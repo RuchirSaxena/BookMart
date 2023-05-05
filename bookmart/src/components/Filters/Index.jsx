@@ -1,11 +1,10 @@
-import "./Filter.css";
+import "./Index.css";
 import { Link } from "react-router-dom";
 const Filter = () => {
   return (
     <div className="categories">
       <div className="container">
         <Link to="/fiction">
-          {" "}
           <img src="/images/sciencefiction.jpg" alt="" />
         </Link>
         <div className="overlay">Sci-Fi</div>
