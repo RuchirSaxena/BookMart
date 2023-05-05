@@ -1,9 +1,32 @@
-import React from "react";
-import "./Home.css";
-import Card from "../Card/Card";
+import React, { useState, useEffect } from "react";
+import "./Index.css";
+import Card from "../Card/Index";
+import { db } from "../../firebase";
+import { onSnapshot, collection } from "firebase/firestore";
+const Index = () => {
+  const [books, setBooks] = useState([]);
 
-const Home = () => {
-  
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(db, "booksmanually"),
+      (snapshot) => {
+        let list = [];
+        snapshot.docs.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
+        });
+        setBooks(list);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    return () => {
+      unsub();
+    };
+  }, []);
+
+  console.log(books);
+
   return (
     <section className="bookContainer">
       <Card
@@ -40,4 +63,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Index;
