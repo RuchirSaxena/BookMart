@@ -1,9 +1,10 @@
-import './App.css';
-
+import "./App.css";
+import Home from "./components/Home/Index";
 function App() {
   return (
     <div className="App">
-     Main Component
+      Main Component
+      <Home />
     </div>
   );
 }
