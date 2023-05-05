@@ -2,13 +2,15 @@ import React from "react";
 import "./Index.css";
 const Index = (props) => {
   return (
-    <div class="card">
+    <div class="card-container" key={props.key}>
       <div class="card-details">
         <div className="img-container">
           <img src={props.image} alt="Loading Error" />
         </div>
-        <p class="text-title">{props.title}</p>
-        <p class="text-body">{props.price}</p>
+        <div className="data">
+          <div class="text-title">{props.title}</div>
+          <div class="text-body">&#8377;{props.price}</div>
+        </div>
       </div>
       <button
         class="card-button"

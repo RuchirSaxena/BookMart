@@ -35,10 +35,10 @@ const Index = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div className="row">
+        <div className="row justify-content-center">
           {books.map((bookItem) => (
             <div
-              className="col col-12 col-sm-4 col-md-3 col-lg-3"
+              className="col col-sm-6 col-md-3 col-lg-2 m-2"
               key={bookItem.id}
             >
               <Card
