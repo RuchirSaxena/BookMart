@@ -5,24 +5,20 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../../../node_modules/bootstrap/dist/js/bootstrap.bundle.js';
+import SearchBar from "../Search/SearchBar";
 
 import "./Index.css";
 const Index = () => {
   return (
-    <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav className="navbar navbar-expand-sm bg-dark navbar-dark navbar-container">
       <div className="container-fluid mx-2">
         <NavLink className="navbar-brand" to="/">
           BOOKMART
         </NavLink>
 
         <form className="mx-5">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            size="50"
-          />
+        
+          <SearchBar className="form-control me-2 search " placeholder="Search Your Book Here ..."/>
         </form>
         <button
           className="navbar-toggler"

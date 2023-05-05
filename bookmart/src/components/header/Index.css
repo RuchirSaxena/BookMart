@@ -10,3 +10,6 @@
 .nav-icon {
   justify-content: right;
 }
+.navbar-container{
+  height: 70px;
+}
