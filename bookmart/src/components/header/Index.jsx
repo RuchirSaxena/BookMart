@@ -18,7 +18,7 @@ const Index = () => {
 
         <form className="mx-5">
         
-          <SearchBar className="form-control me-2 search " placeholder="Search Your Book Here ..."/>
+          <SearchBar  placeholder="Search Your Book Here ..."/>
         </form>
         <button
           className="navbar-toggler"
