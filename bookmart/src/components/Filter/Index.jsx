@@ -35,7 +35,7 @@ const Index = (props) => {
               <img
                 src="https://magazine.washington.edu/columns_wordpress/wp-content/uploads/2021/11/selfhelp2k.jpg"
                 alt="Self Help"
-                onClick={() => handleCategorySelect('Self Help')}
+                onClick={() => handleCategorySelect("Self Help")}
               />
             </div>
           </div>
@@ -46,7 +46,7 @@ const Index = (props) => {
               <img
                 src="https://img.freepik.com/premium-photo/photograph-wooden-table-with-vintage-book-open-it_410516-14808.jpg?w=740"
                 alt="Mystery"
-                onClick={() => handleCategorySelect('Education')}
+                onClick={() => handleCategorySelect("Education")}
               />
             </div>
           </div>
@@ -57,7 +57,7 @@ const Index = (props) => {
               <img
                 src="https://img.freepik.com/free-photo/red-rose-inside-open-book_181624-28498.jpg?w=740&t=st=1683527586~exp=1683528186~hmac=864ca4da2d7d3a07b23c35d5c1eb202363f6e9779b7a5641538930b260cf7af0"
                 alt="Romance"
-                onClick={() => handleCategorySelect('Romance')}
+                onClick={() => handleCategorySelect("Romance")}
               />
             </div>
           </div>
@@ -68,7 +68,7 @@ const Index = (props) => {
               <img
                 src="https://media.npr.org/assets/img/2012/07/16/humor-57edbd64049db5b1b2c321a612e07a7e734bbe25-s1100-c50.jpg"
                 alt="Comedy"
-                onClick={() => handleCategorySelect('Comedy')}
+                onClick={() => handleCategorySelect("Comedy")}
               />
             </div>
           </div>
@@ -79,20 +79,13 @@ const Index = (props) => {
               <img
                 src="https://static.toiimg.com/thumb/58907558.cms?width=680&height=512&imgsize=199255"
                 alt="Science-fictional"
-                onClick={() => handleCategorySelect('Fiction')}
+                onClick={() => handleCategorySelect("Fiction")}
               />
             </div>
           </div>
         </div>
       </div>
 
-      {/* <div>
-        <button onClick={() => handleCategorySelect('Education')}>Education</button>
-        <button onClick={() => handleCategorySelect('Self Help')}>Self Help</button>
-        <button onClick={() => handleCategorySelect('Romance')}>Romance</button>
-        <button onClick={() => handleCategorySelect('Fiction')}>Fiction</button>
-        <button onClick={() => handleCategorySelect('')}>Reset</button>
-      </div> */}
       <div>
         {filtered.map((book) => (
           <Card

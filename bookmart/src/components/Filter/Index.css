@@ -1,18 +1,14 @@
-
 .card1 {
-  /* height: 150px; */
   border: none;
 }
 
 .card1:hover {
-  /* width: 13rem; */
   height: auto;
   border-radius: 20px;
   transition: all 0.5s;
 }
 .card1 > img {
   height: 150px;
-  /* width: 13rem; */
   border-radius: 20px;
   object-fit: cover;
 }
