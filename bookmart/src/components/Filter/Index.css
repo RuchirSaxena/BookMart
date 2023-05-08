@@ -6,6 +6,7 @@
   height: auto;
   border-radius: 20px;
   transition: all 0.5s;
+  cursor: pointer;
 }
 .card1 > img {
   height: 150px;
@@ -35,4 +36,9 @@
   0% {
     box-shadow: 0 0 0 0 var(--hoverContorno);
   }
+}
+
+.filteredData{
+  display: flex;
+  justify-content: center;
 }

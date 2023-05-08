@@ -72,8 +72,9 @@ const Index = (props) => {
           </div>
         </div>
       </div>
-
-      <div>
+    
+      <div className="filteredData">
+        
         {filtered.map((book) => (
           <Card
             key={book.id}
@@ -84,6 +85,7 @@ const Index = (props) => {
           />
         ))}
       </div>
+      <hr />
     </div>
   );
 };
