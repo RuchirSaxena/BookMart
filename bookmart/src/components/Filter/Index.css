@@ -1,0 +1,42 @@
+
+.card1 {
+  /* height: 150px; */
+  border: none;
+}
+
+.card1:hover {
+  /* width: 13rem; */
+  height: auto;
+  border-radius: 20px;
+  transition: all 0.5s;
+}
+.card1 > img {
+  height: 150px;
+  /* width: 13rem; */
+  border-radius: 20px;
+  object-fit: cover;
+}
+.secondAnimation {
+  --hoverContorno: #959595;
+  --hoverContorno1: #fff;
+}
+
+.secondAnimation:hover,
+.secondAnimation:focus {
+  -webkit-animation: card1Animacion 1.4s;
+  animation: card1Animacion 1.4s;
+  box-shadow: 0 0 0 0.8em #fff;
+  border-radius: 20px;
+}
+
+@-webkit-keyframes card1Animacion {
+  0% {
+    box-shadow: 0 0 0 0 var(--hoverContorno);
+  }
+}
+
+@keyframes card1Animacion {
+  0% {
+    box-shadow: 0 0 0 0 var(--hoverContorno);
+  }
+}
