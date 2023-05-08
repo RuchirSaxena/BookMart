@@ -3,8 +3,6 @@ import Card from "../Card/Index";
 import "./Index.css";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 const Index = (props) => {
-  console.log("Filter Component");
-  console.log(props.books);
   const [filtered, setFiltered] = useState([]);
 
   const handleCategorySelect = (category) => {
@@ -12,19 +10,8 @@ const Index = (props) => {
       (book) => book.category === category
     );
     setFiltered(filteredBooks);
-    console.log(category);
-    console.log(
-      "Filtered Books",
-      filteredBooks.map((book) => book.name)
-    );
+    
   };
-
-  useEffect(() => {
-    console.log(
-      "Updated Filtered Books",
-      filtered.map((book) => book.name)
-    );
-  }, [filtered]);
 
   return (
     <div className="filter">
