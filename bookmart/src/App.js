@@ -1,23 +1,17 @@
 
 import "./App.css";
 import Home from "./components/Home/Index";
-import Header from "./components/header/Index";
-import Footer from "./components/footer/Index";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
-
-
+import Carousel from "./components/Carousel/Index";
+import Header from './components/Header';
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-        
-     
-        </Routes>
-      </BrowserRouter>
-      <Footer />
+    <div className="App" style={{ backgroundColor: "#fff" }}>
+      <Header />
+
+      <div className="main-home">
+        <Carousel />
+        <Home />
+      </div>
     </div>
   );
 }
