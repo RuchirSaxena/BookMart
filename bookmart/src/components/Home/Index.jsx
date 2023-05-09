@@ -5,6 +5,7 @@ import Filter from "../Filter/Index";
 import { db } from "../../firebase";
 import { onSnapshot, collection } from "firebase/firestore";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import Heading from "../HeadingUI";
 const Index = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,8 +34,9 @@ const Index = () => {
 
   return (
     <>
+      <Heading text={"Filters"} />
       <section className="filter">
-        <Filter books={books}/>
+        <Filter books={books} />
       </section>
       <section className="bookContainer ">
         {loading ? (

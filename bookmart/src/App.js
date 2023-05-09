@@ -1,14 +1,16 @@
 import "./App.css";
 import Home from "./components/Home/Index";
-import  Carousel from "./components/Carousel/Index";
-import Filter from './components/Filter/Index'
+import Carousel from "./components/Carousel/Index";
+import Header from './components/Header';
 function App() {
   return (
     <div className="App" style={{ backgroundColor: "#fff" }}>
-      <Carousel/>
-      Main Component
-      
-     
+      <Header />
+
+      <div className="main-home">
+        <Carousel />
+        <Home />
+      </div>
     </div>
   );
 }
