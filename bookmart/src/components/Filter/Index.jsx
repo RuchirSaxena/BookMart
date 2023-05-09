@@ -1,19 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../Card/Index";
 import "./Index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Heading from "../HeadingUI";
 const Index = (props) => {
-  const [filtered, setFiltered] = useState([]);
+  const [filtered, setFiltered] = useState(props.books);
   const [filter, setFilter] = useState("");
+  const [filterSelected, setfilterSelected] = useState(false);
+  const [categorySelected,setCategory]=useState("")
+  const loading = props.loading;
   const handleCategorySelect = (category) => {
     const filteredBooks = props.books.filter(
       (book) => book.category === category
     );
-
+    setCategory(category)
+    setfilterSelected(true);
     setFiltered(filteredBooks);
     setFilter(category);
   };
 
+  useEffect(() => {
+    setFiltered(props.books);
+  }, [loading]);
   return (
     <div className="filter">
       <div className="row">
@@ -21,7 +29,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter === "Self Help" ? "cardContainer active" : "cardContainer"
+                filter == "Self Help" ? "cardContainer active" : "cardContainer"
               }
               onClick={() => handleCategorySelect("Self Help")}
             >
@@ -37,7 +45,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter === "Education" ? "cardContainer active" : "cardContainer"
+                filter == "Education" ? "cardContainer active" : "cardContainer"
               }
               onClick={() => handleCategorySelect("Education")}
             >
@@ -53,7 +61,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter === "Romance" ? "cardContainer active" : "cardContainer"
+                filter == "Romance" ? "cardContainer active" : "cardContainer"
               }
               onClick={() => handleCategorySelect("Romance")}
             >
@@ -69,7 +77,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter === "Comedy" ? "cardContainer active" : "cardContainer"
+                filter == "Comedy" ? "cardContainer active" : "cardContainer"
               }
               onClick={() => {
                 handleCategorySelect("Comedy");
@@ -87,7 +95,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter === "Fiction" ? "cardContainer active" : "cardContainer"
+                filter == "Fiction" ? "cardContainer active" : "cardContainer"
               }
               onClick={() => handleCategorySelect("Fiction")}
             >
@@ -103,14 +111,49 @@ const Index = (props) => {
       <div>
         <button
           onClick={() => {
-            setFiltered([]);
+            setFiltered(props.books);
             setFilter("");
           }}
         >
           CLear Filter
         </button>
       </div>
-      <div className="filteredData">
+      <section className="bookContainer ">
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="row justify-content-center">
+            {filter ? (
+              <Heading text={categorySelected} />
+            ) : (
+              <Heading text={"Popular Books"} />
+            )}
+
+            {filtered?.map((bookItem) => (
+              <div
+                className="col col-sm-6 col-md-3 col-lg-2 m-2"
+                key={bookItem.id}
+              >
+                <Card
+                  title={bookItem.name}
+                  price={bookItem.priceOffered}
+                  image={bookItem.imgURLs[0]}
+                  id={bookItem.id}
+                />
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+      <hr />
+    </div>
+  );
+};
+
+export default Index;
+
+{
+  /* <div className="filteredData">
         <div className="row justify-content-around">
           {filtered.map((bookItem) => (
             <div
@@ -126,10 +169,5 @@ const Index = (props) => {
             </div>
           ))}
         </div>
-      </div>
-      <hr />
-    </div>
-  );
-};
-
-export default Index;
+      </div> */
+}

@@ -1,21 +1,20 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-
+import './Index.css'
 const Index = () => {
   return (
     <>
       <div
         id="carouselExampleRide"
-        className="carousel slide"
+        className="carousel slide carousel-css "
         data-bs-ride="true"
- 
       >
         <div className="carousel-inner">
           <div className="carousel-item active">
             <img
               src="https://www.bookswagon.com/images/bannerimages/80_inr.jpg?v=1.6"
-              className="d-block w-100"
+              className="d-block w-100 carousel-img"
               alt="Loading Error !"
             />
           </div>
