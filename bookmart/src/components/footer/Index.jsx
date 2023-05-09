@@ -1,8 +1,8 @@
-import React from "react";    
-import './Index.css'
+import React from "react";
+import "./Index.css";
 const Index = () => {
   return (
-    <div class="container-fluid  w-100 footer" >
+    <div class="container-fluid  w-100 footer">
       <footer class="bg-dark text-center text-lg-start text-white">
         <div class="container-fluid p-4">
           <div class="row mt-4">
@@ -113,7 +113,7 @@ const Index = () => {
         </div>
 
         <div
-          class="text-center p-3" 
+          class="text-center p-3"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
         >
           © 2023 Copyright:

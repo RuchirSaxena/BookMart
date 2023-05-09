@@ -6,6 +6,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Overlay from '../Overlay';
 import { createPortal } from "react-dom";
+
 const Index = () => {
   const [isActive, setIsActive] = useState(false);
   const handleClick = (event) => {
