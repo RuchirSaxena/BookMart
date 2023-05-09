@@ -27,8 +27,8 @@ const Searchbar = () => {
       unsub();
     };
   }, []);
-  const handleFilter = (event) => {
-    const searchWord = event.target.value;
+  const handleFilter = (e) => {
+    const searchWord = e.target.value;
     setWordEntered(searchWord);
     const newFilter = books.filter((value) => {
       return value.name.toLowerCase().includes(searchWord.toLowerCase());
