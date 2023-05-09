@@ -1,15 +1,1 @@
-.space {
-  width: 450px;
-}
 
-.iconDiv {
-  position: absolute;
-  display: flex;
-  right: 0;
-}
-.nav-icon {
-  justify-content: right;
-}
-/* .navbar-container{
-  height: 70px;
-} */
