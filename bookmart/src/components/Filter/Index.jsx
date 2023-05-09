@@ -152,22 +152,3 @@ const Index = (props) => {
 
 export default Index;
 
-{
-  /* <div className="filteredData">
-        <div className="row justify-content-around">
-          {filtered.map((bookItem) => (
-            <div
-              className="col col-sm-6 col-md-3 col-lg-2 m-2 "
-              key={bookItem.id}
-            >
-              <Card
-                title={bookItem.name}
-                price={bookItem.priceOffered}
-                image={bookItem.imgURLs[0]}
-                id={bookItem.id}
-              />
-            </div>
-          ))}
-        </div>
-      </div> */
-}
