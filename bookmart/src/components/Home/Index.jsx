@@ -4,7 +4,7 @@ import Card from "../Card/Index";
 import Filter from "../Filter/Index";
 import { db } from "../../firebase";
 import { onSnapshot, collection } from "firebase/firestore";
-import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Heading from "../HeadingUI";
 const Index = () => {
   const [books, setBooks] = useState([]);

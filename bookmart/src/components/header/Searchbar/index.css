@@ -1,78 +1,99 @@
-.input-box{
-    position: relative;
-    height: 50%;
-    width: 30% ;
- 
+.input-box {
+  position: relative;
+  height: 50%;
+  width: 30%;
 }
-.input-box input{
-    width: 100%;
-    height: 100%;
-    outline: none;
-    border: none;
-    border-radius: 10px;
-    padding-left:10px;
-    font-size: 15px;
+.input-box input {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  padding-left: 10px;
+  font-size: 15px;
 }
 
-.searchIcon{
-    display: block;
-    cursor: pointer;
-    position: absolute;
-    right: 3px;
-    top: 6px;
-    color: #393646;
+.searchIcon {
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  right: 3px;
+  top: 6px;
+  color: #393646;
 }
 
 @media only screen and (max-width: 750px) {
-    .input-box{
+  .input-box {
     position: relative;
     height: 50%;
-    width: 40% ;
- 
-}
-.input-box input{
+    width: 40%;
+  }
+  .input-box input {
     width: 100%;
     height: 100%;
     outline: none;
     border: none;
     border-radius: 10px;
-    padding-left:10px;
+    padding-left: 10px;
     font-size: 15px;
-}
+  }
 
-.searchIcon{
+  .searchIcon {
     display: block;
     cursor: pointer;
     position: absolute;
     right: 0;
     top: 9px;
     color: #393646;
-}
+  }
 }
 
 @media only screen and (max-width: 550px) {
-    .input-box{
+  .input-box {
     position: relative;
     height: 50%;
-    width: 60% ;
- 
-}
-.input-box input{
+    width: 60%;
+  }
+  .input-box input {
     width: 100%;
     height: 100%;
     outline: none;
     border: none;
     border-radius: 10px;
-    padding-left:10px;
+    padding-left: 10px;
     font-size: 17px;
-}
+  }
 
-.searchIcon{
+  .searchIcon {
     display: block;
     cursor: pointer;
     position: absolute;
     right: 5px;
     top: 7px;
     color: #393646;
+  }
 }
+.dataResult {
+  width: 100%;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 10;
+  border-radius: 10px;
+}
+.dataResult::-webkit-scrollbar {
+  display: none;
+}
+.dataResult .dataItem {
+  width: 80%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  color: black;
+}
+.dataItem p {
+  margin-left: 10px;
+  margin-top: 10px;
 }
