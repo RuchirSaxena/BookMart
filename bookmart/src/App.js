@@ -1,8 +1,11 @@
 import "./App.css";
 import Home from "./components/Home/Index";
-import Carousel from "./components/Carousel/Index";
+
 import Header from "./components/header/Index";
 import Footer from "./components/footer/Index";
+import Productdetails from "./components/Product-details/Productdetails";
+import { BrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
@@ -10,8 +13,15 @@ function App() {
       <Header />
 
       <div className="main-home">
-        <Carousel />
-        <Home />
+      
+
+        <BrowserRouter>
+          <Routes>
+            <Route path="/productdetails/:id" element={<Productdetails />} />
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </BrowserRouter>
+
         <Footer />
       </div>
     </div>

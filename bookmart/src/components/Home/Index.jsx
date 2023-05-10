@@ -6,6 +6,7 @@ import { db } from "../../firebase";
 import { onSnapshot, collection } from "firebase/firestore";
 import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Heading from "../HeadingUI";
+import Carousel from '../Carousel/Index';
 const Index = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -30,10 +31,11 @@ const Index = () => {
     };
   }, []);
 
-  console.log(books);
+
 
   return (
     <>
+      <Carousel />
       <Heading text={"Filters"} />
       <section className="filter">
         <Filter books={books} />
@@ -44,11 +46,14 @@ const Index = () => {
         ) : (
           <div className="row justify-content-center">
             {books.map((bookItem) => (
+            
               <div
                 className="col col-sm-6 col-md-3 col-lg-2 m-2"
                 key={bookItem.id}
               >
+                 
                 <Card
+                bookDetails = {bookItem}
                   title={bookItem.name}
                   price={bookItem.priceOffered}
                   image={bookItem.imgURLs[0]}

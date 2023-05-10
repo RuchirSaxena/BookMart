@@ -11,19 +11,13 @@ const Index = () => {
 
               <ul class="list-unstyled mb-0">
                 <li>
-                  <a href="#!" class="text-white">
-                    <i class="fas fa-book fa-fw fa-sm me-2"></i>Bestsellers
-                  </a>
+                  <i class="fas fa-book fa-fw fa-sm me-2"></i>Bestsellers
                 </li>
                 <li>
-                  <a href="#!" class="text-white">
-                    <i class="fas fa-book fa-fw fa-sm me-2"></i>All books
-                  </a>
+                  <i class="fas fa-book fa-fw fa-sm me-2"></i>All books
                 </li>
                 <li>
-                  <a href="#!" class="text-white">
-                    <i class="fas fa-user-edit fa-fw fa-sm me-2"></i>Our authors
-                  </a>
+                  <i class="fas fa-user-edit fa-fw fa-sm me-2"></i>Our authors
                 </li>
               </ul>
             </div>
@@ -33,56 +27,26 @@ const Index = () => {
 
               <ul class="list-unstyled">
                 <li>
-                  <a href="#!" class="text-white">
-                    <i class="fas fa-shipping-fast fa-fw fa-sm me-2"></i>
-                    Supply
-                  </a>
+                  <i class="fas fa-shipping-fast fa-fw fa-sm me-2"></i>
+                  Supply
                 </li>
                 <li>
-                  <a href="#!" class="text-white">
-                    <i class="fas fa-backspace fa-fw fa-sm me-2"></i>Returns
-                  </a>
+                  <i class="fas fa-backspace fa-fw fa-sm me-2"></i>Returns
                 </li>
                 <li>
-                  <a href="#!" class="text-white">
-                    <i class="far fa-file-alt fa-fw fa-sm me-2"></i>
-                    Regulations
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" class="text-white">
-                    <i class="far fa-file-alt fa-fw fa-sm me-2"></i>Privacy
-                    policy
-                  </a>
+                  <i class="far fa-file-alt fa-fw fa-sm me-2"></i>Privacy policy
                 </li>
               </ul>
             </div>
 
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0 company-div">
-              <h5 class="text-uppercase">COMPANY</h5>
+              <h5 class="text-uppercase">FEATURES</h5>
 
               <ul class="list-unstyled">
-                <li>
-                  <a href="#!" class="text-white">
-                    Bookmart
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" class="text-white">
-                    Sector-144
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" class="text-white">
-                    Noida
-                  </a>
-                </li>
-                <li>
-                  <a href="#!" class="text-white">
-                    <i class="fas fa-briefcase fa-fw fa-sm me-2"></i>Send us a
-                    book
-                  </a>
-                </li>
+                <li>Buy</li>
+                <li>Sell</li>
+                <li>Great Prices</li>
+  
               </ul>
             </div>
 
@@ -91,21 +55,15 @@ const Index = () => {
 
               <ul class="list-unstyled">
                 <li>
-                  <a href="#!" class="text-white">
-                    <i class="fas fa-at fa-fw fa-sm me-2"></i>Help in purchasing
-                  </a>
+                  <i class="fas fa-at fa-fw fa-sm me-2"></i>Help in purchasing
                 </li>
                 <li>
-                  <a href="#!" class="text-white">
-                    <i class="fas fa-shipping-fast fa-fw fa-sm me-2"></i>Check
-                    the order status
-                  </a>
+                  <i class="fas fa-shipping-fast fa-fw fa-sm me-2"></i>Check the
+                  order status
                 </li>
                 <li>
-                  <a href="#!" class="text-white">
-                    <i class="fas fa-envelope fa-fw fa-sm me-2"></i>Join the
-                    newsletter
-                  </a>
+                  <i class="fas fa-envelope fa-fw fa-sm me-2"></i>Join the
+                  newsletter
                 </li>
               </ul>
             </div>
