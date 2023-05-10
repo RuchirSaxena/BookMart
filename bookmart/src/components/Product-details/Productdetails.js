@@ -1,13 +1,5 @@
 import React from "react";
-// import {
-//   FaFacebookF,
-//   FaTwitter,
-//   FaInstagram,
-//   FaLinkedinIn,
-//   FaPinterest,
-//   FaCartPlus,
-// } from "react-icons/fa";
-// import "./SingleProduct.scss";
+
 
 const Productdetails = () => {
   
