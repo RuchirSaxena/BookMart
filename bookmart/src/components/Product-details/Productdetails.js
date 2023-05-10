@@ -19,9 +19,9 @@ const Productdetails = () => {
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUZo64M-5yduHuE8FzjOp6lV2q-ryCSsE8f5w_IBIs&s" alt="product" />
           </div>
           <div className="right">
-            <span className="name">Babu</span>
-            <span className="price">$10</span>
-            <span className="desc">Nice pic dear</span>
+            <span className="name">Suryanshu</span>
+            <span className="price">$1000</span>
+            <span className="desc">Heavy Driver</span>
                  
             <span className="divider" />
             <div className="info-item">
