@@ -1,17 +1,17 @@
 import "./App.css";
 import Home from "./components/Home/Index";
-import Carousel from "./components/Carousel/Index";
 import Header from "./components/header/Index";
+import AddBook from './components/AddBook/Index'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
-    <div className="App">
+    <BrowserRouter>
       <Header />
-
-      <div className="main-home">
-        <Carousel />
-        <Home />
-      </div>
-    </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/addbook" element={<AddBook/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

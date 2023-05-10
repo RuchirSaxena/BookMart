@@ -7,7 +7,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Overlay from '../Overlay';
 import { createPortal } from "react-dom";
 const Index = () => {
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(true);
   const handleClick = (event) => {
     setIsActive((current) => !current);
   };
