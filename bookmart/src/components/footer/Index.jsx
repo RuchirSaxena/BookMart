@@ -74,7 +74,7 @@ const index = () => {
           class="text-center p-3"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
         >
-          © 2023 Copyright:
+          © 2023 Copyright :
           <a class="text-white" href="">
             bookmart.com
           </a>
