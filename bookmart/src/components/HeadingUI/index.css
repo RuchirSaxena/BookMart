@@ -12,7 +12,9 @@
 .heading-hr{
     margin: 0;
     opacity: 1;
+    width: 5%;
+    height: 2px;
     width: 7%;
-    height: 20px;
+    height: 2px;
     border: 1px solid red;
 }

@@ -1,9 +1,9 @@
-.login-container{
+.signup-container{
     display:flex;
     justify-content: center;
-    padding-top : 100px;
+    padding-top : 20px;
 }
-.login-form{
+.signup-form{
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -11,17 +11,17 @@
     border-radius: 10px;
     width: 350px;
 }
-.login-form p {
+.signup-form p {
     font-size: 30px;
 }
-.login-form label{
+.signup-form label{
     padding: 0 px;
     margin-top:  16px;
     font-weight: 700;
     font-size: 16px;
 }
 
-.login-form input{
+.signup-form input{
     margin: 2px 0px;
     border-radius: 5px;
     padding: 5px;
@@ -29,7 +29,7 @@
     font-size: 18px;
 
 }
-.login-form button{
+.signup-form button{
     background-color: black;
     margin: 20px 0px;
     border: none;
