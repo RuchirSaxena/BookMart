@@ -1,6 +1,6 @@
 import React from "react";
-import "./Index.css";
-const Index = () => {
+import "./index.css";
+const index = () => {
   return (
     <div class="container-fluid  w-100 footer">
       <footer class="bg-dark text-center text-lg-start text-white">
@@ -84,4 +84,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default index;
