@@ -1,8 +1,8 @@
 import "./App.css";
-import Home from "./components/Home/Index";
-import Header from "./components/header/Index";
-import AddBook from "./components/AddBook/Index";
-import Footer from "./components/footer/Index";
+import Home from "./components/Home";
+import Footer from "./components/Footer";
+import Header from "./components/header";
+import AddBook from "./components/AddBook";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Product from "./components/Productdetails/Product";
 function App() {

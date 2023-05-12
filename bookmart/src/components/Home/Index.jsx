@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Index.css";
 import Card from "../Card/Index";
 import Filter from "../Filter/Index";
-import Carousel from "../Carousel/Index"
+import Carousel from "../Carousel"
 import { db } from "../../firebase";
 import { onSnapshot, collection } from "firebase/firestore";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -32,7 +32,7 @@ const Index = () => {
   }, []);
   useEffect(()=>  {
     console.log(books);
-  },[])
+  })
 
   return (
     <>

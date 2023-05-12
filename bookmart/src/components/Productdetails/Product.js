@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Header from "../header/Index";
-import Footer from "../footer/Index";
+import Header from "../header/";
+import Footer from "../Footer";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { db } from "../../firebase";
@@ -10,10 +10,10 @@ import "./SingleProduct.css";
 
 const Productdetails = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState("");
+  const [product, setProduct] = useState([]);
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  function GetCurrentProduct() {
+  
     useEffect(() => {
       const getProduct = async () => {
         const docRef = doc(db, "booksmanually", id);
@@ -22,10 +22,10 @@ const Productdetails = () => {
       };
       getProduct();
     }, []);
-    return product;
-  }
-  GetCurrentProduct();
+
+
   return (
+    
     <div class="hello">
       <div className="card-wrapper">
         <div className="card">
@@ -55,8 +55,7 @@ const Productdetails = () => {
             <div class="product-detail">
               <h2>About this item: </h2>
               <p>{product.description}</p>
-
-            </div> 
+            </div>
 
             <div class="purchase-info">
               <button type="button" class="btn">
@@ -71,3 +70,4 @@ const Productdetails = () => {
 };
 
 export default Productdetails;
+
