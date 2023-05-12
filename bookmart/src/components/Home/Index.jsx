@@ -30,10 +30,14 @@ const Index = () => {
       unsub();
     };
   }, []);
+  useEffect(()=>  {
+    console.log(books);
+  },[])
 
   return (
     <>
     <Carousel/>
+  
       <Heading text={"Filters"} />
       <section className="filter">
         <Filter books={books} loading={loading} />
