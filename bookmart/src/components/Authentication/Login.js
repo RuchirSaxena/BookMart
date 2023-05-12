@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
+import { TextField } from "@mui/material";
 import "./Login.css";
 const Login = () => {
   const [password, setPassword] = useState("");
@@ -15,16 +16,19 @@ const Login = () => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        let string = JSON.stringify(userCredential);
+        let jsonUser = JSON.parse(string);
+        console.log(jsonUser);
         setSuccessMsg(
           "Logged in Successfully, you will be redirected to home page"
         );
         setEmail("");
         setPassword("");
         setErrorMsg("");
-        setTimeout(() => {
-          setSuccessMsg("");
+       
+          
           navigate("/");
-        }, 3000);
+      
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -41,10 +45,13 @@ const Login = () => {
       });
   };
   return (
-    <div>
+    <div className="login">
+      <div className="login-ui">
+       
+      </div>
       <div className="login-container">
         <form className="login-form">
-          <p>Create Account</p>
+          <p>Login Account</p>
 
           {successMsg && (
             <>
@@ -57,19 +64,32 @@ const Login = () => {
             </>
           )}
 
-          <label>Email</label>
-
-          <input
+          <TextField
+            id="outlined-basic"
+            label="Email"
+            variant="outlined"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <br />
+          <TextField
+        
+            id="outlined-password-input"
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {/* <input
             type="email"
             placeholder="Enter Your Mail"
             onChange={(e) => setEmail(e.target.value)}
-          />
-          <label>Password</label>
+          /> */}
+          {/* <label>Password</label>
           <input
             type="password"
             placeholder="Enter Your Password"
             onChange={(e) => setPassword(e.target.value)}
-          />
+          /> */}
 
           <button onClick={handleLogin}>Log In</button>
           <div>
