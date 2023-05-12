@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import Card from "../Card/Index";
-import "./Index.css";
+import Card from "../Card";
+import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Heading from "../HeadingUI";
 const Index = (props) => {
   const [filtered, setFiltered] = useState(props.books);
   const [filter, setFilter] = useState("");
   const [filterSelected, setfilterSelected] = useState(false);
-  const [categorySelected,setCategory]=useState("")
+  const [categorySelected, setCategory] = useState("");
   const loading = props.loading;
   const handleCategorySelect = (category) => {
     const filteredBooks = props.books.filter(
       (book) => book.category === category
     );
-    setCategory(category)
+    setCategory(category);
     setfilterSelected(true);
     setFiltered(filteredBooks);
     setFilter(category);
@@ -30,7 +30,9 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter === "Self Help" ? "cardContainer active" : "cardContainer"
+                filter === "Self Help"
+                  ? "cardContainer active"
+                  : "cardContainer"
               }
               onClick={() => handleCategorySelect("Self Help")}
             >
@@ -46,7 +48,9 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter === "Education" ? "cardContainer active" : "cardContainer"
+                filter === "Education"
+                  ? "cardContainer active"
+                  : "cardContainer"
               }
               onClick={() => handleCategorySelect("Education")}
             >
@@ -146,10 +150,8 @@ const Index = (props) => {
           </div>
         )}
       </section>
-      <hr />
     </div>
   );
 };
 
 export default Index;
-

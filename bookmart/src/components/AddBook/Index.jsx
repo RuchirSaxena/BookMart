@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { storage, db } from "../../firebase";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import "./Index.css";
+import "./index.css";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
@@ -100,7 +100,7 @@ const AddEditBook = () => {
   };
 
   return (
-    <>
+    <div className="addBookContainer">
       <Heading text={"Add Books"} />
 
       <div className="addBookForm">
@@ -248,7 +248,7 @@ const AddEditBook = () => {
           
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Index.css";
+import "./index.css";
 const Index = (props) => {
   return (
     <div class="card-container" key={props.key}>

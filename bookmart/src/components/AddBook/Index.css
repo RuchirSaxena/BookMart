@@ -31,3 +31,8 @@ form {
   flex-direction: row;
   gap: 10px;
 }
+@media screen and (max-width: 750px) {
+  .addBookContainer {
+    padding-top: 150px; 
+  }
+}
