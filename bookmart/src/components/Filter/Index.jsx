@@ -21,6 +21,7 @@ const Index = (props) => {
 
   useEffect(() => {
     setFiltered(props.books);
+    console.log(props.books);
   }, [loading]);
   return (
     <div className="filter">
@@ -29,7 +30,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter == "Self Help" ? "cardContainer active" : "cardContainer"
+                filter === "Self Help" ? "cardContainer active" : "cardContainer"
               }
               onClick={() => handleCategorySelect("Self Help")}
             >
@@ -45,7 +46,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter == "Education" ? "cardContainer active" : "cardContainer"
+                filter === "Education" ? "cardContainer active" : "cardContainer"
               }
               onClick={() => handleCategorySelect("Education")}
             >
@@ -61,7 +62,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter == "Romance" ? "cardContainer active" : "cardContainer"
+                filter === "Romance" ? "cardContainer active" : "cardContainer"
               }
               onClick={() => handleCategorySelect("Romance")}
             >
@@ -77,7 +78,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter == "Comedy" ? "cardContainer active" : "cardContainer"
+                filter === "Comedy" ? "cardContainer active" : "cardContainer"
               }
               onClick={() => {
                 handleCategorySelect("Comedy");
@@ -95,7 +96,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter == "Fiction" ? "cardContainer active" : "cardContainer"
+                filter === "Fiction" ? "cardContainer active" : "cardContainer"
               }
               onClick={() => handleCategorySelect("Fiction")}
             >

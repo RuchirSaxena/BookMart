@@ -44,6 +44,9 @@ const Searchbar = () => {
     setFilteredData([]);
     setWordEntered("");
   };
+  const clicked = () =>{
+    alert("Clicked" );
+  }
   return (
     <>
     <div className="input-box">
@@ -65,7 +68,11 @@ const Searchbar = () => {
           {filteredData.slice(0, 8).map((value, key) => {
             return (
               <div className="dataItem">
-                <p>{value.name}</p>
+                <p onClick={clicked}>
+                
+                  {value.name}
+                  
+                  </p>
               </div>
             );
           })}
