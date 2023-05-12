@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.css";
+import "./Index.css";
 const index = () => {
   return (
     <div class="container-fluid  w-100 footer">
