@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Card from "../Card/Index";
-import "./Index.css";
+import Card from "../Card";
+import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Heading from "../HeadingUI";
 const Index = (props) => {

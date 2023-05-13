@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./Index.css";
-import Card from "../Card/Index";
-import Filter from "../Filter/Index";
+import "./index.css";
+import Card from "../Card";
+import Filter from "../Filter";
 import Carousel from "../Carousel"
 import { db } from "../../firebase";
 import { onSnapshot, collection } from "firebase/firestore";
@@ -30,9 +30,7 @@ const Index = () => {
       unsub();
     };
   }, []);
-  useEffect(()=>  {
-    console.log(books);
-  })
+
 
   return (
     <>

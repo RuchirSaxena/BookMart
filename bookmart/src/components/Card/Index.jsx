@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./Index.css";
+import "./index.css";
 const Index = (props) => {
   const navigate = useNavigate();
   const id = props.id;
