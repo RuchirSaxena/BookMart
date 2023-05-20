@@ -1,0 +1,8 @@
+
+.imgContainer{
+  display: flex;
+  >img{
+    height: 25vh;
+    justify-content: space-evenly;
+  }
+}

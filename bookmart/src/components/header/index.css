@@ -161,7 +161,6 @@ ul li a {
   }
 
   .overlay {
- 
     cursor: pointer;
     position: absolute;
     height: 100vh;
@@ -177,7 +176,7 @@ ul li a {
 }
 
 @media only screen and (max-width: 550px) {
-      .navbar-container {
+  .navbar-container {
     position: fixed;
     top: 0;
     box-sizing: border-box;
@@ -283,9 +282,8 @@ ul li a {
   .sidebar-links li a:hover {
     background-color: #cacaca;
   }
- 
+
   .overlay {
-    
     cursor: pointer;
     position: absolute;
     height: 100vh;
