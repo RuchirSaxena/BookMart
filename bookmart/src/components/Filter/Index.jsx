@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import Card from "../Card/Index";
 import "./Index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Heading from "../HeadingUI";
+const LazyCard = lazy(() => import("../Card/Index"));
 const Index = (props) => {
   const [filtered, setFiltered] = useState(props.books);
   const [filter, setFilter] = useState("");
@@ -133,13 +134,13 @@ const Index = (props) => {
             ) : (
               <Heading text={"Popular Books"} />
             )}
-
+        <Suspense fallback={<div>Loading...</div>}>
             {filtered?.map((bookItem) => (
               <div
                 className="col col-sm-6 col-md-3 col-lg-2 m-2"
                 key={bookItem.id}
               >
-                <Card
+                <LazyCard
                   title={bookItem.name}
                   price={bookItem.priceOffered}
                   image={bookItem.imgURLs[0]}
@@ -147,6 +148,7 @@ const Index = (props) => {
                 />
               </div>
             ))}
+            </Suspense>
           </div>
         )}
       </section>
