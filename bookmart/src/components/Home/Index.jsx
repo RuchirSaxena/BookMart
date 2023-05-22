@@ -33,6 +33,7 @@ const Index = () => {
         console.log(error);
       }
     );
+    console.log(books);
     return () => {
       unsub();
     };

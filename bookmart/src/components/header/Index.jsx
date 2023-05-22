@@ -5,9 +5,12 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Overlay from "../Overlay";
 import { createPortal } from "react-dom";
+import { useNavigate } from "react-router-dom";
 import Login from "../Authentication/Login";
+import './index.css';
 const Index = () => {
   const [isActive, setIsActive] = useState(true);
+  const navigate = useNavigate();
   const handleClick = (event) => {
     setIsActive((current) => !current);
   };
@@ -17,7 +20,13 @@ const Index = () => {
       <Overlay isActive={isActive} setIsActive={setIsActive} />
 
       <div className="navbar-container">
-        <logo>BookMart</logo>
+        <logo
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          BookMart
+        </logo>
         <Searchbar />
         <div className="links-container">
           <ul className="links">

@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
-import { TextField } from "@mui/material";
+import {TextField} from "@mui/material";
 import "./Login.css";
 const Login = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const navigate = useNavigate();
@@ -25,10 +24,7 @@ const Login = () => {
         setEmail("");
         setPassword("");
         setErrorMsg("");
-       
-          
-          navigate("/");
-      
+        navigate("/");
       })
       .catch((error) => {
         const errorCode = error.code;

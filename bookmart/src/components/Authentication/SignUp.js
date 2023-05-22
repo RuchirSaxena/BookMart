@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import "./SignUp.css";
+import constants from "../Utilities/Constants";
 const SignUp = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -15,14 +16,12 @@ const SignUp = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
+    await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         const initialCartValue = 0;
-        console.log(user);
-
         addDoc(collection(db, "users"), {
           userName: userName,
           email: email,
@@ -32,7 +31,7 @@ const SignUp = () => {
           uid: user.uid,
         })
           .then(() => {
-            setSuccessMsg("New User Added Successfully");
+            setSuccessMsg(constants.successMsg);
             setUserName("");
             setPhoneNumber("");
             setEmail("");
@@ -48,11 +47,11 @@ const SignUp = () => {
           });
       })
       .catch((error) => {
-        if (error.message == "Firebase: Error (auth/invalid-email).") {
-          setErrorMsg("Please Fill all required fields");
+        if (error.message === "Firebase: Error (auth/invalid-email).") {
+          setErrorMsg(constants.missingFields);
         }
-        if (error.message == "Firebase: Error (auth/email-already-in-use).") {
-          setErrorMsg("User already exists");
+        if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+          setErrorMsg(constants.errorMsg);
         }
       });
   };
@@ -61,7 +60,7 @@ const SignUp = () => {
     <div>
       <div className="signup-container">
         <form className="signup-form" onSubmit={handleSubmit}>
-          <p>Create Account</p>
+          <p>{constants.createAccount}</p>
 
           {successMsg && (
             <>
@@ -73,36 +72,36 @@ const SignUp = () => {
               <div className="error-msg">{errorMsg}</div>
             </>
           )}
-          <label>Your Name</label>
+          <label>{constants.name}</label>
           <input
             type="text"
             placeholder="Enter Your Name"
             onChange={(e) => setUserName(e.target.value)}
           />
 
-          <label>Email</label>
+          <label>{constants.email}</label>
 
           <input
             type="email"
             placeholder="Enter Your Mail"
             onChange={(e) => setEmail(e.target.value)}
           />
-          <label>Password</label>
+          <label>{constants.password}</label>
           <input
             type="password"
             placeholder="Enter Your Password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <label>Phone Number</label>
+          <label>{constants.phoneNumber}</label>
           <input
             type="password"
             placeholder="Enter Your Phone Number"
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
-          <button type="submit">Sign Up</button>
+          <button type="submit">{constants.signUp}</button>
           <div>
-            <span>Already Have an account?</span>
-            <Link to="/login">Sign In</Link>
+            <span>{constants.accountCheck}</span>
+            <Link to="/login">{constants.signIn}</Link>
           </div>
         </form>
       </div>
