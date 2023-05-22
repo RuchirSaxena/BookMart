@@ -101,7 +101,7 @@ const AddEditBook = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addDoc(collection(db, "books"), {
+    await addDoc(collection(db, "booksmanually"), {
       ...data,
       timeStamp: serverTimestamp(),
     }).then(() => {
