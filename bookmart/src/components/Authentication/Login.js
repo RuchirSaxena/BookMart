@@ -4,6 +4,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import {TextField} from "@mui/material";
 import "./Login.css";
+import svgImg from '../../assests/login-img.svg';
 const Login = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -43,7 +44,7 @@ const Login = () => {
   return (
     <div className="login">
       <div className="login-ui">
-       
+        <img className="login-ui-img" src={svgImg} alt="Kiwi standing on oval"></img>
       </div>
       <div className="login-container">
         <form className="login-form">
@@ -68,7 +69,6 @@ const Login = () => {
           />
           <br />
           <TextField
-        
             id="outlined-password-input"
             label="Password"
             type="password"

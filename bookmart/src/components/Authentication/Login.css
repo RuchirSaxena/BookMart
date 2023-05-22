@@ -10,11 +10,17 @@
 .login-ui{
     height: calc(100vh) ;
     width: 50%;
-    background-color: #ab9ee9;
+    background-color: #dbd7ee;
    
   
 }
-
+.login-ui-img{
+    
+   margin-left:50px;
+   margin-top:50px;
+    height: 70%; 
+    width:70%;
+}
 
 
 
