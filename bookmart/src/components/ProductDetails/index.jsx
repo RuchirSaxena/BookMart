@@ -28,33 +28,7 @@ const Index = () => {
 
   return (
     <>
-      {/* <br />
-      {product.name}
-      <br />
-      {product.category}
-      <br />
-      {product.ownerInfo?.name && <>Owner Info : {product.ownerInfo.name}</>}
-      <br />
-      {product.ownerInfo?.email && <>Owner Info : {product.ownerInfo.email}</>}
-      <br />
-      {product.ownerInfo?.contact && (
-        <>Owner Info : {product.ownerInfo.contact}</>
-      )}
-      <br />
-      {product.priceOffered}
-      <br />
-      {product.originalPrice}
-      <br />
-      {product.description}
-      <br />
-      {product.authorName}
-      <br />
-      <div className="imgContainer">
-        {product.imgURLs &&
-          product.imgURLs.map((url, index) => (
-            <img src={url} alt={`Image ${index}`} key={index} />
-          ))}
-      </div> */}
+    
           
       <div className="card-wrapper">
         <div className="card">
