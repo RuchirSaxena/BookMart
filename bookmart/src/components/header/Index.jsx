@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import "./index.css";
 import Searchbar from "./Searchbar";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Overlay from '../Overlay';
+import Overlay from "../Overlay";
 import { createPortal } from "react-dom";
+import Login from "../Authentication/Login";
 const Index = () => {
   const [isActive, setIsActive] = useState(true);
   const handleClick = (event) => {
     setIsActive((current) => !current);
   };
-  
+  const [openModal, setOpenModal] = useState(false);
   return (
     <>
-     
-        <Overlay isActive={isActive} setIsActive={setIsActive}/>
-      
+      <Overlay isActive={isActive} setIsActive={setIsActive} />
+
       <div className="navbar-container">
         <logo>BookMart</logo>
         <Searchbar />
@@ -57,6 +57,9 @@ const Index = () => {
       <div className={`sidebar ${isActive ? " " : "sidebar-active  "}`}>
         <ul className="sidebar-links">
           <li>
+            <button onClick={() => setOpenModal((prev) => !prev)}>Login</button>
+          </li>
+          <li>
             <a>SignIn</a>
           </li>
           <li>
@@ -70,6 +73,7 @@ const Index = () => {
           </li>
         </ul>
       </div>
+      {openModal && <Login />}
     </>
   );
 };
