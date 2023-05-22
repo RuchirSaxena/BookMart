@@ -8,8 +8,10 @@ import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import Login from "../Authentication/Login";
 import './index.css';
+import { useSelector } from "react-redux";
 const Index = () => {
   const [isActive, setIsActive] = useState(true);
+  const isAuth = useSelector(state =>state.auth.isAuthenticated);
   const navigate = useNavigate();
   const handleClick = (event) => {
     setIsActive((current) => !current);
@@ -28,7 +30,7 @@ const Index = () => {
           BookMart
         </logo>
         <Searchbar />
-        <div className="links-container">
+       {isAuth && (<div className="links-container">
           <ul className="links">
             <li>
               <a>
@@ -46,7 +48,7 @@ const Index = () => {
               </a>
             </li>
           </ul>
-        </div>
+        </div>)}
         <div className="icons">
           <i
             className={`fa-solid fa-bars fa-2xl bars ${

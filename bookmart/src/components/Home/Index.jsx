@@ -13,10 +13,16 @@ import {
 } from "firebase/firestore";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Heading from "../HeadingUI";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store";
 const Index = () => {
   const [user, setUser] = useState("");
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const dispatch = useDispatch();
+
+
 
   useEffect(() => {
     const unsub = onSnapshot(
@@ -67,6 +73,7 @@ const Index = () => {
 
   const userLogOut = () => {
     auth.signOut();
+    dispatch(authActions.logout());
   };
   return (
     <>

@@ -5,7 +5,10 @@ import { collection, addDoc } from "firebase/firestore";
 import {TextField} from "@mui/material";
 import "./Login.css";
 import svgImg from '../../assests/login-img.svg';
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store";
 const Login = () => {
+  const dispatch = useDispatch();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -22,6 +25,7 @@ const Login = () => {
         setSuccessMsg(
           "Logged in Successfully, you will be redirected to home page"
         );
+        dispatch(authActions.login());
         setEmail("");
         setPassword("");
         setErrorMsg("");
