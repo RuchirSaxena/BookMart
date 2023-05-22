@@ -1,0 +1,38 @@
+.addBookForm {
+  margin: 20px auto;
+  padding: 10px;
+  width: 70%;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+
+form {
+  padding: 1.0rem;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.addBookForm form .inputHandle,
+.addBookForm form .MuiFormControl-root,
+.addBookForm form .MuiButton-root {
+  margin-bottom: 0.5rem;
+}
+
+.priceContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.ownerInfo {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+@media screen and (max-width: 750px) {
+  .addBookContainer {
+    padding-top: 150px; 
+  }
+}

@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./Index.css";
 import Card from "../Card/Index";
 import Filter from "../Filter/Index";
+import Carousel from "../Carousel/Index";
 import { db } from "../../firebase";
 import { onSnapshot, collection } from "firebase/firestore";
-import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Heading from "../HeadingUI";
 const Index = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -24,38 +26,18 @@ const Index = () => {
         console.log(error);
       }
     );
+    console.log(books);
     return () => {
       unsub();
     };
   }, []);
 
-  console.log(books);
-
   return (
     <>
+      <Carousel />
+      <Heading text={"Filters"} />
       <section className="filter">
-        <Filter books={books}/>
-      </section>
-      <section className="bookContainer ">
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <div className="row justify-content-center">
-            {books.map((bookItem) => (
-              <div
-                className="col col-sm-6 col-md-3 col-lg-2 m-2"
-                key={bookItem.id}
-              >
-                <Card
-                  title={bookItem.name}
-                  price={bookItem.priceOffered}
-                  image={bookItem.imgURLs[0]}
-                  id={bookItem.id}
-                />
-              </div>
-            ))}
-          </div>
-        )}
+        <Filter books={books} loading={loading} />
       </section>
     </>
   );
