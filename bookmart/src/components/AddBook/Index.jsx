@@ -5,6 +5,8 @@ import Button from "@mui/material/Button";
 import "./Index.css";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import { useParams, useNavigate, Navigate } from "react-router-dom";
@@ -30,11 +32,10 @@ const AddEditBook = () => {
   const [data, setData] = useState(initialState);
   const [files, setFiles] = useState([]);
   const [urls, setUrls] = useState([]);
-  const [progress,setProgress]=useState(0);
-  const [uploaded,setUploaded]= useState(true);
+  const [progress, setProgress] = useState(0);
+  const [uploaded, setUploaded] = useState(true);
   useEffect(() => {
     const uploadFile = () => {
-    
       files.map((file) => {
         const name = new Date().getTime() + file.name;
         const storageRef = ref(storage, name);
@@ -47,8 +48,8 @@ const AddEditBook = () => {
             console.log("Upload is " + ImageUploadprogress + "% done");
 
             setProgress(ImageUploadprogress);
-            if(ImageUploadprogress==100){
-              setUploaded(false)
+            if (ImageUploadprogress == 100) {
+              setUploaded(false);
             }
             switch (snapshot.state) {
               case "paused":
@@ -83,12 +84,12 @@ const AddEditBook = () => {
   useEffect(() => {
     console.log(data);
   }, [data]);
-const emptyarr =[];
+  const emptyarr = [];
   const handleImageUpload = (e) => {
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
       newImage["id"] = Math.random();
-      setFiles((prevState) => [...prevState, newImage,]);
+      setFiles((prevState) => [...prevState, newImage]);
     }
   };
 
@@ -98,11 +99,22 @@ const emptyarr =[];
       [e.target.name]: e.target.value,
     });
   };
-  const handleSubmit = async () => {
-    await addDoc(collection(db, "booksmanually"), {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await addDoc(collection(db, "books"), {
       ...data,
       timeStamp: serverTimestamp(),
     }).then(() => {
+      toast.success(`Added New Book`, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       console.log("Successfully uploaded");
     });
     setData(initialState);
@@ -240,25 +252,30 @@ const emptyarr =[];
             />
           </div>
           <div className="imgUploadMain">
-              <div className="imgUpload">
-          <Button fullWidth variant="contained" component="label">
-            Upload Images*
-            
-            <input
-              hidden
-              required
-              accept="image/*"
-              multiple
-              type="file"
-              onChange={handleImageUpload}
-            />
-          </Button>
+            <div className="imgUpload">
+              <Button fullWidth variant="contained" component="label">
+                Upload Images*
+                <input
+                  hidden
+                  required
+                  accept="image/*"
+                  multiple
+                  type="file"
+                  onChange={handleImageUpload}
+                />
+              </Button>
+            </div>
+            <div className="progressBar">
+              {"Upload is " + progress + "% done"}
+            </div>
           </div>
-          <div className="progressBar">{"Upload is " + progress + "% done"}</div>
-          </div>
-          
 
-          <Button disabled={uploaded} type="submit" variant="contained" color="success">
+          <Button
+            disabled={uploaded}
+            type="submit"
+            variant="contained"
+            color="success"
+          >
             Submit
           </Button>
         </form>
