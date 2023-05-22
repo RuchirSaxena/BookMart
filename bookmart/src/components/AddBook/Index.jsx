@@ -30,9 +30,11 @@ const AddEditBook = () => {
   const [data, setData] = useState(initialState);
   const [files, setFiles] = useState([]);
   const [urls, setUrls] = useState([]);
-
+  const [progress,setProgress]=useState(0);
+  const [uploaded,setUploaded]= useState(true);
   useEffect(() => {
     const uploadFile = () => {
+    
       files.map((file) => {
         const name = new Date().getTime() + file.name;
         const storageRef = ref(storage, name);
@@ -40,6 +42,14 @@ const AddEditBook = () => {
         uploadTask.on(
           "state_changed",
           (snapshot) => {
+            const ImageUploadprogress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log("Upload is " + ImageUploadprogress + "% done");
+
+            setProgress(ImageUploadprogress);
+            if(ImageUploadprogress==100){
+              setUploaded(false)
+            }
             switch (snapshot.state) {
               case "paused":
                 console.log("upload is Paused");
@@ -73,12 +83,12 @@ const AddEditBook = () => {
   useEffect(() => {
     console.log(data);
   }, [data]);
-
+const emptyarr =[];
   const handleImageUpload = (e) => {
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
       newImage["id"] = Math.random();
-      setFiles((prevState) => [...prevState, newImage]);
+      setFiles((prevState) => [...prevState, newImage,]);
     }
   };
 
@@ -229,9 +239,11 @@ const AddEditBook = () => {
               }
             />
           </div>
-
-          <Button variant="contained" component="label" >
+          <div className="imgUploadMain">
+              <div className="imgUpload">
+          <Button fullWidth variant="contained" component="label">
             Upload Images*
+            
             <input
               hidden
               required
@@ -241,11 +253,14 @@ const AddEditBook = () => {
               onChange={handleImageUpload}
             />
           </Button>
+          </div>
+          <div className="progressBar">{"Upload is " + progress + "% done"}</div>
+          </div>
+          
 
-          <Button type="submit" variant="contained" color="success">
+          <Button disabled={uploaded} type="submit" variant="contained" color="success">
             Submit
           </Button>
-          
         </form>
       </div>
     </div>
