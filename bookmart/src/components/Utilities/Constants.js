@@ -10,6 +10,7 @@ const Constants = {
   successMsg: "New User added Successfully",
   errorMsg: "User Already Exists",
   missingFields: "Please Fill all required fields",
+  autoCloseTime:5000,
 };
 
 export default Constants;

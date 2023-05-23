@@ -6,22 +6,24 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Authentication/Login";
 import SignUp from "./components/Authentication/SignUp";
 import Product from "./components/ProductDetails";
-import {ToastContainer} from "react-toastify"
+import { ToastContainer } from "react-toastify";
+import Constants from "./components/Utilities/Constants";
 function App() {
-  return (<>
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/productdetails/:id" element={<Product />} />
-        <Route path="/addbook" element={<AddBook />} />
-      </Routes>
-    </BrowserRouter>
-    <ToastContainer
+  return (
+    <>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/productdetails/:id" element={<Product />} />
+          <Route path="/addbook" element={<AddBook />} />
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer
         position="top-center"
-        autoClose={5000}
+        autoClose={Constants.autoCloseTime} 
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

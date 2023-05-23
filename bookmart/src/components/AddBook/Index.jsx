@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
-import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import Heading from "../HeadingUI";
@@ -31,60 +30,44 @@ let initialState = {
 const AddEditBook = () => {
   const [data, setData] = useState(initialState);
   const [files, setFiles] = useState([]);
-  const [urls, setUrls] = useState([]);
   const [progress, setProgress] = useState(0);
   const [uploaded, setUploaded] = useState(true);
-  useEffect(() => {
-    const uploadFile = () => {
-      files.map((file) => {
-        const name = new Date().getTime() + file.name;
-        const storageRef = ref(storage, name);
-        const uploadTask = uploadBytesResumable(storageRef, file);
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const ImageUploadprogress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log("Upload is " + ImageUploadprogress + "% done");
+  const uploadFile = () => {
+    files.forEach((file) => {
+      const name = new Date().getTime() + file.name;
+      const storageRef = ref(storage, name);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const ImageUploadprogress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 
-            setProgress(ImageUploadprogress);
-            if (ImageUploadprogress == 100) {
-              setUploaded(false);
-            }
-            switch (snapshot.state) {
-              case "paused":
-                console.log("upload is Paused");
-                break;
-              case "running":
-                console.log("upload is running");
-                break;
-              default:
-                break;
-            }
-          },
-          (error) => {
-            console.log(error);
-          },
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((urls) => {
-              initialState = {
-                ...initialState,
-                imgURLs: [...initialState.imgURLs, urls],
-              };
-              console.log(initialState);
-              setData({ ...data, imgURLs: initialState.imgURLs });
-            });
+          setProgress(ImageUploadprogress);
+          if (ImageUploadprogress === 100) {
+            setUploaded(false);
           }
-        );
-      });
-    };
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((urls) => {
+            initialState = {
+              ...initialState,
+              imgURLs: [...initialState.imgURLs, urls],
+            };
+
+            setData({ ...data, imgURLs: initialState.imgURLs });
+          });
+        }
+      );
+    });
+  };
+  useEffect(() => {
     files && uploadFile();
   }, [files]);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-  const emptyarr = [];
   const handleImageUpload = (e) => {
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
@@ -93,7 +76,7 @@ const AddEditBook = () => {
     }
   };
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     setData({
       ...data,
       [e.target.name]: e.target.value,
@@ -115,7 +98,6 @@ const AddEditBook = () => {
         progress: undefined,
         theme: "light",
       });
-      console.log("Successfully uploaded");
     });
     setData(initialState);
     setFiles([]);
@@ -129,46 +111,44 @@ const AddEditBook = () => {
         <form onSubmit={handleSubmit}>
           <TextField
             className="inputHandle"
-            id="outlined-required"
+            fullWidth
             label="Book Name"
             value={data.name}
             name="name"
             required
-            onChange={handleChange}
+            onChange={handleInputChange}
           />
 
           <div className="priceContainer">
             <TextField
-              id="outlined-required"
               label="Book Original Price"
               value={data.originalPrice}
               name="originalPrice"
               required
-              onChange={handleChange}
-              fullWidth
+              onChange={handleInputChange}
+              className="price"
             />
 
             <TextField
-              id="outlined-required"
               label="Book Price Offered"
               value={data.priceOffered}
               name="priceOffered"
               required
-              onChange={handleChange}
-              fullWidth
+              onChange={handleInputChange}
+              className="price"
             />
           </div>
 
           <TextField
-            id="outlined-required"
+            fullWidth
             label="Book's Author Name"
             value={data.authorName}
             name="authorName"
             required
-            onChange={handleChange}
+            onChange={handleInputChange}
           />
 
-          <FormControl>
+          <FormControl className="categorySelect">
             <InputLabel id="category-label">Category</InputLabel>
             <Select
               labelId="category-label"
@@ -176,7 +156,7 @@ const AddEditBook = () => {
               id="category"
               value={data.category}
               name="category"
-              onChange={handleChange}
+              onChange={handleInputChange}
             >
               <MenuItem value="Fiction">Fiction</MenuItem>
               <MenuItem value="Comedy">Comedy</MenuItem>
@@ -188,22 +168,21 @@ const AddEditBook = () => {
           </FormControl>
 
           <TextField
-            id="outlined-required"
+            fullWidth
             label="Description"
             value={data.description}
             name="description"
             required
-            onChange={handleChange}
+            onChange={handleInputChange}
           />
 
           <div className="ownerInfo">
             <TextField
-              id="outlined-required"
+              className="ownerData"
               label="Owner Name"
               value={data.ownerInfo.name}
               name="authorContact"
               required
-              fullWidth
               onChange={(e) =>
                 setData({
                   ...data,
@@ -216,12 +195,11 @@ const AddEditBook = () => {
             />
 
             <TextField
-              id="outlined-required"
+              className="ownerData"
               label="Owner Contact"
               value={data.ownerInfo.contact}
               name="ownerName"
               required
-              fullWidth
               onChange={(e) =>
                 setData({
                   ...data,
@@ -234,12 +212,11 @@ const AddEditBook = () => {
             />
 
             <TextField
-              id="outlined-required"
+              className="ownerData"
               label="Owner Email"
               value={data.ownerInfo.email}
               name="ownerEmail"
               required
-              fullWidth
               onChange={(e) =>
                 setData({
                   ...data,
@@ -273,6 +250,7 @@ const AddEditBook = () => {
           <Button
             disabled={uploaded}
             type="submit"
+            fullWidth
             variant="contained"
             color="success"
           >
