@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./index.css";
+import "./style.css";
 import Searchbar from "./Searchbar";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";

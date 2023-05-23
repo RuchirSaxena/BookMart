@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "../Card";
-import "./index.css";
+import "./style.css";
 import { lazy, Suspense } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Heading from "../HeadingUI";

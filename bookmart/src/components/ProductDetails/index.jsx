@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./index.css";
+import "./style.css";
 import { db } from "../../firebase";
 import { useParams } from "react-router-dom";
 import { getDoc } from "firebase/firestore";
@@ -37,7 +37,7 @@ const Index = () => {
             <div className="carousel-inner image-slider">
               <div className="carousel-item active ">
                 <img
-                  src={product.imgURLs}
+                  src={product?.imgURLs}
                   className="d-block w-100 carousel-img"
                   alt="Loading Error !"
                 />
