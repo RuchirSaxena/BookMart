@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { storage, db } from "../../firebase";
-import {TextField} from "@mui/material";
-import {Button} from "@mui/material";
-import "./Index.css";
-import {InputLabel} from "@mui/material";
-import {MenuItem} from "@mui/material";
-import {Select} from "@mui/material";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import "./style.css";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
-import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import Heading from "../HeadingUI";
@@ -29,50 +30,43 @@ let initialState = {
 const AddEditBook = () => {
   const [data, setData] = useState(initialState);
   const [files, setFiles] = useState([]);
-  const [urls, setUrls] = useState([]);
+  const [progress, setProgress] = useState(0);
+  const [uploaded, setUploaded] = useState(true);
+  const uploadFile = () => {
+    files.forEach((file) => {
+      const name = new Date().getTime() + file.name;
+      const storageRef = ref(storage, name);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const ImageUploadprogress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 
-  useEffect(() => {
-    const uploadFile = () => {
-      files.map((file) => {
-        const name = new Date().getTime() + file.name;
-        const storageRef = ref(storage, name);
-        const uploadTask = uploadBytesResumable(storageRef, file);
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            switch (snapshot.state) {
-              case "paused":
-                console.log("upload is Paused");
-                break;
-              case "running":
-                console.log("upload is running");
-                break;
-              default:
-                break;
-            }
-          },
-          (error) => {
-            console.log(error);
-          },
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((urls) => {
-              initialState = {
-                ...initialState,
-                imgURLs: [...initialState.imgURLs, urls],
-              };
-              console.log(initialState);
-              setData({ ...data, imgURLs: initialState.imgURLs });
-            });
+          setProgress(ImageUploadprogress);
+          if (ImageUploadprogress === 100) {
+            setUploaded(false);
           }
-        );
-      });
-    };
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((urls) => {
+            initialState = {
+              ...initialState,
+              imgURLs: [...initialState.imgURLs, urls],
+            };
+
+            setData({ ...data, imgURLs: initialState.imgURLs });
+          });
+        }
+      );
+    });
+  };
+  useEffect(() => {
     files && uploadFile();
   }, [files]);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   const handleImageUpload = (e) => {
     for (let i = 0; i < e.target.files.length; i++) {
@@ -82,18 +76,28 @@ const AddEditBook = () => {
     }
   };
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     setData({
       ...data,
       [e.target.name]: e.target.value,
     });
   };
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     await addDoc(collection(db, "booksmanually"), {
       ...data,
       timeStamp: serverTimestamp(),
     }).then(() => {
-      console.log("Successfully uploaded");
+      toast.success(`Added New Book`, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     });
     setData(initialState);
     setFiles([]);
@@ -107,46 +111,44 @@ const AddEditBook = () => {
         <form onSubmit={handleSubmit}>
           <TextField
             className="inputHandle"
-            id="outlined-required"
+            fullWidth
             label="Book Name"
             value={data.name}
             name="name"
             required
-            onChange={handleChange}
+            onChange={handleInputChange}
           />
 
           <div className="priceContainer">
             <TextField
-              id="outlined-required"
               label="Book Original Price"
               value={data.originalPrice}
               name="originalPrice"
               required
-              onChange={handleChange}
-              fullWidth
+              onChange={handleInputChange}
+              className="price"
             />
 
             <TextField
-              id="outlined-required"
               label="Book Price Offered"
               value={data.priceOffered}
               name="priceOffered"
               required
-              onChange={handleChange}
-              fullWidth
+              onChange={handleInputChange}
+              className="price"
             />
           </div>
 
           <TextField
-            id="outlined-required"
+            fullWidth
             label="Book's Author Name"
             value={data.authorName}
             name="authorName"
             required
-            onChange={handleChange}
+            onChange={handleInputChange}
           />
 
-          <FormControl>
+          <FormControl className="categorySelect">
             <InputLabel id="category-label">Category</InputLabel>
             <Select
               labelId="category-label"
@@ -154,7 +156,7 @@ const AddEditBook = () => {
               id="category"
               value={data.category}
               name="category"
-              onChange={handleChange}
+              onChange={handleInputChange}
             >
               <MenuItem value="Fiction">Fiction</MenuItem>
               <MenuItem value="Comedy">Comedy</MenuItem>
@@ -166,22 +168,21 @@ const AddEditBook = () => {
           </FormControl>
 
           <TextField
-            id="outlined-required"
+            fullWidth
             label="Description"
             value={data.description}
             name="description"
             required
-            onChange={handleChange}
+            onChange={handleInputChange}
           />
 
           <div className="ownerInfo">
             <TextField
-              id="outlined-required"
+              className="ownerData"
               label="Owner Name"
               value={data.ownerInfo.name}
               name="authorContact"
               required
-              fullWidth
               onChange={(e) =>
                 setData({
                   ...data,
@@ -194,12 +195,11 @@ const AddEditBook = () => {
             />
 
             <TextField
-              id="outlined-required"
+              className="ownerData"
               label="Owner Contact"
               value={data.ownerInfo.contact}
               name="ownerName"
               required
-              fullWidth
               onChange={(e) =>
                 setData({
                   ...data,
@@ -212,12 +212,11 @@ const AddEditBook = () => {
             />
 
             <TextField
-              id="outlined-required"
+              className="ownerData"
               label="Owner Email"
               value={data.ownerInfo.email}
               name="ownerEmail"
               required
-              fullWidth
               onChange={(e) =>
                 setData({
                   ...data,
@@ -229,23 +228,34 @@ const AddEditBook = () => {
               }
             />
           </div>
+          <div className="imgUploadMain">
+            <div className="imgUpload">
+              <Button fullWidth variant="contained" component="label">
+                Upload Images*
+                <input
+                  hidden
+                  required
+                  accept="image/*"
+                  multiple
+                  type="file"
+                  onChange={handleImageUpload}
+                />
+              </Button>
+            </div>
+            <div className="progressBar">
+              {"Upload is " + progress + "% done"}
+            </div>
+          </div>
 
-          <Button variant="contained" component="label" >
-            Upload Images*
-            <input
-              hidden
-              required
-              accept="image/*"
-              multiple
-              type="file"
-              onChange={handleImageUpload}
-            />
-          </Button>
-
-          <Button type="submit" variant="contained" color="success">
+          <Button
+            disabled={uploaded}
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="success"
+          >
             Submit
           </Button>
-          
         </form>
       </div>
     </div>

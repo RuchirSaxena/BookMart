@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./style.css";
 import Searchbar from "./Searchbar";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -7,7 +8,6 @@ import Overlay from "../Overlay";
 import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import Login from "../Authentication/Login";
-import './index.css';
 import { useSelector } from "react-redux";
 const Index = () => {
   const [isActive, setIsActive] = useState(true);
