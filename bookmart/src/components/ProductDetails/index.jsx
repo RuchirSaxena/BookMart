@@ -18,7 +18,6 @@ const Index = () => {
         const docSnap = await getDoc(docRef);
         setProduct(docSnap.data());
       } catch (error) {
-        console.log("Error getting document:", error);
         setErrorMsg("Error fetching data");
       }
     };
@@ -38,7 +37,7 @@ const Index = () => {
             <div className="carousel-inner image-slider">
               <div className="carousel-item active ">
                 <img
-                  src={product?.imgURLs}
+                  src={product.imgURLs}
                   className="d-block w-100 carousel-img"
                   alt="Loading Error !"
                 />

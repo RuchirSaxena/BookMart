@@ -1,6 +1,7 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../Card";
 import "./index.css";
+import { lazy, Suspense } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Heading from "../HeadingUI";
 const LazyCard = lazy(() => import("../Card"));
