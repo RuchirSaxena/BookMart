@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./Index.css";
-import Card from "../Card/Index";
-import Filter from "../Filter/Index";
-import Carousel from "../Carousel/Index";
+import "./style.css";
+import Card from "../Card";
+import Filter from "../Filter";
+import Carousel from "../Carousel";
 import { auth, db } from "../../firebase";
 import {
   onSnapshot,

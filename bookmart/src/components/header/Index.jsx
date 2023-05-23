@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./style.css";
 import Searchbar from "./Searchbar";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -8,7 +9,6 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Overlay from "../Overlay";
 import { useNavigate } from "react-router-dom";
 import Login from "../Authentication/Login";
-import './index.css';
 import { useSelector } from "react-redux";
 import IconSVG from '../../assests/icon.svg';
 const Index = () => {
