@@ -28,8 +28,6 @@ const Index = () => {
 
   return (
     <>
-    
-          
       <div className="card-wrapper">
         <div className="card">
           <div
@@ -37,16 +35,16 @@ const Index = () => {
             className="carousel slide carousel-css "
             data-bs-ride="true"
           >
-            <div className="carousel-inner">
-              <div className="carousel-item active">
+            <div className="carousel-inner image-slider">
+              <div className="carousel-item active ">
                 <img
-                  src={product.imgURLs}
+                  src={product?.imgURLs}
                   className="d-block w-100 carousel-img"
                   alt="Loading Error !"
                 />
               </div>
-              {product.imgURLs?.map((item, index) => (
-                <div className="carousel-item image-slider" >
+              {product.imgURLs?.slice(1).map((item, index) => (
+                <div className="carousel-item ">
                   <img src={item} alt={Index}></img>
                 </div>
               ))}
@@ -78,25 +76,25 @@ const Index = () => {
             </div>
           </div>
 
-          <div class="product-content">
-            <h2 class="product-title">{product.name}</h2>
+          <div className="product-content">
+            <h2 className="product-title">{product.name}</h2>
             <a href="#" class="product-link">
               {Constants.link}
             </a>
 
-            <div class="product-price">
-              <p class="last-price">
+            <div className="product-price">
+              <p className="last-price">
                 {Constants.originalPrice}
                 <span>{product.originalPrice}</span>
               </p>
-              <p class="new-price">
+              <p className="new-price">
                 {Constants.newPrice}
                 <span>{product.priceOffered}</span>
               </p>
             </div>
 
-            <div class="product-detail">
-              <h2>About this item: </h2>
+            <div className="product-detail">
+              <h2>{Constants.aboutthisItem} </h2>
               <p>{product.description}</p>
               <ul>
                 <li>
@@ -113,10 +111,10 @@ const Index = () => {
               </ul>
             </div>
 
-            <div class="purchase-info">
+            <div className="purchase-info">
               <button type="button" class="btn">
                 {Constants.cart}
-                <i class="fas fa-shopping-cart"></i>
+                <i className="fas fa-shopping-cart"></i>
               </button>
             </div>
           </div>

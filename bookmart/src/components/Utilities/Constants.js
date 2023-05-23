@@ -19,6 +19,7 @@ const Constants = {
   ownersName: "Owner's Name: ",
   ownersContact: "Owner's Contact:",
   ownersEmail: "Owner's Email:",
+  aboutthisItem: "About this item: ",
 };
 
 export default Constants;
