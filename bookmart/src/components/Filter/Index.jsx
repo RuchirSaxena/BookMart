@@ -1,9 +1,9 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
-import Card from "../Card/Index";
-import "./Index.css";
+import Card from "../Card";
+import "./style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Heading from "../HeadingUI";
-const LazyCard = lazy(() => import("../Card/Index"));
+const LazyCard = lazy(() => import("../Card"));
 const Index = (props) => {
   const [filtered, setFiltered] = useState(props.books);
   const [filter, setFilter] = useState("");

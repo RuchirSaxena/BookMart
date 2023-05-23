@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { storage, db } from "../../firebase";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import "./Index.css";
+import "./style.css";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import { toast } from "react-toastify";
