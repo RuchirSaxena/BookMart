@@ -14,7 +14,8 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import Heading from "../HeadingUI";
 import { useDispatch } from "react-redux";
-import { authActions } from "../../store";
+import { authActions, loggedUserActions } from "../../store";
+
 const Index = () => {
   const [user, setUser] = useState("");
   const [books, setBooks] = useState([]);
@@ -39,7 +40,7 @@ const Index = () => {
         console.log(error);
       }
     );
-    console.log(books);
+    
     return () => {
       unsub();
     };
@@ -69,7 +70,8 @@ const Index = () => {
     return user;
   };
   const loggedUser = GetCurrentUser();
-  console.log(loggedUser);
+  dispatch(loggedUserActions.setUser(loggedUser));
+ 
 
   const userLogOut = () => {
     auth.signOut();

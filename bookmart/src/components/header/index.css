@@ -10,8 +10,16 @@
   padding: 10px;
   justify-content: space-between;
 }
+.icon-img{
+  
+  margin:0 10px;
+  height: 50px;
+  width: 47px;
+}
 logo {
+  cursor: pointer;
   font-size: 2rem;
+  font-weight: 600;
 }
 .input-box {
   border: none;
@@ -51,7 +59,13 @@ ul li a {
 .sidebar-links {
   display: none;
 }
-
+.MuiButton-outlined {
+border-color: #F2F1F1 !important;
+color:#F2F1F1 !important;
+}
+.MuiButton-outlined:hover {
+border-color: #dbd9d9 !important;
+}
 @media only screen and (max-width: 750px) {
   .navbar-container {
     position: fixed;
@@ -279,9 +293,7 @@ ul li a {
     width: 100%;
     padding: 10px;
   }
-  .sidebar-links li a:hover {
-    background-color: #cacaca;
-  }
+
 
   .overlay {
     cursor: pointer;

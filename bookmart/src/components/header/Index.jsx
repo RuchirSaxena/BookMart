@@ -1,25 +1,49 @@
 import React, { useState } from "react";
 import Searchbar from "./Searchbar";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
+import { Button } from "@mui/material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Overlay from "../Overlay";
-import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import Login from "../Authentication/Login";
 import './index.css';
 import { useSelector } from "react-redux";
+import IconSVG from '../../assests/icon.svg';
 const Index = () => {
   const [isActive, setIsActive] = useState(true);
+  const [isSidebarActive,setIsSidebarActive]= useState(true);
+  const [isAccountSidebarActive,setIsAccountSidebarActive]= useState(true);
   const isAuth = useSelector(state =>state.auth.isAuthenticated);
+  const userLoggedIn = useSelector((state) => state.loggedUser.loggedUserData);
   const navigate = useNavigate();
-  const handleClick = (event) => {
+
+
+
+ 
+  const handleOverlayClick = (event) => {
+    setIsActive((current) => !current);
+    setIsSidebarActive((current)=> !current);
+  };
+  const handleAccountOverlayClick = (event) => {
     setIsActive((current) => !current);
   };
+
+
+  const handleAddBookClick = ()=> {
+      navigate('/addbook');
+    }
+  
+
   const [openModal, setOpenModal] = useState(false);
   return (
     <>
-      <Overlay isActive={isActive} setIsActive={setIsActive} />
+      <Overlay
+        isActive={isActive}
+        setIsActive={setIsActive}
+        setIsSidebarActive={setIsSidebarActive}
+      />
 
       <div className="navbar-container">
         <logo
@@ -27,48 +51,61 @@ const Index = () => {
             navigate("/");
           }}
         >
+          <img className="icon-img" src={IconSVG} alt="icon"></img>
           BookMart
         </logo>
         <Searchbar />
-       {isAuth && (<div className="links-container">
+
+        <div className="links-container">
           <ul className="links">
             <li>
               <a>
-                <FavoriteBorderOutlinedIcon fontSize="large" />
+                <Button variant="outlined" onClick={handleAddBookClick}>
+                  Add Book
+                </Button>
               </a>
             </li>
+            {isAuth && (
+              <>
+                <li>
+                  <a>
+                    <FavoriteBorderOutlinedIcon fontSize="large" />
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    <AddShoppingCartIcon fontSize="large" />
+                  </a>
+                </li>
+              </>
+            )}
             <li>
               <a>
-                <AddShoppingCartIcon fontSize="large" />
-              </a>
-            </li>
-            <li>
-              <a>
-                <AccountCircleIcon fontSize="large" />
+                <AccountCircleIcon
+                  fontSize="large"
+                  onClick={handleAccountOverlayClick}
+                />
               </a>
             </li>
           </ul>
-        </div>)}
+        </div>
         <div className="icons">
           <i
             className={`fa-solid fa-bars fa-2xl bars ${
               isActive ? "active" : " "
             }`}
-            onClick={handleClick}
+            onClick={handleOverlayClick}
           ></i>
           <i
             className={` fa-solid fa-xmark fa-2xl cross ${
               isActive ? " " : "active"
             }`}
-            onClick={handleClick}
+            onClick={handleOverlayClick}
           ></i>
         </div>
       </div>
-      <div className={`sidebar ${isActive ? " " : "sidebar-active  "}`}>
+      <div className={`sidebar ${isSidebarActive ? " " : "sidebar-active  "}`}>
         <ul className="sidebar-links">
-          <li>
-            <button onClick={() => setOpenModal((prev) => !prev)}>Login</button>
-          </li>
           <li>
             <a>SignIn</a>
           </li>

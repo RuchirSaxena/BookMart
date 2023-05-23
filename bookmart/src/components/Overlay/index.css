@@ -1,5 +1,5 @@
- @media only screen and (max-width: 750px) {
-    .overlay {
+@media only screen and (max-width: 750px) {
+  .overlay-head{
     cursor: pointer;
     position: fixed;
     width: 100%;
@@ -12,5 +12,4 @@
   .active-overlay {
     display: block;
   }
- }
- 
+}

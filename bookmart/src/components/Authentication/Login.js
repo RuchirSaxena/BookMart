@@ -7,6 +7,7 @@ import "./Login.css";
 import svgImg from '../../assests/login-img.svg';
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store";
+
 const Login = () => {
   const dispatch = useDispatch();
   const [password, setPassword] = useState("");
@@ -79,18 +80,6 @@ const Login = () => {
             autoComplete="current-password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          {/* <input
-            type="email"
-            placeholder="Enter Your Mail"
-            onChange={(e) => setEmail(e.target.value)}
-          /> */}
-          {/* <label>Password</label>
-          <input
-            type="password"
-            placeholder="Enter Your Password"
-            onChange={(e) => setPassword(e.target.value)}
-          /> */}
-
           <button onClick={handleLogin}>Log In</button>
           <div>
             <span>Don't Have an account?</span>

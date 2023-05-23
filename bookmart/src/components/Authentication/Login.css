@@ -47,25 +47,25 @@
 }
 
 .login-form button{
-    height: 50px;
-    width: 30%;
+    height: 40px;
+    width: 40%;
     background-color: #393646;
     margin: 20px 0;
     border: none;
     color: white;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 5px;
     transition: all 0.5s ease;
 }
 .login-form button:hover{
-    height: 50px;
-    width: 30%;
+    height: 40px;
+    width: 40%;
     background-color: #46464b;
     margin: 20px 0;
     border: none;
     color: white;
     font-size: medium;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 5px;
 }
 .success-msg{
