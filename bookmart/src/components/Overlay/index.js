@@ -1,5 +1,5 @@
 import React from 'react'
-import './index.css';
+import './style.css';
 const Overlay = (props) => {
      const handleClick = (event) => {
        props.setIsActive((current) => !current);

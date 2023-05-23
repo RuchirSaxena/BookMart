@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Header from "../header/";
+import Header from "../header";
 import Footer from "../Footer";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
@@ -7,7 +7,7 @@ import { db } from "../../firebase";
 import constants from "../Utilities/Constants";
 import { getDoc } from "firebase/firestore";
 import { doc, collection, query, where, addDoc } from "firebase/firestore";
-import "./SingleProduct.css";
+import "./style.css";
 
 const Productdetails = () => {
   const { id } = useParams();

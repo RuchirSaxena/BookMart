@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import Card from "../Card";
-import "./index.css";
+import "./style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Heading from "../HeadingUI";
+const LazyCard = lazy(() => import("../Card"));
 const Index = (props) => {
   const [filtered, setFiltered] = useState(props.books);
   const [filter, setFilter] = useState("");
   const [filterSelected, setfilterSelected] = useState(false);
-  const [categorySelected,setCategory]=useState("")
+  const [categorySelected, setCategory] = useState("");
   const loading = props.loading;
   const handleCategorySelect = (category) => {
     const filteredBooks = props.books.filter(
       (book) => book.category === category
     );
-    setCategory(category)
+    setCategory(category);
     setfilterSelected(true);
     setFiltered(filteredBooks);
     setFilter(category);
@@ -21,6 +22,7 @@ const Index = (props) => {
 
   useEffect(() => {
     setFiltered(props.books);
+    console.log(props.books);
   }, [loading]);
   return (
     <div className="filter">
@@ -29,7 +31,9 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter == "Self Help" ? "cardContainer active" : "cardContainer"
+                filter === "Self Help"
+                  ? "cardContainer active"
+                  : "cardContainer"
               }
               onClick={() => handleCategorySelect("Self Help")}
             >
@@ -45,7 +49,9 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter == "Education" ? "cardContainer active" : "cardContainer"
+                filter === "Education"
+                  ? "cardContainer active"
+                  : "cardContainer"
               }
               onClick={() => handleCategorySelect("Education")}
             >
@@ -61,7 +67,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter == "Romance" ? "cardContainer active" : "cardContainer"
+                filter === "Romance" ? "cardContainer active" : "cardContainer"
               }
               onClick={() => handleCategorySelect("Romance")}
             >
@@ -77,7 +83,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter == "Comedy" ? "cardContainer active" : "cardContainer"
+                filter === "Comedy" ? "cardContainer active" : "cardContainer"
               }
               onClick={() => {
                 handleCategorySelect("Comedy");
@@ -95,7 +101,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter == "Fiction" ? "cardContainer active" : "cardContainer"
+                filter === "Fiction" ? "cardContainer active" : "cardContainer"
               }
               onClick={() => handleCategorySelect("Fiction")}
             >
@@ -128,13 +134,13 @@ const Index = (props) => {
             ) : (
               <Heading text={"Popular Books"} />
             )}
-
+        <Suspense fallback={<div>Loading...</div>}>
             {filtered?.map((bookItem) => (
               <div
                 className="col col-sm-6 col-md-3 col-lg-2 m-2"
                 key={bookItem.id}
               >
-                <Card
+                <LazyCard
                   title={bookItem.name}
                   price={bookItem.priceOffered}
                   image={bookItem.imgURLs[0]}
@@ -142,13 +148,12 @@ const Index = (props) => {
                 />
               </div>
             ))}
+            </Suspense>
           </div>
         )}
       </section>
-      <hr />
     </div>
   );
 };
 
 export default Index;
-

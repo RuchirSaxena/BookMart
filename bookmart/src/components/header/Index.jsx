@@ -1,24 +1,31 @@
 import React, { useState } from "react";
-import "./index.css";
+import "./style.css";
 import Searchbar from "./Searchbar";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Overlay from '../Overlay';
+import Overlay from "../Overlay";
 import { createPortal } from "react-dom";
+import { useNavigate } from "react-router-dom";
 const Index = () => {
   const [isActive, setIsActive] = useState(true);
+  const navigate = useNavigate();
   const handleClick = (event) => {
     setIsActive((current) => !current);
   };
-  
+
   return (
     <>
-     
-        <Overlay isActive={isActive} setIsActive={setIsActive}/>
-      
+      <Overlay isActive={isActive} setIsActive={setIsActive} />
+
       <div className="navbar-container">
-        <logo>BookMart</logo>
+        <logo
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          BookMart
+        </logo>
         <Searchbar />
         <div className="links-container">
           <ul className="links">
