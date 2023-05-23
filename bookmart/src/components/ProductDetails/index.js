@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Header from "../header";
-import Footer from "../Footer";
+import Footer from "../footer";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { db } from "../../firebase";

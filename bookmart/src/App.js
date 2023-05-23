@@ -1,12 +1,12 @@
 import "./App.css";
 import Home from "./components/Home";
-import Header from './components/header';
-import AddBook from './components/AddBook';
-import Footer from './components/Footer';
+import Header from "./components/header";
+import AddBook from "./components/AddBook";
+import Footer from "./components/footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./components/Authentication/Login"
+import Login from "./components/Authentication/Login";
 import SignUp from "./components/Authentication/SignUp";
-import Product from "./components/ProductDetails"
+import Product from "./components/ProductDetails";
 import { ToastContainer } from "react-toastify";
 import Constants from "./components/Utilities/Constants";
 function App() {
@@ -25,7 +25,7 @@ function App() {
       </BrowserRouter>
       <ToastContainer
         position="top-center"
-        autoClose={Constants.autoCloseTime} 
+        autoClose={Constants.autoCloseTime}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
