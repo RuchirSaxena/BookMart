@@ -17,7 +17,7 @@ const Productdetails = () => {
   };
   useEffect(() => {
     getProduct();
-  }, []);
+  }, [id]);
 
   return (
     <div class="hello">

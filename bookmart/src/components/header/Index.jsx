@@ -6,13 +6,16 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Overlay from "../Overlay";
 import { useNavigate } from "react-router-dom";
+import Login from "../Authentication/Login";
+import { useSelector } from "react-redux";
 const Index = () => {
   const [isActive, setIsActive] = useState(true);
+  const isAuth = useSelector(state =>state.auth.isAuthenticated);
   const navigate = useNavigate();
   const handleClick = (event) => {
     setIsActive((current) => !current);
   };
-
+  const [openModal, setOpenModal] = useState(false);
   return (
     <>
       <Overlay isActive={isActive} setIsActive={setIsActive} />
@@ -26,7 +29,7 @@ const Index = () => {
           BookMart
         </logo>
         <Searchbar />
-        <div className="links-container">
+       {isAuth && (<div className="links-container">
           <ul className="links">
             <li>
               <a>
@@ -44,7 +47,7 @@ const Index = () => {
               </a>
             </li>
           </ul>
-        </div>
+        </div>)}
         <div className="icons">
           <i
             className={`fa-solid fa-bars fa-2xl bars ${
@@ -63,6 +66,9 @@ const Index = () => {
       <div className={`sidebar ${isActive ? " " : "sidebar-active  "}`}>
         <ul className="sidebar-links">
           <li>
+            <button onClick={() => setOpenModal((prev) => !prev)}>Login</button>
+          </li>
+          <li>
             <a>SignIn</a>
           </li>
           <li>
@@ -76,6 +82,7 @@ const Index = () => {
           </li>
         </ul>
       </div>
+      {openModal && <Login />}
     </>
   );
 };
