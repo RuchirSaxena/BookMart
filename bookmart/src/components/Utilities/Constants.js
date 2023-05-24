@@ -1,3 +1,4 @@
+
 const Constants = {
   createAccount: "Create Account",
   name: "Your Name",
@@ -15,6 +16,10 @@ const Constants = {
   successMsg: "New User added Successfully",
   errorMsg: "User Already Exists",
   missingFields: "Please Fill all required fields",
+  ownersName: "Owner's Name: ",
+  ownersContact: "Owner's Contact:",
+  ownersEmail: "Owner's Email:",
+  aboutthisItem: "About this item: ",
   autoCloseTime:5000,
 };
 
