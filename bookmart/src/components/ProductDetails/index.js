@@ -1,26 +1,21 @@
 import React, { useEffect } from "react";
-import Header from "../header";
-import Footer from "../Footer";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { db } from "../../firebase";
 import constants from "../Utilities/Constants";
 import { getDoc } from "firebase/firestore";
-import { doc, collection, query, where, addDoc } from "firebase/firestore";
+import { doc } from "firebase/firestore";
 import "./style.css";
 
 const Productdetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
-  const [successMsg, setSuccessMsg] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
-
+  const getProduct = async () => {
+    const docRef = doc(db, "booksmanually", id);
+    const docSnap = await getDoc(docRef);
+    setProduct(docSnap.data());
+  };
   useEffect(() => {
-    const getProduct = async () => {
-      const docRef = doc(db, "booksmanually", id);
-      const docSnap = await getDoc(docRef);
-      setProduct(docSnap.data());
-    };
     getProduct();
   }, []);
 

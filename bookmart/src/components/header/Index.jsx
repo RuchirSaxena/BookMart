@@ -5,7 +5,6 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Overlay from "../Overlay";
-import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 const Index = () => {
   const [isActive, setIsActive] = useState(true);
