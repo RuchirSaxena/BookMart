@@ -20,6 +20,7 @@ const Constants = {
   ownersContact: "Owner's Contact:",
   ownersEmail: "Owner's Email:",
   aboutthisItem: "About this item: ",
+  autoCloseTime:5000,
 };
 
 export default Constants;
