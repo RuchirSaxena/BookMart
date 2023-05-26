@@ -9,6 +9,7 @@ import SignUp from "./components/Authentication/SignUp";
 import Product from "./components/ProductDetails";
 import { ToastContainer } from "react-toastify";
 import Constants from "./components/Utilities/Constants";
+import GoToTopButton from "./components/GoToTopButton";
 function App() {
   return (
     <>
@@ -35,6 +36,7 @@ function App() {
         pauseOnHover
         theme="light"
       />
+      <GoToTopButton />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import Searchbar from "./Searchbar";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
@@ -7,36 +7,42 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Button } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Overlay from "../Overlay";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import Login from "../Authentication/Login";
 import { useSelector } from "react-redux";
-import IconSVG from '../../assests/icon.svg';
+import IconSVG from "../../assests/icon.svg";
+import Modal from "../Modal";
 const Index = () => {
   const [isActive, setIsActive] = useState(true);
-  const [isSidebarActive,setIsSidebarActive]= useState(true);
-  const [isAccountSidebarActive,setIsAccountSidebarActive]= useState(true);
-  const isAuth = useSelector(state =>state.auth.isAuthenticated);
+  const [isSidebarActive, setIsSidebarActive] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
   const userLoggedIn = useSelector((state) => state.loggedUser.loggedUserData);
   const navigate = useNavigate();
 
 
+  const location = useLocation();
 
- 
+  const locationPath= location.pathname;
+
+
   const handleOverlayClick = (event) => {
     setIsActive((current) => !current);
-    setIsSidebarActive((current)=> !current);
-  };
-  const handleAccountOverlayClick = (event) => {
-    setIsActive((current) => !current);
+    setIsSidebarActive((current) => !current);
   };
 
+  const handleResize = () => {
+    if (window.innerWidth <= 750) setModalOpen(false);
+  };
+  window.addEventListener("resize", handleResize);
 
-  const handleAddBookClick = ()=> {
-      navigate('/addbook');
-    }
-  
+  const handleAddBookClick = () => {
+    navigate("/addbook");
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
-  const [openModal, setOpenModal] = useState(false);
   return (
     <>
       <Overlay
@@ -52,19 +58,26 @@ const Index = () => {
           }}
         >
           <img className="icon-img" src={IconSVG} alt="icon"></img>
-          BookMart
+          <span>BookMart</span>
         </logo>
-        <Searchbar />
-
+        {locationPath === "/login" ? "" : <Searchbar />}
         <div className="links-container">
           <ul className="links">
-            <li>
-              <a>
-                <Button variant="outlined" onClick={handleAddBookClick}>
-                  Add Book
-                </Button>
-              </a>
-            </li>
+            {locationPath === "/login" ? (
+              ""
+            ) : (
+              <li>
+                <a>
+                  <Button
+                    sx={{ color: "#f4eee0" }}
+                    variant="outlined"
+                    onClick={handleAddBookClick}
+                  >
+                    Add Book
+                  </Button>
+                </a>
+              </li>
+            )}
             {isAuth && (
               <>
                 <li>
@@ -81,10 +94,7 @@ const Index = () => {
             )}
             <li>
               <a>
-                <AccountCircleIcon
-                  fontSize="large"
-                  onClick={handleAccountOverlayClick}
-                />
+                <AccountCircleIcon fontSize="large" />
               </a>
             </li>
           </ul>
@@ -120,7 +130,6 @@ const Index = () => {
           </li>
         </ul>
       </div>
-      {openModal && <Login />}
     </>
   );
 };

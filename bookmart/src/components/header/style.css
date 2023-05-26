@@ -3,6 +3,8 @@
   height: 100px;
   width: 100%;
   background-color: #393646;
+/* background: linear-gradient(120deg, #2a78ac, #9b59b6); */
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -10,16 +12,17 @@
   padding: 10px;
   justify-content: space-between;
 }
+logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap:5px;
+  font-size: 1.7rem;
+  cursor: pointer;
+}
 .icon-img{
-  
-  margin:0 10px;
   height: 50px;
   width: 47px;
-}
-logo {
-  cursor: pointer;
-  font-size: 2rem;
-  font-weight: 600;
 }
 .input-box {
   border: none;
@@ -41,8 +44,7 @@ ul li {
   display: block;
   padding: 10px;
 }
-ul li a {
-}
+
 .icons {
   display: none;
   position: relative;
@@ -60,11 +62,7 @@ ul li a {
   display: none;
 }
 .MuiButton-outlined {
-border-color: #F2F1F1 !important;
-color:#F2F1F1 !important;
-}
-.MuiButton-outlined:hover {
-border-color: #dbd9d9 !important;
+border-color: #f4eee0 !important;
 }
 @media only screen and (max-width: 750px) {
   .navbar-container {
@@ -82,9 +80,17 @@ border-color: #dbd9d9 !important;
     justify-content: space-between;
     z-index: 100;
   }
-  logo {
-    font-size: 2rem;
-  }
+ logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap:5px;
+  font-size: 1.5rem;
+}
+.icon-img{
+  height: 50px;
+  width: 47px;
+}
   input {
     border: none;
     height: 40%;
@@ -205,10 +211,17 @@ border-color: #dbd9d9 !important;
     justify-content: space-between;
     z-index: 100;
   }
-  logo {
-    display: none;
-    font-size: 2rem;
-  }
+ logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap:5px;
+  font-size: 1.3rem;
+}
+.icon-img{
+  height: 45px;
+  width: 42px;
+}
   input {
     border: none;
     height: 40%;
@@ -293,7 +306,9 @@ border-color: #dbd9d9 !important;
     width: 100%;
     padding: 10px;
   }
-
+  .sidebar-links li a:hover {
+    background-color: #cacaca;
+  }
 
   .overlay {
     cursor: pointer;

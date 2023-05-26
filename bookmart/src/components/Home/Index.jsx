@@ -70,8 +70,11 @@ const Index = () => {
     return user;
   };
   const loggedUser = GetCurrentUser();
-  dispatch(loggedUserActions.setUser(loggedUser));
- 
+  console.log(loggedUser);
+  if(loggedUser){
+    dispatch(loggedUserActions.setUser(loggedUser));
+    dispatch(authActions.login());
+  }
 
   const userLogOut = () => {
     auth.signOut();
