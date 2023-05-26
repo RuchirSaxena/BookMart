@@ -6,19 +6,22 @@ import Footer from "./components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Authentication/Login";
 import SignUp from "./components/Authentication/SignUp";
-import Product from "./components/ProductDetails";
+import ProductDetails from "./components/ProductDetails";
 import { ToastContainer } from "react-toastify";
 import Constants from "./components/Utilities/Constants";
+import Cart from './components/Cart'
 function App() {
   return (
     <>
       <BrowserRouter>
         <Header />
         <Routes>
+
+          <Route path="/cart" element={<Cart />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/productdetails/:id" element={<Product />} />
+          <Route path="/productdetails/:id" element={<ProductDetails />} />
           <Route path="/addbook" element={<AddBook />} />
         </Routes>
         <Footer />

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
-import Card from "../Card";
 import Filter from "../Filter";
 import Carousel from "../Carousel";
 import { auth, db } from "../../firebase";
@@ -13,14 +12,12 @@ import {
 } from "firebase/firestore";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Heading from "../HeadingUI";
-import { useDispatch } from "react-redux";
-import { authActions } from "../../store";
 const Index = () => {
   const [user, setUser] = useState("");
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const dispatch = useDispatch();
+
 
 
 
@@ -70,13 +67,9 @@ const Index = () => {
   const loggedUser = GetCurrentUser();
   console.log(loggedUser);
 
-  const userLogOut = () => {
-    auth.signOut();
-    dispatch(authActions.logout());
-  };
   return (
     <>
-      <button onClick={userLogOut}>Logout</button>
+
       <Carousel />
       <Heading text={"Filters"} />
       <section className="filter">

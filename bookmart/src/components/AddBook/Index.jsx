@@ -123,6 +123,7 @@ const AddEditBook = () => {
             <TextField
               label="Book Original Price"
               value={data.originalPrice}
+              type="number"
               name="originalPrice"
               required
               onChange={handleInputChange}
@@ -133,6 +134,7 @@ const AddEditBook = () => {
               label="Book Price Offered"
               value={data.priceOffered}
               name="priceOffered"
+              type="number"
               required
               onChange={handleInputChange}
               className="price"
@@ -198,6 +200,7 @@ const AddEditBook = () => {
               className="ownerData"
               label="Owner Contact"
               value={data.ownerInfo.contact}
+              type="number"
               name="ownerName"
               required
               onChange={(e) =>
@@ -214,6 +217,7 @@ const AddEditBook = () => {
             <TextField
               className="ownerData"
               label="Owner Email"
+              type="email"
               value={data.ownerInfo.email}
               name="ownerEmail"
               required

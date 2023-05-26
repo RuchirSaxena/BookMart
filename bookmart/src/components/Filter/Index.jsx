@@ -7,22 +7,27 @@ const LazyCard = lazy(() => import("../Card"));
 const Index = (props) => {
   const [filtered, setFiltered] = useState(props.books);
   const [filter, setFilter] = useState("");
-  const [filterSelected, setfilterSelected] = useState(false);
+  const [filterSelected, setFilterSelected] = useState(false);
   const [categorySelected, setCategory] = useState("");
   const loading = props.loading;
   const handleCategorySelect = (category) => {
-    const filteredBooks = props.books.filter(
-      (book) => book.category === category
-    );
-    setCategory(category);
-    setfilterSelected(true);
-    setFiltered(filteredBooks);
-    setFilter(category);
+    if (category === filter) {
+      setFilter("");
+      setFilterSelected(false);
+      setFiltered(props.books);
+    } else {
+      const filteredBooks = props.books.filter(
+        (book) => book.category === category
+      );
+      setFilter(category);
+      setFilterSelected(true);
+      setCategory(category);
+      setFiltered(filteredBooks);
+    }
   };
 
   useEffect(() => {
     setFiltered(props.books);
-    console.log(props.books);
   }, [loading]);
   return (
     <div className="filter">
@@ -115,14 +120,6 @@ const Index = (props) => {
         </div>
       </div>
       <div>
-        <button
-          onClick={() => {
-            setFiltered(props.books);
-            setFilter("");
-          }}
-        >
-          CLear Filter
-        </button>
       </div>
       <section className="bookContainer ">
         {loading ? (

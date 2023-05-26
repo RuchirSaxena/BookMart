@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
-import {TextField} from "@mui/material";
+import { TextField } from "@mui/material";
 import "./Login.css";
-import svgImg from '../../assests/login-img.svg';
+import svgImg from "../../assests/login-img.svg";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store";
 const Login = () => {
@@ -48,7 +48,11 @@ const Login = () => {
   return (
     <div className="login">
       <div className="login-ui">
-        <img className="login-ui-img" src={svgImg} alt="Kiwi standing on oval"></img>
+        <img
+          className="login-ui-img"
+          src={svgImg}
+          alt="Kiwi standing on oval"
+        ></img>
       </div>
       <div className="login-container">
         <form className="login-form">
@@ -79,17 +83,6 @@ const Login = () => {
             autoComplete="current-password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          {/* <input
-            type="email"
-            placeholder="Enter Your Mail"
-            onChange={(e) => setEmail(e.target.value)}
-          /> */}
-          {/* <label>Password</label>
-          <input
-            type="password"
-            placeholder="Enter Your Password"
-            onChange={(e) => setPassword(e.target.value)}
-          /> */}
 
           <button onClick={handleLogin}>Log In</button>
           <div>
