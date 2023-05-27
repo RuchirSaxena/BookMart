@@ -1,15 +1,14 @@
-
 const Constants = {
   createAccount: "Create Account",
   name: "Your Name",
   email: "Email",
   password: "Password",
   phoneNumber: "Phone Number",
-  originalPrice : "Original Price: ",
-  newPrice : "New Price: ",
-  about : "About this item: ",
-  cart : "Add to Cart :",
-  visit : "Visit Bookmart" ,
+  originalPrice: "Original Price: ",
+  newPrice: "New Price: ",
+  about: "About this item: ",
+  cart: "ADD TO CART ",
+  wishlist: " WISHLIST",
   signUp: "Sign Up",
   signIn: "Sign In",
   accountCheck: "Already Have an account?",
@@ -20,7 +19,8 @@ const Constants = {
   ownersContact: "Owner's Contact:",
   ownersEmail: "Owner's Email:",
   aboutthisItem: "About this item: ",
-  autoCloseTime:5000,
+  autoCloseTime: 5000,
+  inclusive: "inclusive of all taxes",
 };
 
 export default Constants;
