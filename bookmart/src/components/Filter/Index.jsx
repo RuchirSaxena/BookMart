@@ -29,6 +29,14 @@ const Index = (props) => {
   useEffect(() => {
     setFiltered(props.books);
   }, [loading]);
+
+  const getCardContainerClassName = (category) => {
+    if (filter === category && filterSelected) {
+      return "cardContainer active";
+    } else {
+      return "cardContainer";
+    }
+  };
   return (
     <div className="filter">
       <div className="row">
@@ -36,9 +44,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter === "Self Help"
-                  ? "cardContainer active"
-                  : "cardContainer"
+                getCardContainerClassName("Self Help")
               }
               onClick={() => handleCategorySelect("Self Help")}
             >
@@ -54,9 +60,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter === "Education"
-                  ? "cardContainer active"
-                  : "cardContainer"
+                getCardContainerClassName("Education")
               }
               onClick={() => handleCategorySelect("Education")}
             >
@@ -72,8 +76,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter === "Romance" ? "cardContainer active" : "cardContainer"
-              }
+                getCardContainerClassName("Romance")              }
               onClick={() => handleCategorySelect("Romance")}
             >
               <img
@@ -88,7 +91,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter === "Comedy" ? "cardContainer active" : "cardContainer"
+                getCardContainerClassName("Comedy")     
               }
               onClick={() => {
                 handleCategorySelect("Comedy");
@@ -106,8 +109,7 @@ const Index = (props) => {
           <div className="secondAnimation">
             <div
               className={
-                filter === "Fiction" ? "cardContainer active" : "cardContainer"
-              }
+                getCardContainerClassName("Fiction")                   }
               onClick={() => handleCategorySelect("Fiction")}
             >
               <img

@@ -28,17 +28,17 @@ logo {
 }
 
 .links-container {
-  position: relative; 
+  position: relative;
 }
 
 .links-container .dropdown-menu {
   position: absolute;
-  top: 100%; 
-  right: 0; 
+  top: 100%;
+  right: 0;
   background-color: #d9d9d9;
   border-radius: 5px;
   padding: 10px;
-  display: none; 
+  display: none;
 }
 
 .links-container:hover .dropdown-menu {
@@ -63,8 +63,7 @@ ul li {
   display: block;
   padding: 10px;
 }
-ul li a {
-}
+
 .icons {
   display: none;
   position: relative;
@@ -174,7 +173,6 @@ ul li a {
 
   .sidebar-links li {
     display: block;
-    /* transform: translateX(-25%); */
     background-color: #d9d9d9;
     margin: 0 0 0 0px;
     padding: 0;
@@ -185,9 +183,6 @@ ul li a {
     display: block;
     width: 100%;
     padding: 10px;
-  }
-  .sidebar-links li a:hover {
-    background-color: #cacaca;
   }
 
   .overlay {
