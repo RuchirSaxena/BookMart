@@ -10,14 +10,12 @@ import ProductDetails from "./components/ProductDetails";
 import { ToastContainer } from "react-toastify";
 import Constants from "./components/Utilities/Constants";
 import Cart from './components/Cart';
-// import Checkout from './components/Cart/Checkout';
 function App() {
   return (
     <>
       <BrowserRouter>
         <Header />
         <Routes>
-          {/* <Route path="/" element={<Checkout/>}/> */}
           <Route path="/cart" element={<Cart />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
