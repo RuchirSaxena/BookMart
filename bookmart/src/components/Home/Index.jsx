@@ -46,10 +46,16 @@ const Index = () => {
     };
   }, []);
 
+
+
+
+  useEffect(()=>{
+    GetCurrentUser();
+  },[]);
+
+
   const GetCurrentUser = () => {
     const userCollectionRef = collection(db, "users");
-
-    useEffect(() => {
       auth.onAuthStateChanged((userlogged) => {
         if (userlogged) {
           const getUsers = async () => {
@@ -66,16 +72,18 @@ const Index = () => {
           setUser(null);
         }
       });
-    }, []);
-    return user;
   };
-  const loggedUser = GetCurrentUser();
-  console.log(loggedUser);
-  if(loggedUser){
-    dispatch(loggedUserActions.setUser(loggedUser));
+  // const loggedUser = GetCurrentUser();
+  // console.log(loggedUser);
+  if(user){
+    dispatch(loggedUserActions.setUser(user));
     dispatch(authActions.login());
+  }else{
+     dispatch(loggedUserActions.setUser(user));
+    dispatch(authActions.logout());
   }
 
+ 
   const userLogOut = () => {
     auth.signOut();
     dispatch(authActions.logout());

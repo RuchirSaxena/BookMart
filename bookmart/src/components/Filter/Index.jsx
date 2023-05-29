@@ -22,7 +22,6 @@ const Index = (props) => {
 
   useEffect(() => {
     setFiltered(props.books);
-    console.log(props.books);
   }, [loading]);
   return (
     <div className="filter">
