@@ -10,6 +10,7 @@ import ProductDetails from "./components/ProductDetails";
 import { ToastContainer } from "react-toastify";
 import Constants from "./components/Utilities/Constants";
 import Cart from './components/Cart';
+import GoToTopButton from "./components/GoToTopButton";
 function App() {
   return (
     <>
@@ -37,6 +38,7 @@ function App() {
         pauseOnHover
         theme="light"
       />
+      <GoToTopButton />
     </>
   );
 }

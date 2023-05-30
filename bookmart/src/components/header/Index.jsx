@@ -1,41 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import Searchbar from "./Searchbar";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Button } from "@mui/material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Overlay from "../Overlay";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Login from "../Authentication/Login";
 import { useSelector } from "react-redux";
-import { auth } from "../../firebase";
+import IconSVG from "../../assests/icon.svg";
+import { auth, db } from "../../firebase";
+import { authActions, loggedUserActions } from "../../store";
 import { useDispatch } from "react-redux";
-import { authActions } from "../../store";
-import Button from '@mui/material/Button';
+import Modal from "../Modal";
 const Index = () => {
   const [isActive, setIsActive] = useState(true);
+  const [isSidebarActive, setIsSidebarActive] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
+  const userLoggedIn = useSelector((state) => state.loggedUser.loggedUserData);
   const navigate = useNavigate();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dispatch = useDispatch();
+  const location = useLocation();
 
-  const handleClick = () => {
+  const locationPath = location.pathname;
+
+  
+
+  const handleOverlayClick = (event) => {
     setIsActive((current) => !current);
-  };
-  const [openModal, setOpenModal] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false); 
-
-  const toggleDropdown = () => {
-    setShowDropdown((prev) => !prev);
+    setIsSidebarActive((current) => !current);
   };
 
-  const handleLogout = () => {
+  const handleResize = () => {
+    if (window.innerWidth <= 750) setModalOpen(false);
+  };
+  window.addEventListener("resize", handleResize);
+
+  const handleAddBookClick = () => {
+    navigate("/addbook");
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+  const dropdownMenuMain=()=>{
+    console.log("Hello")
+    setIsDropdownOpen((prevOpen) => !prevOpen);
+  }
+  const userLogOut = () => {
     auth.signOut();
     dispatch(authActions.logout());
   };
-
   return (
     <>
-      <Overlay isActive={isActive} setIsActive={setIsActive} />
+      <Overlay
+        isActive={isActive}
+        setIsActive={setIsActive}
+        setIsSidebarActive={setIsSidebarActive}
+      />
 
       <div className="navbar-container">
         <logo
@@ -43,63 +67,81 @@ const Index = () => {
             navigate("/");
           }}
         >
-          BookMart
+          <img className="icon-img" src={IconSVG} alt="icon"></img>
+          <span>BookMart</span>
         </logo>
-        <Searchbar />
-        {isAuth && (
-          <div className="links-container">
-            <ul className="links">
+        {locationPath === "/login" ? "" : <Searchbar />}
+        <div className="links-container">
+          <ul className="links">
+            {locationPath === "/login" ? (
+              ""
+            ) : (
               <li>
                 <a>
-                  <FavoriteBorderOutlinedIcon fontSize="large" />
+                  <Button
+                    sx={{ color: "#f4eee0" }}
+                    variant="outlined"
+                    onClick={handleAddBookClick}
+                  >
+                    Add Book
+                  </Button>
                 </a>
               </li>
-              <li>
-                <a>
-                  <AddShoppingCartIcon fontSize="large" />
-                </a>
-              </li>
-              <li onClick={toggleDropdown}>
-                <a>
-                  <AccountCircleIcon fontSize="large" />
-                </a>
-                {showDropdown && ( 
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a>Welcome User</a>
-                    </li>
-                    <li>
-                      <a>Help</a>
-                    </li>
-                    <li>
-                      <a onClick={handleLogout}><Button variant="outlined">LogOut</Button></a>
-                    </li>
-                  </ul>
-                )}
-              </li>
-            </ul>
-          </div>
-        )}
+            )}
+            {isAuth && (
+              <>
+                <li>
+                  <a>
+                    <FavoriteBorderOutlinedIcon fontSize="large" />
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    <AddShoppingCartIcon fontSize="large" />
+                  </a>
+                </li>
+              </>
+            )}
+            <li
+            
+              onClick={dropdownMenuMain}
+            >
+              <a >
+                <AccountCircleIcon fontSize="large" />
+              </a>
+              {
+                isDropdownOpen &&(<ul className="dropdown-menu">
+                <li>
+                  <a>Welcome User</a>
+                </li>
+                <li>
+                  <a>Help</a>
+                </li>
+                <li>
+                  <a onClick={userLogOut}><Button variant="outlined">LogOut</Button></a>
+                </li>
+              </ul>)
+              }
+            </li>
+          </ul>
+        </div>
         <div className="icons">
           <i
             className={`fa-solid fa-bars fa-2xl bars ${
-              isActive ? "active" : ""
+              isActive ? "active" : " "
             }`}
-            onClick={handleClick}
+            onClick={handleOverlayClick}
           ></i>
           <i
             className={` fa-solid fa-xmark fa-2xl cross ${
-              isActive ? "" : "active"
+              isActive ? " " : "active"
             }`}
-            onClick={handleClick}
+            onClick={handleOverlayClick}
           ></i>
         </div>
       </div>
-      <div className={`sidebar ${isActive ? "" : "sidebar-active"}`}>
+      <div className={`sidebar ${isSidebarActive ? " " : "sidebar-active  "}`}>
         <ul className="sidebar-links">
-          <li>
-            <button onClick={() => setOpenModal((prev) => !prev)}>Login</button>
-          </li>
           <li>
             <a>SignIn</a>
           </li>
@@ -114,7 +156,6 @@ const Index = () => {
           </li>
         </ul>
       </div>
-      {openModal && <Login />}
     </>
   );
 };

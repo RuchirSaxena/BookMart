@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
+import Card from "../Card";
 import Filter from "../Filter";
 import Carousel from "../Carousel";
 import { auth, db } from "../../firebase";
@@ -12,14 +13,15 @@ import {
 } from "firebase/firestore";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Heading from "../HeadingUI";
+import { useDispatch } from "react-redux";
+import { authActions, loggedUserActions } from "../../store";
+
 const Index = () => {
   const [user, setUser] = useState("");
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
-
-
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const unsub = onSnapshot(
@@ -36,40 +38,46 @@ const Index = () => {
         console.log(error);
       }
     );
+
     return () => {
       unsub();
     };
   }, []);
 
+  useEffect(() => {
+    GetCurrentUser();
+  }, []);
+
   const GetCurrentUser = () => {
     const userCollectionRef = collection(db, "users");
-
-    useEffect(() => {
-      auth.onAuthStateChanged((userlogged) => {
-        if (userlogged) {
-          const getUsers = async () => {
-            const q = query(
-              collection(db, "users"),
-              where("uid", "==", userlogged.uid)
-            );
-            const data = await getDocs(q);
-            console.log(data);
-            setUser(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-          };
-          getUsers();
-        } else {
-          setUser(null);
-        }
-      });
-    }, []);
-    return user;
+    auth.onAuthStateChanged((userlogged) => {
+      if (userlogged) {
+        const getUsers = async () => {
+          const q = query(
+            collection(db, "users"),
+            where("uid", "==", userlogged.uid)
+          );
+          const data = await getDocs(q);
+          setUser(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        };
+        getUsers();
+      } else {
+        setUser(null);
+      }
+    });
   };
-  const loggedUser = GetCurrentUser();
-  console.log(loggedUser);
+
+  if (user) {
+    dispatch(loggedUserActions.setUser(user));
+    dispatch(authActions.login());
+  } else {
+    dispatch(loggedUserActions.setUser(user));
+    dispatch(authActions.logout());
+  }
+
 
   return (
     <>
-
       <Carousel />
       <Heading text={"Filters"} />
       <section className="filter">

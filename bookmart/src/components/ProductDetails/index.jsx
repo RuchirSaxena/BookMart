@@ -85,8 +85,8 @@ const Index = () => {
           <div class="basic-info">
             <h1 >{product.name}</h1>
 
-            <span>${product.priceOffered}</span>
-            <div>${product.originalPrice}</div>
+            <span>Rs. {product.priceOffered}</span>
+            <div>Rs. {product.originalPrice}</div>
 
             <p class="green">{Constants.inclusive}</p>
 

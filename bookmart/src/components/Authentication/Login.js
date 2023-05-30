@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
-import { TextField } from "@mui/material";
+import {TextField, Button} from "@mui/material";
+
 import "./Login.css";
-import svgImg from "../../assests/login-img.svg";
+import svgImg from '../../assests/login-img.svg';
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store";
+
 const Login = () => {
   const dispatch = useDispatch();
   const [password, setPassword] = useState("");
@@ -15,13 +17,17 @@ const Login = () => {
   const [successMsg, setSuccessMsg] = useState("");
   const navigate = useNavigate();
   const auth = getAuth();
+
+  const location = useLocation();
+ 
+
+
+
+
   const handleLogin = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        let string = JSON.stringify(userCredential);
-        let jsonUser = JSON.parse(string);
-        console.log(jsonUser);
         setSuccessMsg(
           "Logged in Successfully, you will be redirected to home page"
         );
@@ -47,12 +53,16 @@ const Login = () => {
   };
   return (
     <div className="login">
-      <div className="login-ui">
-        <img
-          className="login-ui-img"
-          src={svgImg}
-          alt="Kiwi standing on oval"
-        ></img>
+      <div className="login-ui-container">
+        <div className="login-ui">
+          <div className="login-ui-text">
+            <p>NICE TO SEE YOU AGAIN</p>
+            <h2>WELCOME BACK</h2>
+            <hr />
+            <p>Please login to Buy the book, or to Sell your book faster with us.</p>
+          </div>
+
+        </div>
       </div>
       <div className="login-container">
         <form className="login-form">
@@ -83,8 +93,9 @@ const Login = () => {
             autoComplete="current-password"
             onChange={(e) => setPassword(e.target.value)}
           />
-
-          <button onClick={handleLogin}>Log In</button>
+          <Button variant="contained" onClick={handleLogin}>
+           Log in
+          </Button>
           <div>
             <span>Don't Have an account?</span>
             <Link to="/signup">Sign Up</Link>
