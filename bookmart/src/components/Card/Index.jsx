@@ -1,6 +1,8 @@
 import React from "react";
-import "./Index.css";
+import "./style.css";
+import { useNavigate } from "react-router-dom";
 const Index = (props) => {
+  const navigate = useNavigate();
   return (
     <div class="card-container" key={props.key}>
       <div class="card-details">
@@ -15,7 +17,7 @@ const Index = (props) => {
       <button
         class="card-button"
         onClick={() => {
-          alert(`Clicked ${props.id}`);
+          navigate(`/productdetails/${props.id}`);
         }}
       >
         More info

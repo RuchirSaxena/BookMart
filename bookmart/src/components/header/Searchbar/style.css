@@ -1,15 +1,15 @@
-.input-box{
+.navbar-input-box{
     position: relative;
-    height: 50%;
+    height: 60%;
     width: 30% ;
  
 }
-.input-box input{
+.navbar-input-box input{
     width: 100%;
     height: 100%;
     outline: none;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     padding-left:10px;
     font-size: 15px;
 }
@@ -18,24 +18,24 @@
     display: block;
     cursor: pointer;
     position: absolute;
-    right: 3px;
-    top: 6px;
+    right: 5px;
+    top: 10px;
     color: #393646;
 }
 
 @media only screen and (max-width: 750px) {
-    .input-box{
+    .navbar-input-box{
     position: relative;
     height: 50%;
     width: 40% ;
  
 }
-.input-box input{
+.navbar-input-box input{
     width: 100%;
     height: 100%;
     outline: none;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     padding-left:10px;
     font-size: 15px;
 }
@@ -44,25 +44,25 @@
     display: block;
     cursor: pointer;
     position: absolute;
-    right: 0;
-    top: 9px;
+    right: 5px;
+    top: 6px;
     color: #393646;
 }
 }
 
 @media only screen and (max-width: 550px) {
-    .input-box{
+    .navbar-input-box{
     position: relative;
     height: 50%;
     width: 60% ;
  
 }
-.input-box input{
+.navbar-input-box input{
     width: 100%;
     height: 100%;
     outline: none;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     padding-left:10px;
     font-size: 17px;
 }
@@ -103,11 +103,4 @@
   .dataItem p {
     margin-left: 10px;
     margin-top: 10px;
-  }
-  a {
-    text-decoration: none;
-  }
-  
-  a:hover {
-    background-color: lightgrey;
   }

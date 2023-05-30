@@ -1,12 +1,13 @@
 import React from 'react'
-import './index.css';
+import './style.css';
 const Overlay = (props) => {
      const handleClick = (event) => {
        props.setIsActive((current) => !current);
+       props.setIsSidebarActive((current=>!current));
      };
   return (
     <div
-      className={`overlay ${props.isActive ? "" : "active-overlay"}`}
+      className={`overlay-head ${props.isActive ? "" : "active-overlay"}`}
       onClick={handleClick}
     ></div>
   );
