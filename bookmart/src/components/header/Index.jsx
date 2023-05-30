@@ -7,7 +7,7 @@ import { auth, db } from "../../firebase";
 import { Button } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Overlay from "../Overlay";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import Login from "../Authentication/Login";
 import { useSelector } from "react-redux";
 import IconSVG from "../../assests/icon.svg";
@@ -101,9 +101,9 @@ const Index = () => {
                   </a>
                 </li>
                 <li>
-                  <a>
+                <Link to="/cartdata">
                     <AddShoppingCartIcon fontSize="large" />
-                  </a>
+                  </Link>
                 </li>
               </>
             )}

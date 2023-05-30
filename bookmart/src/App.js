@@ -12,6 +12,7 @@ import Constants from "./components/Utilities/Constants";
 import GoToTopButton from "./components/GoToTopButton";
 import Cart from './components/Cart';
 import Help from "./components/Help";
+import ShoppingCart from "./components/CartItems/ShoppingCart";
 function App() {
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
           <Route path="/productdetails/:id" element={<ProductDetails />} />
           <Route path="/addbook" element={<AddBook />} />
           <Route path="/help" element={<Help />} />
+          <Route path="/cartdata" element={<ShoppingCart/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>

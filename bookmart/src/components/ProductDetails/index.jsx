@@ -1,15 +1,38 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
-import { db } from "../../firebase";
+import { db,auth } from "../../firebase";
 import { useParams } from "react-router-dom";
-import { getDoc } from "firebase/firestore";
-import { doc } from "firebase/firestore";
+import { getDoc,doc,getDocs,collection,query,where,addDoc } from "firebase/firestore";
+
 import Constants from "../Utilities/Constants";
 const Index = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+
+  const GetCurrentUser = () => {
+    const [user,setUser] = useState("");
+    const usersCollectionRef = collection(db, "users");
+    useEffect(()=>{
+      auth.onAuthStateChanged(userlogged => {
+        if(userlogged){
+          const getUsers= async() =>{
+            const q = query(collection(db,"users"),where("uid", "==",userlogged.uid))
+            const data = await getDocs(q);
+            setUser(data.docs.map((doc)=>({...doc.data(),id:doc.id})));
+          };
+          getUsers();
+        }
+        else{
+          setUser(null);
+        }
+
+          })
+        },[])
+      return user
+    }
+     const loggeduser=GetCurrentUser();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +48,20 @@ const Index = () => {
     fetchData();
   }, [id]);
 
+  const addToCart = () =>{
+    if(loggeduser){
+      addDoc(collection(db,`cart-${loggeduser[0].uid}`,),{
+        product,quantity:1
+      }).then(()=>{
+        setSuccessMsg('Product added to cart');
+      }).catch((error)=>{setErrorMsg(error.message)})
+    }
+    else{
+      setErrorMsg('You need to Login first')
+    }
+  }
+
+  
   return (
     <>
       <div class="contain">
@@ -91,12 +128,17 @@ const Index = () => {
             <p class="green">{Constants.inclusive}</p>
 
             <div class="options">
-              <button type="button" class="btn">
+              <button type="button" class="btn" onClick= {addToCart}>
                 <i class="fas fa-shopping-cart"></i>&nbsp;  {Constants.cart}
               </button>
+              
               <button type="button" class="btn">
                 <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
               </button>
+              {successMsg && <>
+        <div className="success-msg">{successMsg}</div></>}
+        {errorMsg && <>
+        <div className="error-msg">{errorMsg}</div></>}
             </div>
           </div>
           <div class="description">
