@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { db, auth } from "../../firebase";
-
+import { payment } from "./Checkout";
 import {
   doc,
   collection,
@@ -10,15 +10,16 @@ import {
   getDocs,
 } from "firebase/firestore";
 import CartCard from "./CartCard";
-import "./ShoppingCartStyle.css";  
+import "./ShoppingCartStyle.css";
+import Checkout from "./Checkout";
 const ShoppingCart = () => {
-  const [cartData,setCartData] = useState([]);
+  const [cartData, setCartData] = useState([]);
+  const [checkoutTotal, setCheckoutTotal] = useState(0);
 
-  
   const GetCurrentUser = () => {
     const [user, setUser] = useState("");
     const usersCollectionRef = collection(db, "users");
-    
+
     useEffect(() => {
       auth.onAuthStateChanged((userlogged) => {
         if (userlogged) {
@@ -40,8 +41,17 @@ const ShoppingCart = () => {
   };
   const loggeduser = GetCurrentUser();
 
+  const calculateTotal = () => {
+    const total = cartData.reduce((accumulator, item) => {
+      const itemTotal = item.product.priceOffered * item.quantity;
+      return accumulator + itemTotal;
+    }, 0);
+    return total;
+  };
 
-
+  const checkoutToPayment = () => {
+    payment(checkoutTotal);
+  };
 
   useEffect(() => {
     if (loggeduser) {
@@ -61,37 +71,37 @@ const ShoppingCart = () => {
     }
   }, [cartData,loggeduser]);
 
- 
-
-
+  useEffect(() => {
+    if (cartData.length > 0) {
+      const total = calculateTotal();
+      setCheckoutTotal(total);
+    } else {
+      setCheckoutTotal(0);
+    }
+  }, [cartData]);
 
   return (
     <div>
-    
-      {cartData.length !==0 ? (
+      {cartData.length !== 0 ? (
         <div>
           <div className="cart-head">Your Cart Items</div>
           <div className="allcartitems">
             {cartData.map((item) => (
-              <CartCard key={item.id} itemdata={item} userId = {loggeduser[0].uid} cartLength = {cartData.length}  />
-    
+              <CartCard
+                key={item.id}
+                itemdata={item}
+                userId={loggeduser[0].uid}
+                cartLength={cartData.length}
+              />
             ))}
-    
           </div>
-        
-          <div className="card-total">
-          <h3>
-            Cart Total : <span>Rs.{" "}{ 
-           cartData.map(item =>
-           item.product.priceOffered * item.quantity)
-           .reduce((total,value) =>total+value  ,0)  }       
 
-        
-              
-              </span>
-          </h3>
-          <button>Checkout</button>
-        </div>
+          <div className="card-total">
+            <h3>
+              Cart Total: <span>Rs. {checkoutTotal}</span>
+            </h3>
+            <button onClick={checkoutToPayment}>Checkout</button>
+          </div>
         </div>
       ) : (
         <p>Your Cart is Empty</p>

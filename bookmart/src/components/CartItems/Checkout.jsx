@@ -1,6 +1,6 @@
-function App() {
-
-
+import { toast } from "react-toastify";
+export const payment = (props) => {
+  console.log(props);
 
   const loadScript = (src) => {
     return new Promise((resovle) => {
@@ -35,10 +35,18 @@ function App() {
       amount: amount * 100,
       name: "BookMart",
       description: "Thanks for purchasing",
-      
+
       handler: function (response) {
-        alert(response.razorpay_payment_id);
-        alert("Payment Successfully");
+        toast.success(`Payment Successfull`, {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       },
       prefill: {
         name: "BookMart",
@@ -48,14 +56,5 @@ function App() {
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   };
-  return (
-    <>
-    
-    <button onClick={() => displayRazorpay(600)}>
-                BUY NOW
-              </button></>
-     
-  );
-}
-
-export default App;
+  displayRazorpay(props);
+};

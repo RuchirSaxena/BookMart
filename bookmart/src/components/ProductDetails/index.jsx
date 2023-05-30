@@ -3,7 +3,7 @@ import "./style.css";
 import { db,auth } from "../../firebase";
 import { useParams } from "react-router-dom";
 import { getDoc,doc,getDocs,collection,query,where,addDoc } from "firebase/firestore";
-
+import { toast } from "react-toastify";
 import Constants from "../Utilities/Constants";
 const Index = () => {
   const { id } = useParams();
@@ -53,7 +53,16 @@ const Index = () => {
       addDoc(collection(db,`cart-${loggeduser[0].uid}`,),{
         product,quantity:1
       }).then(()=>{
-        setSuccessMsg('Product added to cart');
+        toast.success(`Product added to cart`, {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }).catch((error)=>{setErrorMsg(error.message)})
     }
     else{
@@ -135,8 +144,8 @@ const Index = () => {
               <button type="button" class="btn">
                 <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
               </button>
-              {successMsg && <>
-        <div className="success-msg">{successMsg}</div></>}
+              {/* {successMsg && <>
+        <div className="success-msg">{successMsg}</div></>} */}
         {errorMsg && <>
         <div className="error-msg">{errorMsg}</div></>}
             </div>
