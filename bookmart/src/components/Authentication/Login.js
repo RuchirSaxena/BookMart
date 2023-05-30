@@ -51,57 +51,61 @@ const Login = () => {
       });
   };
   return (
-    <div className="login">
-      <div className="login-ui-container">
-        <div className="login-ui">
-          <div className="login-ui-text">
-            <p>NICE TO SEE YOU AGAIN</p>
-            <h2>WELCOME BACK</h2>
-            <hr />
-            <p>
-              Please login to Buy the book, or to Sell your book faster with us.
-            </p>
+    <div className="login-bg">
+      <div className="background-image"></div>
+      <div className="login">
+        <div className="login-ui-container">
+          <div className="login-ui">
+            <div className="login-ui-text">
+              <p>NICE TO SEE YOU AGAIN</p>
+              <h2>WELCOME BACK</h2>
+              <hr />
+              <p>
+                Please login to Buy the book, or to Sell your book faster with
+                us.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="login-container">
-        <form className="login-form">
-          <p>Login Account</p>
+        <div className="login-container">
+          <form className="login-form">
+            <p>Login Account</p>
 
-          {successMsg && (
-            <>
-              <div className="success-msg">{successMsg}</div>
-            </>
-          )}
-          {errorMsg && (
-            <>
-              <div className="error-msg">{errorMsg}</div>
-            </>
-          )}
+            {successMsg && (
+              <>
+                <div className="success-msg">{successMsg}</div>
+              </>
+            )}
+            {errorMsg && (
+              <>
+                <div className="error-msg">{errorMsg}</div>
+              </>
+            )}
 
-          <TextField
-            id="outlined-basic"
-            label="Email"
-            variant="outlined"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <br />
-          <TextField
-            id="outlined-password-input"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button variant="contained" onClick={handleLogin}>
-            Log in
-          </Button>
-          {/* <button onClick={handleLogin}>Log In</button> */}
-          <div>
-            <span>Don't Have an account?</span>
-            <Link to="/signup">Sign Up</Link>
-          </div>
-        </form>
+            <TextField
+              id="outlined-basic"
+              label="Email"
+              variant="outlined"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <br />
+            <TextField
+              id="outlined-password-input"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button variant="contained" onClick={handleLogin}>
+              Log in
+            </Button>
+            {/* <button onClick={handleLogin}>Log In</button> */}
+            <div>
+              <span>Don't Have an account?</span>
+              <Link to="/signup">Sign Up</Link>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

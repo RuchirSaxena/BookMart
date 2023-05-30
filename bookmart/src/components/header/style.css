@@ -2,8 +2,8 @@
   box-sizing: border-box;
   height: 100px;
   width: 100%;
-  background-color: #393646;
-/* background: linear-gradient(120deg, #2a78ac, #9b59b6); */
+  /* background-color: rgb(235, 230, 230); */
+background: linear-gradient(120deg, #4b5f6b, #5a3c66);
 
   display: flex;
   flex-direction: row;
