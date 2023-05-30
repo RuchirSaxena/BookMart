@@ -1,12 +1,13 @@
 import "./App.css";
-import Home from "./components/Home";
-import Header from "./components/Header";
+import Home from "./components/Home" ;
+import Header from "./components/header";
+import Wishlist from "./components/Wishlist" ;
 import AddBook from "./components/AddBook";
 import Footer from "./components/footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Authentication/Login";
 import SignUp from "./components/Authentication/SignUp";
-import ProductDetails from "./components/ProductDetails";
+import ProductDetails from "./components/Productdetails";
 import { ToastContainer } from "react-toastify";
 import Constants from "./components/Utilities/Constants";
 import GoToTopButton from "./components/GoToTopButton";
@@ -21,6 +22,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/productdetails/:id" element={<ProductDetails />} />
           <Route path="/addbook" element={<AddBook />} />
+          <Route path="/wishlist" element={<Wishlist />} />
         </Routes>
         <Footer />
       </BrowserRouter>
