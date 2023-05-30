@@ -304,9 +304,6 @@ ul li {
     width: 100%;
     padding: 10px;
   }
-  .sidebar-links li a:hover {
-    background-color: #cacaca;
-  }
 
   .overlay {
     cursor: pointer;
