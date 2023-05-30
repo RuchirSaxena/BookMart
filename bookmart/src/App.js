@@ -9,8 +9,9 @@ import SignUp from "./components/Authentication/SignUp";
 import ProductDetails from "./components/ProductDetails";
 import { ToastContainer } from "react-toastify";
 import Constants from "./components/Utilities/Constants";
-import Cart from './components/Cart';
 import GoToTopButton from "./components/GoToTopButton";
+import Cart from './components/Cart';
+import Help from "./components/Help";
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/productdetails/:id" element={<ProductDetails />} />
           <Route path="/addbook" element={<AddBook />} />
+          <Route path="/help" element={<Help />} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -3,6 +3,7 @@ import "./style.css";
 import Searchbar from "./Searchbar";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { auth, db } from "../../firebase";
 import { Button } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Overlay from "../Overlay";
@@ -10,10 +11,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Login from "../Authentication/Login";
 import { useSelector } from "react-redux";
 import IconSVG from "../../assests/icon.svg";
-import { auth, db } from "../../firebase";
-import { authActions, loggedUserActions } from "../../store";
-import { useDispatch } from "react-redux";
 import Modal from "../Modal";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store";
+import { loggedUserActions } from "../../store";
+import { NavLink } from "react-router-dom";
 const Index = () => {
   const [isActive, setIsActive] = useState(true);
   const [isSidebarActive, setIsSidebarActive] = useState(true);
@@ -21,19 +23,17 @@ const Index = () => {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
   const userLoggedIn = useSelector((state) => state.loggedUser.loggedUserData);
   const navigate = useNavigate();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dispatch = useDispatch();
+
   const location = useLocation();
 
   const locationPath = location.pathname;
-
-  
 
   const handleOverlayClick = (event) => {
     setIsActive((current) => !current);
     setIsSidebarActive((current) => !current);
   };
-
+ console.log(userLoggedIn);
   const handleResize = () => {
     if (window.innerWidth <= 750) setModalOpen(false);
   };
@@ -45,14 +45,19 @@ const Index = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
-  const dropdownMenuMain=()=>{
-    console.log("Hello")
-    setIsDropdownOpen((prevOpen) => !prevOpen);
-  }
-  const userLogOut = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const toggleDropdown = () => {
+    setShowDropdown((prev) => !prev);
+  };
+
+  const handleLogout = () => {
     auth.signOut();
     dispatch(authActions.logout());
+    dispatch(loggedUserActions.clearUser());
   };
+
   return (
     <>
       <Overlay
@@ -102,39 +107,52 @@ const Index = () => {
                 </li>
               </>
             )}
-            <li
-            
-              onClick={dropdownMenuMain}
-            >
-              <a >
+            <li onClick={toggleDropdown}>
+              <a>
                 <AccountCircleIcon fontSize="large" />
               </a>
-              {
-                isDropdownOpen &&(<ul className="dropdown-menu">
-                <li>
-                  <a>Welcome User</a>
-                </li>
-                <li>
-                  <a>Help</a>
-                </li>
-                <li>
-                  <a onClick={userLogOut}><Button variant="outlined">LogOut</Button></a>
-                </li>
-              </ul>)
-              }
+              {showDropdown && (
+                <ul className="dropdown-menu">
+                  <li>
+                    <a>
+                      {isAuth
+                        ? `Hi ${userLoggedIn[0].userName.toUpperCase()}`
+                        : `Hi User`}
+                    </a>
+                  </li>
+                  <li>
+                    <NavLink to="/help">
+                      <a>Need Help?</a>
+                    </NavLink>
+                  </li>
+                  <li>
+                    {isAuth ? (
+                      <a onClick={handleLogout}>
+                        <Button variant="outlined">Log Out</Button>
+                      </a>
+                    ) : (
+                      <NavLink to="/login">
+                        <a onClick={handleLogout}>
+                          <Button variant="outlined">Log In</Button>
+                        </a>
+                      </NavLink>
+                    )}
+                  </li>
+                </ul>
+              )}
             </li>
           </ul>
         </div>
         <div className="icons">
           <i
             className={`fa-solid fa-bars fa-2xl bars ${
-              isActive ? "active" : " "
+              isActive ? "active" : ""
             }`}
             onClick={handleOverlayClick}
           ></i>
           <i
             className={` fa-solid fa-xmark fa-2xl cross ${
-              isActive ? " " : "active"
+              isActive ? "" : "active"
             }`}
             onClick={handleOverlayClick}
           ></i>

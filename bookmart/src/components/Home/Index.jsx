@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
-import Card from "../Card";
 import Filter from "../Filter";
 import Carousel from "../Carousel";
 import { auth, db } from "../../firebase";
@@ -21,7 +20,9 @@ const Index = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const dispatch = useDispatch();
+ const dispatch= useDispatch();
+
+
 
   useEffect(() => {
     const unsub = onSnapshot(
@@ -38,46 +39,51 @@ const Index = () => {
         console.log(error);
       }
     );
-
+    
     return () => {
       unsub();
     };
   }, []);
 
-  useEffect(() => {
+
+
+
+  useEffect(()=>{
     GetCurrentUser();
-  }, []);
+  },[]);
+
 
   const GetCurrentUser = () => {
-    const userCollectionRef = collection(db, "users");
-    auth.onAuthStateChanged((userlogged) => {
-      if (userlogged) {
-        const getUsers = async () => {
-          const q = query(
-            collection(db, "users"),
-            where("uid", "==", userlogged.uid)
-          );
-          const data = await getDocs(q);
-          setUser(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        };
-        getUsers();
-      } else {
-        setUser(null);
-      }
-    });
+      auth.onAuthStateChanged((userlogged) => {
+        if (userlogged) {
+          const getUsers = async () => {
+            const q = query(
+              collection(db, "users"),
+              where("uid", "==", userlogged.uid)
+            );
+            const data = await getDocs(q);
+            console.log(data);
+            setUser(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+          };
+          getUsers();
+        } else {
+          setUser(null);
+        }
+      });
   };
-
-  if (user) {
+  if(user){
     dispatch(loggedUserActions.setUser(user));
     dispatch(authActions.login());
-  } else {
-    dispatch(loggedUserActions.setUser(user));
+  }else{
+     dispatch(loggedUserActions.clearUser());
     dispatch(authActions.logout());
   }
 
+ 
 
   return (
     <>
+
       <Carousel />
       <Heading text={"Filters"} />
       <section className="filter">

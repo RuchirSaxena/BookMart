@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
-import {TextField, Button} from "@mui/material";
-
+import { TextField, Button } from "@mui/material";
 import "./Login.css";
-import svgImg from '../../assests/login-img.svg';
+import svgImg from "../../assests/login-img.svg";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store";
 
@@ -19,15 +18,15 @@ const Login = () => {
   const auth = getAuth();
 
   const location = useLocation();
- 
-
-
-
+  console.log(location.pathname);
 
   const handleLogin = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        let string = JSON.stringify(userCredential);
+        let jsonUser = JSON.parse(string);
+        console.log(jsonUser);
         setSuccessMsg(
           "Logged in Successfully, you will be redirected to home page"
         );
@@ -59,9 +58,10 @@ const Login = () => {
             <p>NICE TO SEE YOU AGAIN</p>
             <h2>WELCOME BACK</h2>
             <hr />
-            <p>Please login to Buy the book, or to Sell your book faster with us.</p>
+            <p>
+              Please login to Buy the book, or to Sell your book faster with us.
+            </p>
           </div>
-
         </div>
       </div>
       <div className="login-container">
@@ -94,8 +94,9 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button variant="contained" onClick={handleLogin}>
-           Log in
+            Log in
           </Button>
+          {/* <button onClick={handleLogin}>Log In</button> */}
           <div>
             <span>Don't Have an account?</span>
             <Link to="/signup">Sign Up</Link>
@@ -107,3 +108,5 @@ const Login = () => {
 };
 
 export default Login;
+
+            
