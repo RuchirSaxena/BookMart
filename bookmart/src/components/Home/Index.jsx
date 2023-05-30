@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
-import Card from "../Card";
 import Filter from "../Filter";
 import Carousel from "../Carousel";
 import { auth, db } from "../../firebase";
@@ -21,7 +20,7 @@ const Index = () => {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const dispatch = useDispatch();
+ const dispatch= useDispatch();
 
 
 
@@ -55,7 +54,6 @@ const Index = () => {
 
 
   const GetCurrentUser = () => {
-    const userCollectionRef = collection(db, "users");
       auth.onAuthStateChanged((userlogged) => {
         if (userlogged) {
           const getUsers = async () => {
@@ -73,24 +71,19 @@ const Index = () => {
         }
       });
   };
-  // const loggedUser = GetCurrentUser();
-  // console.log(loggedUser);
   if(user){
     dispatch(loggedUserActions.setUser(user));
     dispatch(authActions.login());
   }else{
-     dispatch(loggedUserActions.setUser(user));
+     dispatch(loggedUserActions.clearUser());
     dispatch(authActions.logout());
   }
 
  
-  const userLogOut = () => {
-    auth.signOut();
-    dispatch(authActions.logout());
-  };
+
   return (
     <>
-      <button onClick={userLogOut}>Logout</button>
+
       <Carousel />
       <Heading text={"Filters"} />
       <section className="filter">

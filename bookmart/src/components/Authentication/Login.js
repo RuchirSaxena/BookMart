@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
-import {TextField, Button} from "@mui/material";
-
+import { TextField, Button } from "@mui/material";
 import "./Login.css";
-import svgImg from '../../assests/login-img.svg';
+import svgImg from "../../assests/login-img.svg";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store";
 
@@ -20,9 +19,6 @@ const Login = () => {
 
   const location = useLocation();
   console.log(location.pathname);
-
-
-
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -62,13 +58,10 @@ const Login = () => {
             <p>NICE TO SEE YOU AGAIN</p>
             <h2>WELCOME BACK</h2>
             <hr />
-            <p>Please login to Buy the book, or to Sell your book faster with us.</p>
+            <p>
+              Please login to Buy the book, or to Sell your book faster with us.
+            </p>
           </div>
-          {/* <img
-            className="login-ui-img"
-            src={svgImg}
-            alt="Kiwi standing on oval"
-          ></img> */}
         </div>
       </div>
       <div className="login-container">
@@ -101,7 +94,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button variant="contained" onClick={handleLogin}>
-           Log in
+            Log in
           </Button>
           {/* <button onClick={handleLogin}>Log In</button> */}
           <div>
@@ -115,3 +108,5 @@ const Login = () => {
 };
 
 export default Login;
+
+            
