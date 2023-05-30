@@ -1,12 +1,8 @@
 import React from "react";
+import "./style.css";
 import { useNavigate } from "react-router-dom";
-import "./index.css";
 const Index = (props) => {
   const navigate = useNavigate();
-  const id = props.id;
-  const handleClick = () => {
-    navigate(`/productdetails/${id}`);
-  };
   return (
     <div class="card-container" key={props.key}>
       <div class="card-details">
@@ -18,7 +14,12 @@ const Index = (props) => {
           <div class="text-body">&#8377;{props.price}</div>
         </div>
       </div>
-      <button class="card-button" onClick={handleClick}>
+      <button
+        class="card-button"
+        onClick={() => {
+          navigate(`/productdetails/${props.id}`);
+        }}
+      >
         More info
       </button>
     </div>

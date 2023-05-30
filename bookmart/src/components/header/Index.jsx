@@ -1,37 +1,97 @@
-import React, { useState } from "react";
-import "./index.css";
+import React, { useState, useEffect } from "react";
+import "./style.css";
 import Searchbar from "./Searchbar";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Overlay from '../Overlay';
-import { createPortal } from "react-dom";
+
+import { Button } from "@mui/material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import Overlay from "../Overlay";
+import { useNavigate,useLocation } from "react-router-dom";
+import Login from "../Authentication/Login";
+import { useSelector } from "react-redux";
+import IconSVG from "../../assests/icon.svg";
+import Modal from "../Modal";
 const Index = () => {
   const [isActive, setIsActive] = useState(true);
-  const handleClick = (event) => {
+  const [isSidebarActive, setIsSidebarActive] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
+  const userLoggedIn = useSelector((state) => state.loggedUser.loggedUserData);
+  const navigate = useNavigate();
+
+
+  const location = useLocation();
+
+  const locationPath= location.pathname;
+
+
+  const handleOverlayClick = (event) => {
     setIsActive((current) => !current);
+    setIsSidebarActive((current) => !current);
   };
-  
+
+  const handleResize = () => {
+    if (window.innerWidth <= 750) setModalOpen(false);
+  };
+  window.addEventListener("resize", handleResize);
+
+  const handleAddBookClick = () => {
+    navigate("/addbook");
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <>
-     
-        <Overlay isActive={isActive} setIsActive={setIsActive}/>
-      
+      <Overlay
+        isActive={isActive}
+        setIsActive={setIsActive}
+        setIsSidebarActive={setIsSidebarActive}
+      />
+
       <div className="navbar-container">
-        <logo>BookMart</logo>
-        <Searchbar />
+        <logo
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          <img className="icon-img" src={IconSVG} alt="icon"></img>
+          <span>BookMart</span>
+        </logo>
+        {locationPath === "/login" ? "" : <Searchbar />}
         <div className="links-container">
           <ul className="links">
-            <li>
-              <a>
-                <FavoriteBorderOutlinedIcon fontSize="large" />
-              </a>
-            </li>
-            <li>
-              <a>
-                <AddShoppingCartIcon fontSize="large" />
-              </a>
-            </li>
+            {locationPath === "/login" ? (
+              ""
+            ) : (
+              <li>
+                <a>
+                  <Button
+                    sx={{ color: "#f4eee0" }}
+                    variant="outlined"
+                    onClick={handleAddBookClick}
+                  >
+                    Add Book
+                  </Button>
+                </a>
+              </li>
+            )}
+            {isAuth && (
+              <>
+                <li>
+                  <a>
+                    <FavoriteBorderOutlinedIcon fontSize="large" />
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    <AddShoppingCartIcon fontSize="large" />
+                  </a>
+                </li>
+              </>
+            )}
             <li>
               <a>
                 <AccountCircleIcon fontSize="large" />
@@ -44,17 +104,17 @@ const Index = () => {
             className={`fa-solid fa-bars fa-2xl bars ${
               isActive ? "active" : " "
             }`}
-            onClick={handleClick}
+            onClick={handleOverlayClick}
           ></i>
           <i
             className={` fa-solid fa-xmark fa-2xl cross ${
               isActive ? " " : "active"
             }`}
-            onClick={handleClick}
+            onClick={handleOverlayClick}
           ></i>
         </div>
       </div>
-      <div className={`sidebar ${isActive ? " " : "sidebar-active  "}`}>
+      <div className={`sidebar ${isSidebarActive ? " " : "sidebar-active  "}`}>
         <ul className="sidebar-links">
           <li>
             <a>SignIn</a>

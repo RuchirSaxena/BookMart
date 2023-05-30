@@ -47,10 +47,10 @@ const SignUp = () => {
           });
       })
       .catch((error) => {
-        if (error.message == "Firebase: Error (auth/invalid-email).") {
+        if (error.message === "Firebase: Error (auth/invalid-email).") {
           setErrorMsg(constants.missingFields);
         }
-        if (error.message == "Firebase: Error (auth/email-already-in-use).") {
+        if (error.message === "Firebase: Error (auth/email-already-in-use).") {
           setErrorMsg(constants.errorMsg);
         }
       });
