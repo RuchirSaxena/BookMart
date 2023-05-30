@@ -2,7 +2,7 @@ import "./App.css";
 import Home from "./components/Home";
 import Header from "./components/header";
 import AddBook from "./components/AddBook";
-import Footer from "./components/Footer";
+import Footer from "./components/footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Authentication/Login";
 import SignUp from "./components/Authentication/SignUp";
