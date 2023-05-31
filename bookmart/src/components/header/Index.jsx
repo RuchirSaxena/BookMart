@@ -7,7 +7,7 @@ import { auth, db } from "../../firebase";
 import { Button } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Overlay from "../Overlay";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import Login from "../Authentication/Login";
 import { useSelector } from "react-redux";
 import IconSVG from "../../assests/icon.svg";
@@ -15,7 +15,7 @@ import Modal from "../Modal";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store";
 import { loggedUserActions } from "../../store";
-import { NavLink , Link} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const Index = () => {
   const [isActive, setIsActive] = useState(true);
   const [isSidebarActive, setIsSidebarActive] = useState(true);
@@ -101,9 +101,9 @@ const Index = () => {
                 </li>
                 </Link>
                 <li>
-                  <a>
+                <Link to="/cartdata">
                     <AddShoppingCartIcon fontSize="large" />
-                  </a>
+                  </Link>
                 </li>
               </>
             )}

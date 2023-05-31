@@ -3,7 +3,7 @@ import Home from "./components/Home" ;
 import Header from "./components/Header";
 import Wishlist from "./components/Wishlist" ;
 import AddBook from "./components/AddBook";
-import Footer from "./components/footer/Index";
+import Footer from "./components/footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Authentication/Login";
 import SignUp from "./components/Authentication/SignUp";
@@ -13,6 +13,7 @@ import GoToTopButton from "./components/GoToTopButton";
 import Cart from './components/Cart';
 import Help from "./components/Help";
 import ProductDetails from "./components/ProductDetails";
+import ShoppingCart from "./components/CartItems/ShoppingCart";
 function App() {
   return (
     <>
@@ -27,6 +28,7 @@ function App() {
           <Route path="/addbook" element={<AddBook />} />
           <Route path="/help" element={<Help />} />
           <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/cartdata" element={<ShoppingCart/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>
