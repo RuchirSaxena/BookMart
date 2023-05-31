@@ -32,7 +32,7 @@ const Index = () => {
     setIsActive((current) => !current);
     setIsSidebarActive((current) => !current);
   };
- console.log(userLoggedIn);
+
   const handleResize = () => {
     if (window.innerWidth <= 750) setModalOpen(false);
   };
