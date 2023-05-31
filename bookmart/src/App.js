@@ -1,6 +1,6 @@
 import "./App.css";
 import Home from "./components/Home" ;
-import Header from "./components/Header";
+import Header from "./components/header";
 import Wishlist from "./components/Wishlist" ;
 import AddBook from "./components/AddBook";
 import Footer from "./components/footer";
@@ -10,7 +10,6 @@ import SignUp from "./components/Authentication/SignUp";
 import { ToastContainer } from "react-toastify";
 import Constants from "./components/Utilities/Constants";
 import GoToTopButton from "./components/GoToTopButton";
-import Cart from './components/Cart';
 import Help from "./components/Help";
 import ProductDetails from "./components/ProductDetails";
 import ShoppingCart from "./components/CartItems/ShoppingCart";
@@ -20,7 +19,6 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/cart" element={<Cart />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />

@@ -3,8 +3,8 @@ import Card from "../Card";
 import Filter from "../Filter";
 import Carousel from "../Carousel";
 import { auth, db } from "../../firebase";
-
-
+import "./style.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import {
   onSnapshot,
   collection,
@@ -56,43 +56,44 @@ const Index = () => {
   };
 
   useEffect(() => {
-    console.log(wishData);
-  }, [wishData]);
-  useEffect(() => {
     if (loggeduser) {
       getWishData();
     }
-  }, [loggeduser]);
+  }, [loggeduser,wishData]);
 
-
-  if(wishData){
-    console.log(wishData);
-  }
   return (
     <div>
-      <div class = "wishlist">
+      <div class="wishlist">
         <Heading text="Your Wishlist" />
-        {wishData ? (
+        {wishData != 0 ? (
           <div>
-            <div className="bookContainer">
+            <div className="bookContainer row justify-content-center">
+              
+                {wishData.map((bookItem) => (
+                  <div
+                    className="col col-sm-6 col-md-3 col-lg-2 m-2"
+                    key={bookItem.id}
+                  >
+                    <Card
+                      title={bookItem.product.name}
+                      price={bookItem.product.priceOffered}
+                      image={bookItem.product.imgURLs}
+                      id={bookItem.id}
+                    />
+                  
+              </div>
+                ))}
 
-              {wishData.map((bookItem) => (
-                <div
-                  className="col col-sm-6 col-md-3 col-lg-2 m-2"
-                  key={bookItem.id}
-                >
-                  <Card
-                    title={bookItem.product.name}
-                    price={bookItem.product.priceOffered}
-                    image={bookItem.product.imgURLs}
-                    id={bookItem.id}
-                  />
-                </div>
-              ))}
+             
             </div>
           </div>
         ) : (
-          <div>HJGJGY</div>
+          <div>
+            <img
+              src="https://th.bing.com/th/id/OIP.I1TJ_qQgwsDXRsrRKsUG0wHaEe?pid=ImgDet&rs=1"
+              className="emptyWishlistImg"
+            />
+          </div>
         )}
       </div>
     </div>
