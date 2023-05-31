@@ -4,7 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import { onSnapshot, collection } from "firebase/firestore";
 import { db } from "../../../firebase";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 const Searchbar = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
@@ -49,8 +49,8 @@ const Searchbar = () => {
   };
   const handleClick = (id) => {
     clearInput();
-    const state = {message:currentPath}
-    navigate(`/productdetails/${id}`,{state});
+    const state = { message: currentPath };
+    navigate(`/productdetails/${id}`, { state });
   };
   return (
     <>

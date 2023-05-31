@@ -81,7 +81,7 @@ const Index = () => {
     } else {
       fetchData();
     }
-  }, [loggeduser]);
+  }, [loggeduser,id]);
 
 
 
@@ -118,7 +118,7 @@ const Index = () => {
         quantity: 1,
       })
         .then(() => {
-          toast.success(`Removed From Wishlist`, {
+          toast.success(`added to Wishlist`, {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -258,12 +258,6 @@ const Index = () => {
                 </li>
               </ul>
             </div>
-
-            {state.message == "/wishlist" && (
-              <button className="deletewishlistbutton" onClick={deleteWishlist}>
-                <i class="fa fa-trash" aria-hidden="true"></i>
-              </button>
-            )}
           </div>
         </div>
       )}
