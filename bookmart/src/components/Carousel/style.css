@@ -1,3 +1,8 @@
+.carousel-inner .carousel-item {
+  transition: -webkit-transform 2s ease;
+  transition: transform 2s ease;
+  transition: transform 2s ease, -webkit-transform 2s ease;
+}
 @media only screen and (max-width: 750px) {
   .carousel-item {
     height: 55vh;

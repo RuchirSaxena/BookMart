@@ -26,9 +26,8 @@ const Index = () => {
   const dispatch = useDispatch();
 
   const location = useLocation();
-
+  
   const locationPath = location.pathname;
-
   const handleOverlayClick = (event) => {
     setIsActive((current) => !current);
     setIsSidebarActive((current) => !current);
@@ -57,7 +56,6 @@ const Index = () => {
     dispatch(authActions.logout());
     dispatch(loggedUserActions.clearUser());
   };
-
   return (
     <>
       <Overlay
@@ -95,11 +93,13 @@ const Index = () => {
             )}
             {isAuth && (
               <>
+              <Link to = "/wishlist">
                 <li>
                   <a>
                     <FavoriteBorderOutlinedIcon fontSize="large" />
                   </a>
                 </li>
+                </Link>
                 <li>
                 <Link to="/cartdata">
                     <AddShoppingCartIcon fontSize="large" />

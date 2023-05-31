@@ -91,7 +91,7 @@ const ShoppingCart = () => {
       };
       getCartData();
     }
-  }, [loggeduser]);
+  }, [loggeduser,cartData]);
 
   useEffect(() => {
     if (cartData.length > 0) {

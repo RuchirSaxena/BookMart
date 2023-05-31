@@ -5,6 +5,7 @@ import { auth, db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import "./SignUp.css";
 import constants from "../Utilities/Constants";
+import { TextField } from "@mui/material";
 const SignUp = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -57,7 +58,9 @@ const SignUp = () => {
   };
 
   return (
-    <div>
+    <div className="signup-bg">
+      <div className="background-image"></div>
+
       <div className="signup-container">
         <form className="signup-form" onSubmit={handleSubmit}>
           <p>{constants.createAccount}</p>
@@ -74,6 +77,7 @@ const SignUp = () => {
           )}
           <label>{constants.name}</label>
           <input
+            required
             type="text"
             placeholder="Enter Your Name"
             onChange={(e) => setUserName(e.target.value)}
@@ -82,18 +86,21 @@ const SignUp = () => {
           <label>{constants.email}</label>
 
           <input
+          required
             type="email"
             placeholder="Enter Your Mail"
             onChange={(e) => setEmail(e.target.value)}
           />
           <label>{constants.password}</label>
           <input
+          required
             type="password"
             placeholder="Enter Your Password"
             onChange={(e) => setPassword(e.target.value)}
           />
           <label>{constants.phoneNumber}</label>
           <input
+          required
             type="password"
             placeholder="Enter Your Phone Number"
             onChange={(e) => setPhoneNumber(e.target.value)}
