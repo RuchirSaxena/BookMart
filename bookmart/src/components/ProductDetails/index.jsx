@@ -62,14 +62,12 @@ const Index = () => {
     }
   };
   const fetchDataforWishlist = async () => {
-    console.log("calling wishlist item now");
-    console.log(loggeduser);
     try {
       const docRef = doc(db, `wishlist-${loggeduser[0]?.uid}`, id);
       const docSnap = await getDoc(docRef);
 
       const productData = docSnap.data();
-      console.log(productData.product);
+      
       await setProduct(docSnap.data().product);
     } catch (e) {
       setErrorMsg("Error fetching data");
@@ -84,22 +82,6 @@ const Index = () => {
     }
   }, [loggeduser]);
 
-  // const addToCart = () => {
-  //   if (loggeduser) {
-  //     addDoc(collection(db, `cart-${loggeduser[0].uid}`), {
-  //       product,
-  //       quantity: 1,
-  //     })
-  //       .then(() => {
-  //         setSuccessMsg("Product added to cart");
-  //       })
-  //       .catch((error) => {
-  //         setErrorMsg(error.message);
-  //       });
-  //   } else {
-  //     setErrorMsg("You need to Login first");
-  //   }
-  // };
 
   const addToCart = () => {
     if (loggeduser) {
@@ -108,7 +90,7 @@ const Index = () => {
         quantity: 1,
       })
         .then(() => {
-          toast.success(`Product added to cart`, {
+          toast.success(`Book added to cart`, {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -132,7 +114,16 @@ const Index = () => {
       addDoc(collection(db,`wishlist-${loggeduser[0].uid}`,),{
         product,quantity:1
       }).then(()=>{
-        setSuccessMsg('Product added to wishlist');
+        toast.success(`Book added to Wishlist`, {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }).catch((error)=>{setErrorMsg(error.message)})
     }
     else{
@@ -210,11 +201,7 @@ const Index = () => {
                 <button type="button" class="btn" onClick={addToWishlist}>
                   <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
                 </button>
-                {successMsg && (
-                  <>
-                    <div className="success-msg">{successMsg}</div>
-                  </>
-                )}
+                
                 {errorMsg && (
                   <>
                     <div className="error-msg">{errorMsg}</div>
