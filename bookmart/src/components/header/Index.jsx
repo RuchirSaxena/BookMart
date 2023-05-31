@@ -26,9 +26,8 @@ const Index = () => {
   const dispatch = useDispatch();
 
   const location = useLocation();
-
+  
   const locationPath = location.pathname;
-
   const handleOverlayClick = (event) => {
     setIsActive((current) => !current);
     setIsSidebarActive((current) => !current);
