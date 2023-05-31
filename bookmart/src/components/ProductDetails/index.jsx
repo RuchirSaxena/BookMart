@@ -232,9 +232,19 @@ const Index = () => {
                   <i class="fas fa-shopping-cart"></i>&nbsp; {Constants.cart}
                 </button>
 
-                <button type="button" class="btn" onClick={addToWishlist}>
-                  <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
-                </button>
+                {state.message !== "/wishlist" ? (
+                  <button type="button" class="btn" onClick={addToWishlist}>
+                    <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
+                  </button>
+                ) : (
+                  <button
+                  type="button"
+                    className="btn deletewishlistbutton"
+                    onClick={deleteWishlist}
+                  >
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
+                )}
 
                 {successMsg && (
                   <>
@@ -267,12 +277,11 @@ const Index = () => {
               </ul>
             </div>
 
-            {(state.message ==
-              "/wishlist") && (
-                <button className="deletewishlistbutton" onClick={deleteWishlist}>
-                  <i class="fa fa-trash" aria-hidden="true"></i>
-                </button>
-              )}
+            {state.message == "/wishlist" && (
+              <button className="deletewishlistbutton" onClick={deleteWishlist}>
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            )}
           </div>
         </div>
       )}

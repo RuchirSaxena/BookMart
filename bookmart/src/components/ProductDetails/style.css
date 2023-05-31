@@ -189,14 +189,14 @@
 }
 .deletewishlistbutton{
   float: right;
-    height: 40px;
+   
     width: 40px;
     background-color: #c2bfbf;
     border: none;
     border-radius: 4px;
   }
   .fa-trash{
-    color: red;
+    color: white;
   }
 
 @media (max-width: 991px) {
