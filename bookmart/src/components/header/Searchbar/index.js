@@ -52,7 +52,7 @@ const Searchbar = () => {
   };
   return (
     <>
-      <div className="input-box">
+      <div className="navbar-input-box">
         <input
           type="text"
           placeholder="Search your book..."

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
-import Card from "../Card";
 import Filter from "../Filter";
 import Carousel from "../Carousel";
 import { auth, db } from "../../firebase";
@@ -14,13 +13,14 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import Heading from "../HeadingUI";
 import { useDispatch } from "react-redux";
-import { authActions } from "../../store";
+import { authActions, loggedUserActions } from "../../store";
+
 const Index = () => {
   const [user, setUser] = useState("");
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const dispatch = useDispatch();
+ const dispatch= useDispatch();
 
 
 
@@ -39,15 +39,21 @@ const Index = () => {
         console.log(error);
       }
     );
+    
     return () => {
       unsub();
     };
   }, []);
 
-  const GetCurrentUser = () => {
-    const userCollectionRef = collection(db, "users");
 
-    useEffect(() => {
+
+
+  useEffect(()=>{
+    GetCurrentUser();
+  },[]);
+
+
+  const GetCurrentUser = () => {
       auth.onAuthStateChanged((userlogged) => {
         if (userlogged) {
           const getUsers = async () => {
@@ -64,19 +70,20 @@ const Index = () => {
           setUser(null);
         }
       });
-    }, []);
-    return user;
   };
-  const loggedUser = GetCurrentUser();
-  console.log(loggedUser);
-
-  const userLogOut = () => {
-    auth.signOut();
+  if(user){
+    dispatch(loggedUserActions.setUser(user));
+    dispatch(authActions.login());
+  }else{
+     dispatch(loggedUserActions.clearUser());
     dispatch(authActions.logout());
-  };
+  }
+
+ 
+
   return (
     <>
-      <button onClick={userLogOut}>Logout</button>
+
       <Carousel />
       <Heading text={"Filters"} />
       <section className="filter">
