@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { db, auth } from "../../firebase";
-import { payment } from "./Checkout";
 import {
   doc,
   collection,
   query,
   where,
-  addDoc,
   getDocs,
+  deleteDoc,
+  writeBatch
 } from "firebase/firestore";
 import CartCard from "./CartCard";
 import "./ShoppingCartStyle.css";
-import Checkout from "./Checkout";
+import Checkout, { payment } from "./Checkout";
+
 const ShoppingCart = () => {
   const [cartData, setCartData] = useState([]);
   const [checkoutTotal, setCheckoutTotal] = useState(0);
@@ -49,10 +50,29 @@ const ShoppingCart = () => {
     return total;
   };
 
-  const checkoutToPayment = () => {
-    payment(checkoutTotal);
+  const checkoutToPayment = async () => {
+    const success = await payment(checkoutTotal);
+    if (success) {
+      try {
+        const path = `cart-${loggeduser[0].uid}`;
+        const cartCollectionRef = collection(db, path);
+  
+        const querySnapshot = await getDocs(cartCollectionRef);
+        const batch = writeBatch(db); 
+  
+        querySnapshot.forEach((doc) => {
+          batch.delete(doc.ref);
+        });
+  
+        await batch.commit();
+        setCartData([]); 
+        console.log("Cart cleared successfully");
+      } catch (error) {
+        console.error("Error clearing cart: ", error);
+      }
+    }
   };
-
+  
   useEffect(() => {
     if (loggeduser) {
       const getCartData = async () => {
@@ -65,11 +85,13 @@ const ShoppingCart = () => {
             });
             setCartData(cartArray);
           })
-          .catch("Error");
+          .catch((error) => {
+            console.error("Error getting cart data: ", error);
+          });
       };
       getCartData();
     }
-  }, [cartData,loggeduser]);
+  }, [loggeduser]);
 
   useEffect(() => {
     if (cartData.length > 0) {
