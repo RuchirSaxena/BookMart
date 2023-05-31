@@ -127,6 +127,18 @@ const Index = () => {
     }
   };
 
+  const addToWishlist = () =>{
+    if(loggeduser){
+      addDoc(collection(db,`wishlist-${loggeduser[0].uid}`,),{
+        product,quantity:1
+      }).then(()=>{
+        setSuccessMsg('Product added to wishlist');
+      }).catch((error)=>{setErrorMsg(error.message)})
+    }
+    else{
+      setErrorMsg('You need to Login first')
+    }
+  }
   return (
     <>
       {product && (
@@ -195,7 +207,7 @@ const Index = () => {
                   <i class="fas fa-shopping-cart"></i>&nbsp; {Constants.cart}
                 </button>
 
-                <button type="button" class="btn">
+                <button type="button" class="btn" onClick={addToWishlist}>
                   <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
                 </button>
                 {successMsg && (
