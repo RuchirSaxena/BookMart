@@ -37,6 +37,12 @@ logo {
   gap: 5px;
   margin-bottom: 0;
 }
+.links a{
+  color:#f4eee0;
+}
+.links a:hover{
+  color: #d6d1c4;
+}
 
 .links-container {
   position: relative;

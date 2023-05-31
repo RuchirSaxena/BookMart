@@ -14,12 +14,10 @@ import {
 } from "firebase/firestore";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Heading from "../HeadingUI";
-import { useDispatch } from "react-redux";
 import { authActions, loggedUserActions } from "../../store";
 
 const Index = () => {
   const [user, setUser] = useState("");
-  const dispatch = useDispatch();
   const GetCurrentUser = () => {
     const [user, setUser] = useState("");
     const usersCollectionRef = collection(db, "users");
@@ -66,18 +64,6 @@ const Index = () => {
     }
   }, [loggeduser]);
 
-  if (user) {
-    dispatch(loggedUserActions.setUser(user));
-    dispatch(authActions.login());
-  } else {
-    dispatch(loggedUserActions.setUser(user));
-    dispatch(authActions.logout());
-  }
-
-  const userLogOut = () => {
-    auth.signOut();
-    dispatch(authActions.logout());
-  };
 
   if(wishData){
     console.log(wishData);
