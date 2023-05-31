@@ -66,7 +66,7 @@ const ShoppingCart = () => {
   
         await batch.commit();
         setCartData([]); 
-        console.log("Cart cleared successfully");
+        
       } catch (error) {
         console.error("Error clearing cart: ", error);
       }
@@ -126,7 +126,7 @@ const ShoppingCart = () => {
           </div>
         </div>
       ) : (
-        <p>Your Cart is Empty</p>
+        <p><img src="https://mir-s3-cdn-cf.behance.net/projects/404/95974e121862329.Y3JvcCw5MjIsNzIxLDAsMTM5.png" className="emptycartImage"/></p>
       )}
     </div>
   );
