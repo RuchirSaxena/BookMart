@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import { db, auth } from "../../firebase";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation ,useNavigate} from "react-router-dom";
+
 import {
   getDoc,
+  deleteDoc,
   doc,
   getDocs,
   collection,
@@ -15,6 +17,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Constants from "../Utilities/Constants";
 const Index = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [successMsg, setSuccessMsg] = useState("");
@@ -127,18 +130,40 @@ const Index = () => {
     }
   };
 
-  const addToWishlist = () =>{
-    if(loggeduser){
-      addDoc(collection(db,`wishlist-${loggeduser[0].uid}`,),{
-        product,quantity:1
-      }).then(()=>{
-        setSuccessMsg('Product added to wishlist');
-      }).catch((error)=>{setErrorMsg(error.message)})
+  const addToWishlist = () => {
+    if (loggeduser) {
+      addDoc(collection(db, `wishlist-${loggeduser[0].uid}`), {
+        product,
+        quantity: 1,
+      })
+        .then(() => {
+          setSuccessMsg("Product added to wishlist");
+        })
+        .catch((error) => {
+          setErrorMsg(error.message);
+        });
+    } else {
+      setErrorMsg("You need to Login first");
     }
-    else{
-      setErrorMsg('You need to Login first')
-    }
-  }
+  };
+
+  const deleteWishlist = async () => {
+    await deleteDoc(doc(db, `wishlist-${loggeduser[0].uid}`, id)).then(()=>
+     toast.success(`Removed From Wishlist`, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      }));
+      navigate("/wishlist");
+  };
+
+
+
   return (
     <>
       {product && (
@@ -156,7 +181,7 @@ const Index = () => {
                       <img
                         src={product?.imgURLs}
                         className="d-block w-100 carousel-img"
-                        alt="Loading Error !"
+                        alt=""
                       />
                     </div>
                     {product.imgURLs?.slice(1).map((item, index) => (
@@ -207,19 +232,30 @@ const Index = () => {
                   <i class="fas fa-shopping-cart"></i>&nbsp; {Constants.cart}
                 </button>
 
-                <button type="button" class="btn" onClick={addToWishlist}>
-                  <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
-                </button>
+                {state.message !== "/wishlist" ? (
+                  <button type="button" class="btn" onClick={addToWishlist}>
+                    <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
+                  </button>
+                ) : (
+                  <button
+                  type="button"
+                    className="btn deletewishlistbutton"
+                    onClick={deleteWishlist}
+                  >
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
+                )}
+
                 {successMsg && (
                   <>
                     <div className="success-msg">{successMsg}</div>
                   </>
                 )}
-                {errorMsg && (
+                {/* {errorMsg && (
                   <>
                     <div className="error-msg">{errorMsg}</div>
                   </>
-                )}
+                )} */}
               </div>
             </div>
             <div class="description">
@@ -240,6 +276,12 @@ const Index = () => {
                 </li>
               </ul>
             </div>
+
+            {state.message == "/wishlist" && (
+              <button className="deletewishlistbutton" onClick={deleteWishlist}>
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            )}
           </div>
         </div>
       )}
