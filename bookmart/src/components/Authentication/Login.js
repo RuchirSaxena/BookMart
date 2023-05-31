@@ -18,7 +18,6 @@ const Login = () => {
   const auth = getAuth();
 
   const location = useLocation();
-  console.log(location.pathname);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -26,7 +25,6 @@ const Login = () => {
       .then((userCredential) => {
         let string = JSON.stringify(userCredential);
         let jsonUser = JSON.parse(string);
-        console.log(jsonUser);
         setSuccessMsg(
           "Logged in Successfully, you will be redirected to home page"
         );
@@ -99,7 +97,6 @@ const Login = () => {
             <Button variant="contained" onClick={handleLogin}>
               Log in
             </Button>
-            {/* <button onClick={handleLogin}>Log In</button> */}
             <div>
               <span>Don't Have an account?</span>
               <Link to="/signup">Sign Up</Link>

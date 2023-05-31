@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import { db, auth } from "../../firebase";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+
 import {
   getDoc,
+  deleteDoc,
   doc,
   getDocs,
   collection,
@@ -15,6 +17,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Constants from "../Utilities/Constants";
 const Index = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [successMsg, setSuccessMsg] = useState("");
@@ -22,8 +25,7 @@ const Index = () => {
   const [loggedInUser, setLoggedInUser] = useState();
   const location = useLocation();
   const state = location.state;
-
-  console.log(location.state);
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
   const userLoggedIn = useSelector((state) => state.loggedUser.loggedUserData);
   useEffect(() => {
     setLoggedInUser(userLoggedIn);
@@ -67,7 +69,6 @@ const Index = () => {
       const docSnap = await getDoc(docRef);
 
       const productData = docSnap.data();
-      
       await setProduct(docSnap.data().product);
     } catch (e) {
       setErrorMsg("Error fetching data");
@@ -83,6 +84,7 @@ const Index = () => {
   }, [loggeduser]);
 
 
+
   const addToCart = () => {
     if (loggeduser) {
       addDoc(collection(db, `cart-${loggeduser[0].uid}`), {
@@ -90,7 +92,7 @@ const Index = () => {
         quantity: 1,
       })
         .then(() => {
-          toast.success(`Book added to cart`, {
+          toast.success(`Product added to cart`, {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: false,
@@ -109,27 +111,48 @@ const Index = () => {
     }
   };
 
-  const addToWishlist = () =>{
-    if(loggeduser){
-      addDoc(collection(db,`wishlist-${loggeduser[0].uid}`,),{
-        product,quantity:1
-      }).then(()=>{
-        toast.success(`Book added to Wishlist`, {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+  const addToWishlist = () => {
+    if (loggeduser) {
+      addDoc(collection(db, `wishlist-${loggeduser[0].uid}`), {
+        product,
+        quantity: 1,
+      })
+        .then(() => {
+          toast.success(`Removed From Wishlist`, {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        })
+        .catch((error) => {
+          setErrorMsg(error.message);
         });
-      }).catch((error)=>{setErrorMsg(error.message)})
+    } else {
+      setErrorMsg("You need to Login first");
     }
-    else{
-      setErrorMsg('You need to Login first')
-    }
-  }
+  };
+
+  const deleteWishlist = async () => {
+    await deleteDoc(doc(db, `wishlist-${loggeduser[0].uid}`, id)).then(() =>
+      toast.success(`Removed From Wishlist`, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      })
+    );
+    navigate("/wishlist");
+  };
+
   return (
     <>
       {product && (
@@ -147,7 +170,7 @@ const Index = () => {
                       <img
                         src={product?.imgURLs}
                         className="d-block w-100 carousel-img"
-                        alt="Loading Error !"
+                        alt=""
                       />
                     </div>
                     {product.imgURLs?.slice(1).map((item, index) => (
@@ -198,14 +221,18 @@ const Index = () => {
                   <i class="fas fa-shopping-cart"></i>&nbsp; {Constants.cart}
                 </button>
 
-                <button type="button" class="btn" onClick={addToWishlist}>
-                  <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
-                </button>
-                
-                {errorMsg && (
-                  <>
-                    <div className="error-msg">{errorMsg}</div>
-                  </>
+                {state.message !== "/wishlist" ? (
+                  <button type="button" class="btn" onClick={addToWishlist}>
+                    <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="btn deletewishlistbutton"
+                    onClick={deleteWishlist}
+                  >
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
                 )}
               </div>
             </div>
@@ -219,14 +246,24 @@ const Index = () => {
                 </li>
                 <li>
                   {Constants.ownersContact}
-                  <span>{product.ownerInfo?.contact}</span>
+                  { isAuth ? <span>{product?.ownerInfo?.contact}</span>: <span className="hiddenData" onClick={()=>{
+                    navigate("/login")
+                  }}>Login to See</span>}
                 </li>
                 <li>
                   {Constants.ownersEmail}
-                  <span>{product.ownerInfo?.email}</span>
+                  { isAuth ? <span>{product?.ownerInfo?.email}</span>: <span className="hiddenData" onClick={()=>{
+                    navigate("/login")
+                  }}>Login to See</span>}
                 </li>
               </ul>
             </div>
+
+            {state.message == "/wishlist" && (
+              <button className="deletewishlistbutton" onClick={deleteWishlist}>
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            )}
           </div>
         </div>
       )}
