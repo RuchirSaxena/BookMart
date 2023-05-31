@@ -52,7 +52,7 @@ const Index = () => {
     GetCurrentUser();
   },[]);
 
-
+  
   const GetCurrentUser = () => {
       auth.onAuthStateChanged((userlogged) => {
         if (userlogged) {

@@ -23,7 +23,10 @@ const Index = (props) => {
         </div>
       </div>
 
-      <button class="card-button" onClick={handleMoreInfo}>
+      <button
+        class="card-button"
+        onClick= {handleMoreInfo}
+      >
         More info
       </button>
     </div>

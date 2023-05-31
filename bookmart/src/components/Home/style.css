@@ -3,6 +3,8 @@
   align-items: center;
   margin-right: 3vw;
  }
+
+
 @media (max-width: 772px) {
   .bookContainer {
     display: flex;

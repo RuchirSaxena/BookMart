@@ -15,7 +15,7 @@ import Modal from "../Modal";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store";
 import { loggedUserActions } from "../../store";
-import { NavLink } from "react-router-dom";
+import { NavLink , Link} from "react-router-dom";
 const Index = () => {
   const [isActive, setIsActive] = useState(true);
   const [isSidebarActive, setIsSidebarActive] = useState(true);
@@ -57,7 +57,6 @@ const Index = () => {
     dispatch(authActions.logout());
     dispatch(loggedUserActions.clearUser());
   };
-
   return (
     <>
       <Overlay
@@ -95,11 +94,13 @@ const Index = () => {
             )}
             {isAuth && (
               <>
+              <Link to = "/wishlist">
                 <li>
                   <a>
                     <FavoriteBorderOutlinedIcon fontSize="large" />
                   </a>
                 </li>
+                </Link>
                 <li>
                   <a>
                     <AddShoppingCartIcon fontSize="large" />
