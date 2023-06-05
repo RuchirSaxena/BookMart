@@ -63,7 +63,7 @@ const Index = () => {
 
   return (
     <div>
-      <div class="wishlist">
+      <div className="wishlist">
         <Heading text="Your Wishlist" />
         {wishData != 0 ? (
           <div>

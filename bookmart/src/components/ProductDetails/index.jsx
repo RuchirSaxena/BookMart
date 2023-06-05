@@ -156,10 +156,10 @@ const Index = () => {
   return (
     <>
       {product && (
-        <div class="contain">
-          <div class="box">
-            <div class="images">
-              <div class="img-holder active">
+        <div className="contain">
+          <div className="box">
+            <div className="images">
+              <div className="img-holder active">
                 <div
                   id="carouselExampleRide"
                   className="carousel slide carousel-css "
@@ -208,22 +208,22 @@ const Index = () => {
               </div>
             </div>
 
-            <div class="basic-info">
+            <div className="basic-info">
               <h1>{product.name}</h1>
 
               <span>Rs. {product.priceOffered}</span>
               <div>Rs. {product.originalPrice}</div>
 
-              <p class="green">{Constants.inclusive}</p>
+              <p className="green">{Constants.inclusive}</p>
 
-              <div class="options">
-                <button type="button" class="btn" onClick={addToCart}>
-                  <i class="fas fa-shopping-cart"></i>&nbsp; {Constants.cart}
+              <div className="options">
+                <button type="button" className="btn" onClick={addToCart}>
+                  <i className="fas fa-shopping-cart"></i>&nbsp; {Constants.cart}
                 </button>
 
                 {state.message !== "/wishlist" ? (
-                  <button type="button" class="btn" onClick={addToWishlist}>
-                    <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
+                  <button type="button" className="btn" onClick={addToWishlist}>
+                    <i className="fa fa-heart"></i>&nbsp; {Constants.wishlist}
                   </button>
                 ) : (
                   <button
@@ -231,16 +231,16 @@ const Index = () => {
                     className="btn deletewishlistbutton"
                     onClick={deleteWishlist}
                   >
-                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <i className="fa fa-trash" aria-hidden="true"></i>
                   </button>
                 )}
               </div>
             </div>
-            <div class="description">
+            <div className="description">
               <h4>{Constants.aboutthisItem} </h4>
               <p>{product.description}</p>
               <hr />
-              <ul class="features">
+              <ul className="features">
                 <li>
                   {Constants.ownersName} <span>{product.ownerInfo?.name}</span>
                 </li>
