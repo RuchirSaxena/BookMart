@@ -47,8 +47,9 @@ const Searchbar = () => {
     setWordEntered("");
   };
   const handleClick = (id) => {
+    const state = { message: "searchbar" };
     clearInput();
-    navigate(`/productdetails/${id}`);
+    navigate(`/productdetails/${id}`,{ state});
   };
   return (
     <>

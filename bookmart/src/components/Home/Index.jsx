@@ -83,7 +83,6 @@ const Index = () => {
 
   return (
     <>
-
       <Carousel />
       <Heading text={"Filters"} />
       <section className="filter">

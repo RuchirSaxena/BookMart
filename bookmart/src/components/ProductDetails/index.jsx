@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import { db, auth } from "../../firebase";
 import { useParams, useLocation ,useNavigate} from "react-router-dom";
-
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import {
   getDoc,
   deleteDoc,
@@ -28,6 +28,8 @@ const Index = () => {
 
   console.log(location.state);
   const userLoggedIn = useSelector((state) => state.loggedUser.loggedUserData);
+    const isAuth = useSelector((state) => state.auth.isAuthenticated);
+
   useEffect(() => {
     setLoggedInUser(userLoggedIn);
   }, []);
@@ -162,7 +164,9 @@ const Index = () => {
       navigate("/wishlist");
   };
 
-
+ const goBack = () => {
+  navigate(-1);
+ };
 
   return (
     <>
@@ -232,17 +236,22 @@ const Index = () => {
                   <i class="fas fa-shopping-cart"></i>&nbsp; {Constants.cart}
                 </button>
 
-                {state.message !== "/wishlist" ? (
+                {state.message !== "/wishlist" && loggeduser ? (
                   <button type="button" class="btn" onClick={addToWishlist}>
                     <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
                   </button>
                 ) : (
                   <button
-                  type="button"
+                    type="button"
                     className="btn deletewishlistbutton"
                     onClick={deleteWishlist}
                   >
                     <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
+                )}
+                {!loggeduser && (
+                  <button type="button" class="btn" onClick={addToWishlist}>
+                    <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
                   </button>
                 )}
 
@@ -268,7 +277,11 @@ const Index = () => {
                 </li>
                 <li>
                   {Constants.ownersContact}
-                  <span>{product.ownerInfo?.contact}</span>
+                  {isAuth ? (
+                    <span>{product?.ownerInfo?.contact}</span>
+                  ) : (
+                    "login to see"
+                  )}
                 </li>
                 <li>
                   {Constants.ownersEmail}
@@ -276,12 +289,9 @@ const Index = () => {
                 </li>
               </ul>
             </div>
-
-            {state.message == "/wishlist" && (
-              <button className="deletewishlistbutton" onClick={deleteWishlist}>
-                <i class="fa fa-trash" aria-hidden="true"></i>
-              </button>
-            )}
+            <div className="back-button" onClick={goBack}>
+              <ArrowBackIosNewIcon />
+            </div>
           </div>
         </div>
       )}

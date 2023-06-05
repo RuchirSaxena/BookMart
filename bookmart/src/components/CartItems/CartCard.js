@@ -10,6 +10,8 @@ const CartCard = (props) => {
     props.itemdata.quantity
   );
 
+  
+
   let price = props.itemdata.product.priceOffered;
   let totalAmount = price * productQuantity;
 

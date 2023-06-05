@@ -65,14 +65,14 @@ const Index = () => {
       />
 
       <div className="navbar-container">
-        <logo
+        <site-logo
           onClick={() => {
             navigate("/");
           }}
         >
           <img className="icon-img" src={IconSVG} alt="icon"></img>
           <span>BookMart</span>
-        </logo>
+        </site-logo>
         {locationPath === "/login" ? "" : <Searchbar />}
         <div className="links-container">
           <ul className="links">
@@ -93,15 +93,15 @@ const Index = () => {
             )}
             {isAuth && (
               <>
-              <Link to = "/wishlist">
-                <li>
-                  <a>
-                    <FavoriteBorderOutlinedIcon fontSize="large" />
-                  </a>
-                </li>
+                <Link to="/wishlist">
+                  <li>
+                    <a>
+                      <FavoriteBorderOutlinedIcon fontSize="large" />
+                    </a>
+                  </li>
                 </Link>
                 <li>
-                <Link to="/cartdata">
+                  <Link to="/cartdata">
                     <AddShoppingCartIcon fontSize="large" />
                   </Link>
                 </li>
@@ -119,6 +119,11 @@ const Index = () => {
                         ? `Hi ${userLoggedIn[0].userName.toUpperCase()}`
                         : `Hi User`}
                     </a>
+                  </li>
+                  <li>
+                    <NavLink to="/">
+                      <a>Home</a>
+                    </NavLink>
                   </li>
                   <li>
                     <NavLink to="/help">
