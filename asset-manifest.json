@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/BookMart/static/css/main.9275cec0.css",
+    "main.js": "/BookMart/static/js/main.1c8b846d.js",
+    "static/media/icon.svg": "/BookMart/static/media/icon.dc5afea7876dffa7e516b241b05bbf6b.svg",
+    "static/media/library-img.jpg": "/BookMart/static/media/library-img.0f6c67fece2125da9abc.jpg",
+    "static/media/login-img.svg": "/BookMart/static/media/login-img.b554812bd8201904c46469af896efd72.svg",
+    "index.html": "/BookMart/index.html",
+    "main.9275cec0.css.map": "/BookMart/static/css/main.9275cec0.css.map",
+    "main.1c8b846d.js.map": "/BookMart/static/js/main.1c8b846d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9275cec0.css",
+    "static/js/main.1c8b846d.js"
+  ]
+}
