@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 import { useNavigate, useLocation } from "react-router-dom";
-const Index = (props) => {
+const Card = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
@@ -12,19 +12,19 @@ const Index = (props) => {
   };
 
   return (
-    <div class="card-container" key={props.key}>
-      <div class="card-details">
+    <div className="card-container" key={props.key}>
+      <div className="card-details">
         <div className="img-container">
           <img src={props.image} alt="Loading Error" />
         </div>
         <div className="data">
-          <div class="text-title">{props.title}</div>
-          <div class="text-body">&#8377;{props.price}</div>
+          <div className="text-title">{props.title}</div>
+          <div className="text-body">&#8377;{props.price}</div>
         </div>
       </div>
 
       <button
-        class="card-button"
+        className="card-button"
         onClick= {handleMoreInfo}
       >
         More info
@@ -33,4 +33,4 @@ const Index = (props) => {
   );
 };
 
-export default Index;
+export default Card;

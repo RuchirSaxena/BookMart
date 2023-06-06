@@ -2,47 +2,47 @@ import React from "react";
 import "./style.css";
 const Footer = () => {
   return (
-    <div class="container-fluid  w-100 footer">
-      <footer class="bg-dark text-center text-lg-start text-white">
-        <div class="container-fluid p-4">
-          <div class="row mt-4">
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0 	">
-              <h5 class="text-uppercase">See other books</h5>
+    <div className="container-fluid  w-100 footer">
+      <footer className="bg-dark text-center text-lg-start text-white">
+        <div className="container-fluid p-4">
+          <div className="row mt-4">
+            <div className="col-lg-3 col-md-6 mb-4 mb-md-0 	">
+              <h5 className="text-uppercase">See other books</h5>
 
-              <ul class="list-unstyled mb-0">
+              <ul className="list-unstyled mb-0">
                 <li>
-                  <i class="fas fa-book fa-fw fa-sm me-2"></i>Bestsellers
+                  <i className="fas fa-book fa-fw fa-sm me-2"></i>Bestsellers
                 </li>
                 <li>
-                  <i class="fas fa-book fa-fw fa-sm me-2"></i>All books
+                  <i className="fas fa-book fa-fw fa-sm me-2"></i>All books
                 </li>
                 <li>
-                  <i class="fas fa-user-edit fa-fw fa-sm me-2"></i>Our authors
+                  <i className="fas fa-user-edit fa-fw fa-sm me-2"></i>Our authors
                 </li>
               </ul>
             </div>
 
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0 execution-div">
-              <h5 class="text-uppercase">Execution of the contract</h5>
+            <div className="col-lg-3 col-md-6 mb-4 mb-md-0 execution-div">
+              <h5 className="text-uppercase">Execution of the contract</h5>
 
-              <ul class="list-unstyled">
+              <ul className="list-unstyled">
                 <li>
-                  <i class="fas fa-shipping-fast fa-fw fa-sm me-2"></i>
+                  <i className="fas fa-shipping-fast fa-fw fa-sm me-2"></i>
                   Supply
                 </li>
                 <li>
-                  <i class="fas fa-backspace fa-fw fa-sm me-2"></i>Returns
+                  <i className="fas fa-backspace fa-fw fa-sm me-2"></i>Returns
                 </li>
                 <li>
-                  <i class="far fa-file-alt fa-fw fa-sm me-2"></i>Privacy policy
+                  <i className="far fa-file-alt fa-fw fa-sm me-2"></i>Privacy policy
                 </li>
               </ul>
             </div>
 
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0 company-div">
-              <h5 class="text-uppercase">FEATURES</h5>
+            <div className="col-lg-3 col-md-6 mb-4 mb-md-0 company-div">
+              <h5 className="text-uppercase">FEATURES</h5>
 
-              <ul class="list-unstyled">
+              <ul className="list-unstyled">
                 <li>Buy</li>
                 <li>Sell</li>
                 <li>Great Prices</li>
@@ -50,19 +50,19 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase">Write to us</h5>
+            <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
+              <h5 className="text-uppercase">Write to us</h5>
 
-              <ul class="list-unstyled">
+              <ul className="list-unstyled">
                 <li>
-                  <i class="fas fa-at fa-fw fa-sm me-2"></i>Help in purchasing
+                  <i className="fas fa-at fa-fw fa-sm me-2"></i>Help in purchasing
                 </li>
                 <li>
-                  <i class="fas fa-shipping-fast fa-fw fa-sm me-2"></i>Check the
+                  <i className="fas fa-shipping-fast fa-fw fa-sm me-2"></i>Check the
                   order status
                 </li>
                 <li>
-                  <i class="fas fa-envelope fa-fw fa-sm me-2"></i>Join the
+                  <i className="fas fa-envelope fa-fw fa-sm me-2"></i>Join the
                   newsletter
                 </li>
               </ul>
@@ -71,11 +71,11 @@ const Footer = () => {
         </div>
 
         <div
-          class="text-center p-3"
+          className="text-center p-3"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
         >
           © 2023 Copyright:
-          <a class="text-white" href="">
+          <a className="text-white" href="">
             bookmart.com
           </a>
         </div>

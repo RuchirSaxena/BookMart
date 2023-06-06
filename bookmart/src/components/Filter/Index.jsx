@@ -3,7 +3,7 @@ import "./style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Heading from "../HeadingUI";
 const LazyCard = lazy(() => import("../Card"));
-const Index = (props) => {
+const Filter = (props) => {
   const [filtered, setFiltered] = useState(props.books);
   const [filter, setFilter] = useState("");
   const [filterSelected, setFilterSelected] = useState(false);
@@ -154,4 +154,4 @@ const Index = (props) => {
   );
 };
 
-export default Index;
+export default Filter;

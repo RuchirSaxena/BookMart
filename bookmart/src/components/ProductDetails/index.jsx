@@ -25,10 +25,8 @@ const Index = () => {
   const [loggedInUser, setLoggedInUser] = useState();
   const location = useLocation();
   const state = location.state;
-
-  console.log(location.state);
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
   const userLoggedIn = useSelector((state) => state.loggedUser.loggedUserData);
-    const isAuth = useSelector((state) => state.auth.isAuthenticated);
 
   useEffect(() => {
     setLoggedInUser(userLoggedIn);
@@ -67,14 +65,11 @@ const Index = () => {
     }
   };
   const fetchDataforWishlist = async () => {
-    console.log("calling wishlist item now");
-    console.log(loggeduser);
     try {
       const docRef = doc(db, `wishlist-${loggeduser[0]?.uid}`, id);
       const docSnap = await getDoc(docRef);
 
       const productData = docSnap.data();
-      console.log(productData.product);
       await setProduct(docSnap.data().product);
     } catch (e) {
       setErrorMsg("Error fetching data");
@@ -87,24 +82,9 @@ const Index = () => {
     } else {
       fetchData();
     }
-  }, [loggeduser]);
+  }, [loggeduser,id]);
 
-  // const addToCart = () => {
-  //   if (loggeduser) {
-  //     addDoc(collection(db, `cart-${loggeduser[0].uid}`), {
-  //       product,
-  //       quantity: 1,
-  //     })
-  //       .then(() => {
-  //         setSuccessMsg("Product added to cart");
-  //       })
-  //       .catch((error) => {
-  //         setErrorMsg(error.message);
-  //       });
-  //   } else {
-  //     setErrorMsg("You need to Login first");
-  //   }
-  // };
+
 
   const addToCart = () => {
     if (loggeduser) {
@@ -118,7 +98,7 @@ const Index = () => {
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
-            pauseOnHover: true,
+            pauseOnHover: false,
             draggable: true,
             progress: undefined,
             theme: "light",
@@ -128,7 +108,16 @@ const Index = () => {
           setErrorMsg(error.message);
         });
     } else {
-      setErrorMsg("You need to Login first");
+       toast.error(`You need to login to buy the Book.`, {
+         position: "top-center",
+         autoClose: 3000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: false,
+         draggable: true,
+         progress: undefined,
+         theme: "light",
+       });
     }
   };
 
@@ -139,19 +128,37 @@ const Index = () => {
         quantity: 1,
       })
         .then(() => {
-          setSuccessMsg("Product added to wishlist");
+          toast.success(`added to Wishlist`, {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         })
         .catch((error) => {
           setErrorMsg(error.message);
         });
     } else {
-      setErrorMsg("You need to Login first");
+      toast.error(`You need to login to see your wishlist`, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
   const deleteWishlist = async () => {
-    await deleteDoc(doc(db, `wishlist-${loggeduser[0].uid}`, id)).then(()=>
-     toast.success(`Removed From Wishlist`, {
+    await deleteDoc(doc(db, `wishlist-${loggeduser[0].uid}`, id)).then(() =>
+      toast.success(`Removed From Wishlist`, {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -160,8 +167,9 @@ const Index = () => {
         draggable: true,
         progress: undefined,
         theme: "light",
-      }));
-      navigate("/wishlist");
+      })
+    );
+    navigate("/wishlist");
   };
 
  const goBack = () => {
@@ -171,10 +179,10 @@ const Index = () => {
   return (
     <>
       {product && (
-        <div class="contain">
-          <div class="box">
-            <div class="images">
-              <div class="img-holder active">
+        <div className="contain">
+          <div className="box">
+            <div className="images">
+              <div className="img-holder active">
                 <div
                   id="carouselExampleRide"
                   className="carousel slide carousel-css "
@@ -223,55 +231,57 @@ const Index = () => {
               </div>
             </div>
 
-            <div class="basic-info">
+            <div className="basic-info">
               <h1>{product.name}</h1>
 
               <span>Rs. {product.priceOffered}</span>
               <div>Rs. {product.originalPrice}</div>
 
-              <p class="green">{Constants.inclusive}</p>
+              <p className="green">{Constants.inclusive}</p>
 
-              <div class="options">
-                <button type="button" class="btn" onClick={addToCart}>
-                  <i class="fas fa-shopping-cart"></i>&nbsp; {Constants.cart}
+              <div className="options">
+                <button type="button" className="btn" onClick={addToCart}>
+                  <i className="fas fa-shopping-cart"></i>&nbsp;{" "}
+                  {Constants.cart}
                 </button>
 
-                {state.message !== "/wishlist" && loggeduser ? (
-                  <button type="button" class="btn" onClick={addToWishlist}>
-                    <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
-                  </button>
-                ) : (
-                  <button
+                {state.message === "/wishlist" &&  (
+                   <button
                     type="button"
                     className="btn deletewishlistbutton"
                     onClick={deleteWishlist}
                   >
-                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <i className="fa fa-trash" aria-hidden="true"></i>
                   </button>
-                )}
-                {!loggeduser && (
-                  <button type="button" class="btn" onClick={addToWishlist}>
-                    <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
-                  </button>
-                )}
+                   )
+              }
+                {!loggeduser &&
+                  state.message !==
+                    "/wishlist" && (
+                      <button type="button" class="btn" onClick={addToWishlist}>
+                        <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
+                      </button>
+                    )}
+                {loggeduser &&
+                  state.message !==
+                    "/wishlist" && (
+                      <button type="button" class="btn" onClick={addToWishlist}>
+                        <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
+                      </button>
+                    )}
 
                 {successMsg && (
                   <>
                     <div className="success-msg">{successMsg}</div>
                   </>
                 )}
-                {/* {errorMsg && (
-                  <>
-                    <div className="error-msg">{errorMsg}</div>
-                  </>
-                )} */}
               </div>
             </div>
-            <div class="description">
+            <div className="description">
               <h4>{Constants.aboutthisItem} </h4>
               <p>{product.description}</p>
               <hr />
-              <ul class="features">
+              <ul className="features">
                 <li>
                   {Constants.ownersName} <span>{product.ownerInfo?.name}</span>
                 </li>
@@ -280,12 +290,30 @@ const Index = () => {
                   {isAuth ? (
                     <span>{product?.ownerInfo?.contact}</span>
                   ) : (
-                    "login to see"
+                    <span
+                      className="hiddenData"
+                      onClick={() => {
+                        navigate("/login");
+                      }}
+                    >
+                      Login to See
+                    </span>
                   )}
                 </li>
                 <li>
                   {Constants.ownersEmail}
-                  <span>{product.ownerInfo?.email}</span>
+                  {isAuth ? (
+                    <span>{product?.ownerInfo?.email}</span>
+                  ) : (
+                    <span
+                      className="hiddenData"
+                      onClick={() => {
+                        navigate("/login");
+                      }}
+                    >
+                      Login to See
+                    </span>
+                  )}
                 </li>
               </ul>
             </div>

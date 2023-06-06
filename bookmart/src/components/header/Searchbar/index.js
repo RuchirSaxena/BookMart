@@ -4,13 +4,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import { onSnapshot, collection } from "firebase/firestore";
 import { db } from "../../../firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 const Searchbar = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
   const [books, setBooks] = useState([]);
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const currentPath = location.pathname;
   useEffect(() => {
     const unsub = onSnapshot(
       collection(db, "booksmanually"),
@@ -47,9 +48,9 @@ const Searchbar = () => {
     setWordEntered("");
   };
   const handleClick = (id) => {
-    const state = { message: "searchbar" };
     clearInput();
-    navigate(`/productdetails/${id}`,{ state});
+    const state = { message: currentPath };
+    navigate(`/productdetails/${id}`, { state });
   };
   return (
     <>

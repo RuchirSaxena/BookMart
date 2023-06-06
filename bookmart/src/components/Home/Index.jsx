@@ -15,14 +15,13 @@ import Heading from "../HeadingUI";
 import { useDispatch } from "react-redux";
 import { authActions, loggedUserActions } from "../../store";
 
-const Index = () => {
+const Home = () => {
   const [user, setUser] = useState("");
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
- const dispatch= useDispatch();
-
-
+  const dispatch = useDispatch();
+  
 
   useEffect(() => {
     const unsub = onSnapshot(
@@ -39,48 +38,44 @@ const Index = () => {
         console.log(error);
       }
     );
-    
+
+    GetCurrentUser();
+
     return () => {
       unsub();
     };
   }, []);
 
-
-
-
-  useEffect(()=>{
-    GetCurrentUser();
-  },[]);
-
-  
-  const GetCurrentUser = () => {
-      auth.onAuthStateChanged((userlogged) => {
-        if (userlogged) {
-          const getUsers = async () => {
-            const q = query(
-              collection(db, "users"),
-              where("uid", "==", userlogged.uid)
-            );
-            const data = await getDocs(q);
-            console.log(data);
-            setUser(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-          };
-          getUsers();
-        } else {
-          setUser(null);
-        }
-      });
-  };
-  if(user){
-    dispatch(loggedUserActions.setUser(user));
-    dispatch(authActions.login());
-  }else{
-     dispatch(loggedUserActions.clearUser());
-    dispatch(authActions.logout());
-  }
-
  
 
+  const GetCurrentUser = () => {
+    auth.onAuthStateChanged((userlogged) => {
+      if (userlogged) {
+        const getUsers = async () => {
+          const q = query(
+            collection(db, "users"),
+            where("uid", "==", userlogged.uid)
+          );
+          const data = await getDocs(q);
+          setUser(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        };
+        getUsers();
+      } else {
+        setUser(null);
+      }
+    });
+  };
+  useEffect(()=>{
+    checkUserData(user)
+  },[user])
+  function checkUserData(user){
+  if (user) {
+    dispatch(loggedUserActions.setUser(user));
+    dispatch(authActions.login());
+  } else {
+    dispatch(loggedUserActions.clearUser());
+    dispatch(authActions.logout());
+  }}
   return (
     <>
       <Carousel />
@@ -92,4 +87,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Home;

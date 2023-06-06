@@ -32,7 +32,7 @@ const Index = () => {
     setIsActive((current) => !current);
     setIsSidebarActive((current) => !current);
   };
- console.log(userLoggedIn);
+
   const handleResize = () => {
     if (window.innerWidth <= 750) setModalOpen(false);
   };
@@ -52,9 +52,12 @@ const Index = () => {
   };
 
   const handleLogout = () => {
+    
     auth.signOut();
     dispatch(authActions.logout());
     dispatch(loggedUserActions.clearUser());
+    navigate("/");
+    window.location.reload();
   };
   return (
     <>
@@ -116,7 +119,7 @@ const Index = () => {
                   <li>
                     <a>
                       {isAuth
-                        ? `Hi ${userLoggedIn[0].userName.toUpperCase()}`
+                        ? `Hi ${userLoggedIn[0]?.userName?.toUpperCase()}`
                         : `Hi User`}
                     </a>
                   </li>
@@ -137,7 +140,7 @@ const Index = () => {
                       </a>
                     ) : (
                       <NavLink to="/login">
-                        <a onClick={handleLogout}>
+                        <a>
                           <Button variant="outlined">Log In</Button>
                         </a>
                       </NavLink>
@@ -166,16 +169,39 @@ const Index = () => {
       <div className={`sidebar ${isSidebarActive ? " " : "sidebar-active  "}`}>
         <ul className="sidebar-links">
           <li>
-            <a>SignIn</a>
+            <a>
+              {isAuth
+                ? `Hi ${userLoggedIn[0]?.userName?.toUpperCase()}`
+                : `Hi User`}
+            </a>
           </li>
           <li>
-            <a>Cart</a>
+            <Link to="/cartdata">Cart</Link>
+          </li>
+          {isAuth && (
+            <Link to="/wishlist">
+              <li>
+                <a>Wishlist</a>
+              </li>
+            </Link>
+          )}
+          <li>
+            <NavLink to="/help">
+              <a>Need Help?</a>
+            </NavLink>
           </li>
           <li>
-            <a>Wishlist</a>
-          </li>
-          <li>
-            <a>UserLogo</a>
+            {isAuth ? (
+              <a onClick={handleLogout}>
+                <Button variant="outlined">Log Out</Button>
+              </a>
+            ) : (
+              <NavLink to="/login">
+                <a>
+                  <Button variant="outlined">Log In</Button>
+                </a>
+              </NavLink>
+            )}
           </li>
         </ul>
       </div>

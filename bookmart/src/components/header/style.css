@@ -315,7 +315,7 @@ border-color: #f4eee0 !important;
   .sidebar-active {
     right: 0;
   }
-
+ 
   .sidebar-links {
     display: contents;
     display: flex;
