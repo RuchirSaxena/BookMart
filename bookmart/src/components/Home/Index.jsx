@@ -21,6 +21,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     const unsub = onSnapshot(
@@ -45,6 +46,7 @@ const Home = () => {
     };
   }, []);
 
+ 
 
   const GetCurrentUser = () => {
     auth.onAuthStateChanged((userlogged) => {

@@ -98,9 +98,14 @@
     display: flex;
     align-items: center;
     color: black;
+    cursor: pointer;
+  }
+  .dataResult .dataItem:hover{
+    background-color: #e5e5e9;
   }
   
   .dataItem p {
     margin-left: 10px;
     margin-top: 10px;
   }
+ 

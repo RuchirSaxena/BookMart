@@ -35,6 +35,7 @@
 
 
 .box {
+  position: relative;
   background-color: white;
 
   border-radius: 10px;
@@ -204,7 +205,30 @@
   .fa-trash{
     color: white;
   }
+.back-button {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #f1f1f1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
+.back-button:hover {
+  background-color: #e1e1e1;
+}
+
+.back-button i {
+  font-size: 18px;
+  color: #555555;
+}
 @media (max-width: 991px) {
   .box {
     width: 750px;

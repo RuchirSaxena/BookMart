@@ -5,16 +5,31 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import { db } from "../../firebase";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
+
 const CartCard = (props) => {
   const [productQuantity, setProductQuantity] = useState(
     props.itemdata.quantity
   );
 
+
+
   let price = props.itemdata.product.priceOffered;
   let totalAmount = price * productQuantity;
 
   const deleteCartItem = async () => {
-    await deleteDoc(doc(db, `cart-${props.userId}`, `${props.itemdata.id}`));
+    await deleteDoc(doc(db, `cart-${props.userId}`, `${props.itemdata.id}`)).then(()=>{
+  toast.success(`Product removed from Cart`, {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
+    });
   };
 
   return (

@@ -52,9 +52,12 @@ const Index = () => {
   };
 
   const handleLogout = () => {
+    
     auth.signOut();
     dispatch(authActions.logout());
     dispatch(loggedUserActions.clearUser());
+    navigate("/");
+    window.location.reload();
   };
   return (
     <>
@@ -65,14 +68,14 @@ const Index = () => {
       />
 
       <div className="navbar-container">
-        <logo
+        <site-logo
           onClick={() => {
             navigate("/");
           }}
         >
           <img className="icon-img" src={IconSVG} alt="icon"></img>
           <span>BookMart</span>
-        </logo>
+        </site-logo>
         {locationPath === "/login" ? "" : <Searchbar />}
         <div className="links-container">
           <ul className="links">
@@ -93,15 +96,15 @@ const Index = () => {
             )}
             {isAuth && (
               <>
-              <Link to = "/wishlist">
-                <li>
-                  <a>
-                    <FavoriteBorderOutlinedIcon fontSize="large" />
-                  </a>
-                </li>
+                <Link to="/wishlist">
+                  <li>
+                    <a>
+                      <FavoriteBorderOutlinedIcon fontSize="large" />
+                    </a>
+                  </li>
                 </Link>
                 <li>
-                <Link to="/cartdata">
+                  <Link to="/cartdata">
                     <AddShoppingCartIcon fontSize="large" />
                   </Link>
                 </li>
@@ -116,9 +119,14 @@ const Index = () => {
                   <li>
                     <a>
                       {isAuth
-                        ? `Hi ${userLoggedIn[0].userName.toUpperCase()}`
+                        ? `Hi ${userLoggedIn[0]?.userName?.toUpperCase()}`
                         : `Hi User`}
                     </a>
+                  </li>
+                  <li>
+                    <NavLink to="/">
+                      <a>Home</a>
+                    </NavLink>
                   </li>
                   <li>
                     <NavLink to="/help">
@@ -132,7 +140,7 @@ const Index = () => {
                       </a>
                     ) : (
                       <NavLink to="/login">
-                        <a onClick={handleLogout}>
+                        <a>
                           <Button variant="outlined">Log In</Button>
                         </a>
                       </NavLink>
@@ -161,16 +169,39 @@ const Index = () => {
       <div className={`sidebar ${isSidebarActive ? " " : "sidebar-active  "}`}>
         <ul className="sidebar-links">
           <li>
-            <a>SignIn</a>
+            <a>
+              {isAuth
+                ? `Hi ${userLoggedIn[0]?.userName?.toUpperCase()}`
+                : `Hi User`}
+            </a>
           </li>
           <li>
-            <a>Cart</a>
+            <Link to="/cartdata">Cart</Link>
+          </li>
+          {isAuth && (
+            <Link to="/wishlist">
+              <li>
+                <a>Wishlist</a>
+              </li>
+            </Link>
+          )}
+          <li>
+            <NavLink to="/help">
+              <a>Need Help?</a>
+            </NavLink>
           </li>
           <li>
-            <a>Wishlist</a>
-          </li>
-          <li>
-            <a>UserLogo</a>
+            {isAuth ? (
+              <a onClick={handleLogout}>
+                <Button variant="outlined">Log Out</Button>
+              </a>
+            ) : (
+              <NavLink to="/login">
+                <a>
+                  <Button variant="outlined">Log In</Button>
+                </a>
+              </NavLink>
+            )}
           </li>
         </ul>
       </div>

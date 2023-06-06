@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import { db, auth } from "../../firebase";
-import { useParams, useLocation, useNavigate } from "react-router-dom";
-
+import { useParams, useLocation ,useNavigate} from "react-router-dom";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import {
   getDoc,
   deleteDoc,
@@ -27,6 +27,7 @@ const Index = () => {
   const state = location.state;
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
   const userLoggedIn = useSelector((state) => state.loggedUser.loggedUserData);
+
   useEffect(() => {
     setLoggedInUser(userLoggedIn);
   }, []);
@@ -97,7 +98,7 @@ const Index = () => {
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
-            pauseOnHover: true,
+            pauseOnHover: false,
             draggable: true,
             progress: undefined,
             theme: "light",
@@ -107,7 +108,16 @@ const Index = () => {
           setErrorMsg(error.message);
         });
     } else {
-      setErrorMsg("You need to Login first");
+       toast.error(`You need to login to buy the Book.`, {
+         position: "top-center",
+         autoClose: 3000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: false,
+         draggable: true,
+         progress: undefined,
+         theme: "light",
+       });
     }
   };
 
@@ -123,7 +133,7 @@ const Index = () => {
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
-            pauseOnHover: true,
+            pauseOnHover: false,
             draggable: true,
             progress: undefined,
             theme: "light",
@@ -133,7 +143,16 @@ const Index = () => {
           setErrorMsg(error.message);
         });
     } else {
-      setErrorMsg("You need to Login first");
+      toast.error(`You need to login to see your wishlist`, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -152,6 +171,10 @@ const Index = () => {
     );
     navigate("/wishlist");
   };
+
+ const goBack = () => {
+  navigate(-1);
+ };
 
   return (
     <>
@@ -218,21 +241,39 @@ const Index = () => {
 
               <div className="options">
                 <button type="button" className="btn" onClick={addToCart}>
-                  <i className="fas fa-shopping-cart"></i>&nbsp; {Constants.cart}
+                  <i className="fas fa-shopping-cart"></i>&nbsp;{" "}
+                  {Constants.cart}
                 </button>
 
-                {state.message !== "/wishlist" ? (
-                  <button type="button" className="btn" onClick={addToWishlist}>
-                    <i className="fa fa-heart"></i>&nbsp; {Constants.wishlist}
-                  </button>
-                ) : (
-                  <button
+                {state.message === "/wishlist" &&  (
+                   <button
                     type="button"
                     className="btn deletewishlistbutton"
                     onClick={deleteWishlist}
                   >
                     <i className="fa fa-trash" aria-hidden="true"></i>
                   </button>
+                   )
+              }
+                {!loggeduser &&
+                  state.message !==
+                    "/wishlist" && (
+                      <button type="button" class="btn" onClick={addToWishlist}>
+                        <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
+                      </button>
+                    )}
+                {loggeduser &&
+                  state.message !==
+                    "/wishlist" && (
+                      <button type="button" class="btn" onClick={addToWishlist}>
+                        <i class="fa fa-heart"></i>&nbsp; {Constants.wishlist}
+                      </button>
+                    )}
+
+                {successMsg && (
+                  <>
+                    <div className="success-msg">{successMsg}</div>
+                  </>
                 )}
               </div>
             </div>
@@ -246,17 +287,38 @@ const Index = () => {
                 </li>
                 <li>
                   {Constants.ownersContact}
-                  { isAuth ? <span>{product?.ownerInfo?.contact}</span>: <span className="hiddenData" onClick={()=>{
-                    navigate("/login")
-                  }}>Login to See</span>}
+                  {isAuth ? (
+                    <span>{product?.ownerInfo?.contact}</span>
+                  ) : (
+                    <span
+                      className="hiddenData"
+                      onClick={() => {
+                        navigate("/login");
+                      }}
+                    >
+                      Login to See
+                    </span>
+                  )}
                 </li>
                 <li>
                   {Constants.ownersEmail}
-                  { isAuth ? <span>{product?.ownerInfo?.email}</span>: <span className="hiddenData" onClick={()=>{
-                    navigate("/login")
-                  }}>Login to See</span>}
+                  {isAuth ? (
+                    <span>{product?.ownerInfo?.email}</span>
+                  ) : (
+                    <span
+                      className="hiddenData"
+                      onClick={() => {
+                        navigate("/login");
+                      }}
+                    >
+                      Login to See
+                    </span>
+                  )}
                 </li>
               </ul>
+            </div>
+            <div className="back-button" onClick={goBack}>
+              <ArrowBackIosNewIcon />
             </div>
           </div>
         </div>

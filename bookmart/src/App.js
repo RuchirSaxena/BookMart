@@ -1,6 +1,6 @@
 import "./App.css";
 import Home from "./components/Home" ;
-import Header from "./components/header";
+import Header from "./components/Header";
 import Wishlist from "./components/Wishlist" ;
 import AddBook from "./components/AddBook";
 import Footer from "./components/footer";
